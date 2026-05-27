@@ -1,0 +1,76 @@
+/* Living Design Theme Variables - Walmart */
+
+:root,
+[data-ld-theme="Walmart"],
+[data-ld-theme] {
+  /* Brand colors */
+  --ld-primitive-color-brand-50: #e8f0fc;
+  --ld-primitive-color-brand-100: #b9ccf6;
+  --ld-primitive-color-brand-200: #8aaaef;
+  --ld-primitive-color-brand-300: #5b88e9;
+  --ld-primitive-color-brand-400: #2c66e3;
+  --ld-primitive-color-brand-500: #0053e2;
+  --ld-primitive-color-brand-600: #0048c5;
+  --ld-primitive-color-brand-700: #003da8;
+  --ld-primitive-color-brand-800: #00318b;
+  --ld-primitive-color-brand-900: #00266e;
+
+  /* Semantic colors - actions */
+  --ld-semantic-color-action-fill-primary: #0053e2;
+  --ld-semantic-color-action-fill-primary-hover: #003da8;
+  --ld-semantic-color-action-fill-primary-active: #00318b;
+  --ld-semantic-color-action-text-on-fill-primary: #ffffff;
+  --ld-semantic-color-action-fill-secondary: transparent;
+  --ld-semantic-color-action-border-secondary: #0053e2;
+  --ld-semantic-color-action-text-secondary: #0053e2;
+  --ld-semantic-color-action-fill-negative: #ea1100;
+  --ld-semantic-color-action-text-on-fill-negative: #ffffff;
+  --ld-semantic-color-action-fill-disabled: #c2c5c9;
+  --ld-semantic-color-action-text-disabled: #6b7177;
+  --ld-semantic-color-action-border-disabled: #c2c5c9;
+
+  /* Semantic colors - content */
+  --ld-semantic-color-content-primary: #2e2f32;
+  --ld-semantic-color-content-secondary: #46494d;
+  --ld-semantic-color-content-tertiary: #6b7177;
+  --ld-semantic-color-content-brand: #0053e2;
+  --ld-semantic-color-content-brand-default: #0053e2;
+  --ld-semantic-color-content-inverse: #ffffff;
+  --ld-semantic-color-text: #2e2f32;
+
+  /* Semantic colors - surface */
+  --ld-semantic-color-surface-primary: #ffffff;
+  --ld-semantic-color-surface-secondary: #f5f6f7;
+  --ld-semantic-color-surface-brand: #0053e2;
+  --ld-semantic-color-surface-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Semantic colors - border */
+  --ld-semantic-color-border-primary: #c2c5c9;
+  --ld-semantic-color-border-brand: #0053e2;
+  --ld-semantic-color-border-focus: #0053e2;
+
+  /* Feedback colors */
+  --ld-semantic-color-feedback-success: #007f26;
+  --ld-semantic-color-feedback-warning: #be5000;
+  --ld-semantic-color-feedback-error: #ea1100;
+  --ld-semantic-color-feedback-info: #0053e2;
+  --ld-semantic-color-feedback-surface-success: #e8f5ec;
+  --ld-semantic-color-feedback-surface-warning: #fff3e0;
+  --ld-semantic-color-feedback-surface-error: #fce8e6;
+  --ld-semantic-color-feedback-surface-info: #e8f0fc;
+
+  /* Typography */
+  --ld-primitive-font-family-sans: 'Everyday Sans UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --ld-primitive-font-family-mono: 'EverydaySansMono', 'Courier New', Courier, monospace;
+
+  /* Radius */
+  --ld-semantic-border-radius-small: 4px;
+  --ld-semantic-border-radius-medium: 8px;
+  --ld-semantic-border-radius-large: 16px;
+  --ld-semantic-border-radius-round: 9999px;
+
+  /* Elevation / shadows */
+  --ld-semantic-shadow-small: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+  --ld-semantic-shadow-medium: 0 4px 6px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+  --ld-semantic-shadow-large: 0 10px 15px rgba(0,0,0,0.10), 0 4px 6px rgba(0,0,0,0.05);
+}
