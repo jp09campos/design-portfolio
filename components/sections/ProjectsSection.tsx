@@ -1,8 +1,14 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { PROJECTS } from '@/lib/data'
+
+/* Projects that have a dedicated case study page */
+const PROJECT_ROUTES: Record<string, string> = {
+  'art-city-tour': '/projects/art-city-tour',
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -16,17 +22,10 @@ const fadeUp = {
 function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const href = PROJECT_ROUTES[project.id]
 
-  return (
-    <motion.div
-      ref={ref}
-      custom={index}
-      variants={fadeUp}
-      initial="hidden"
-      animate={isInView ? 'show' : 'hidden'}
-      whileHover={{ y: -6 }}
-      className="group relative glass rounded-3xl overflow-hidden card-glow cursor-pointer"
-    >
+  const inner = (
+    <>
       {/* Gradient top strip */}
       <div className={`h-1.5 w-full bg-gradient-to-r ${project.gradient}`} />
 
@@ -68,15 +67,40 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
       </div>
 
       {/* Hover overlay arrow */}
-      <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        whileHover={{ opacity: 1, x: 0 }}
-        className="absolute bottom-6 right-6 w-9 h-9 rounded-full bg-white/10 flex items-center justify-center"
-      >
+      <div className="absolute bottom-6 right-6 w-9 h-9 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
         </svg>
-      </motion.div>
+      </div>
+
+      {/* "Case Study" badge for linked projects */}
+      {href && (
+        <div className="absolute top-5 right-5">
+          <span className="text-xs font-semibold tracking-wider uppercase text-white/50 px-2.5 py-1 rounded-full bg-white/08 border border-white/10">
+            Case Study →
+          </span>
+        </div>
+      )}
+    </>
+  )
+
+  return (
+    <motion.div
+      ref={ref}
+      custom={index}
+      variants={fadeUp}
+      initial="hidden"
+      animate={isInView ? 'show' : 'hidden'}
+      whileHover={{ y: -6 }}
+      className="group relative glass rounded-3xl overflow-hidden card-glow cursor-pointer"
+    >
+      {href ? (
+        <Link href={href} className="block h-full">
+          {inner}
+        </Link>
+      ) : (
+        inner
+      )}
     </motion.div>
   )
 }
