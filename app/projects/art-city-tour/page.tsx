@@ -5,15 +5,6 @@ import Link from 'next/link'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 /* ─── Animation helpers ───────────────────────────────────────────────────── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-}
-
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
@@ -24,7 +15,11 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       animate={isInView ? 'show' : 'hidden'}
       variants={{
         hidden: { opacity: 0, y: 28 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] } },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+        },
       }}
     >
       {children}
@@ -32,30 +27,46 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
-/* ─── Mock screen previews ────────────────────────────────────────────────── */
-function PhoneFrame({ gradient, label, icon }: { gradient: string; label: string; icon: string }) {
+/* ─── Phone frame mockup ──────────────────────────────────────────────────── */
+function PhoneFrame({
+  label,
+  accentColor,
+  children,
+}: {
+  label: string
+  accentColor: string
+  children: React.ReactNode
+}) {
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="w-32 h-56 md:w-36 md:h-64 rounded-3xl border border-white/10 overflow-hidden relative shadow-2xl"
-        style={{ background: 'rgba(255,255,255,0.04)' }}>
+      <div
+        className="w-28 h-52 md:w-32 md:h-60 rounded-3xl overflow-hidden shadow-2xl border border-white/12 relative"
+        style={{ background: '#1a1f2e' }}
+      >
         {/* Status bar */}
-        <div className="h-6 bg-black/30 flex items-center justify-between px-3">
-          <div className="w-8 h-1.5 bg-white/20 rounded-full" />
-          <div className="flex gap-1">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="w-1 h-1.5 bg-white/30 rounded-sm" style={{ height: `${6 + i * 2}px` }} />
+        <div
+          className="h-5 flex items-center justify-between px-3 text-white shrink-0"
+          style={{ background: accentColor }}
+        >
+          <span className="text-[8px] font-semibold opacity-90">12:30</span>
+          <div className="flex gap-1 items-center">
+            {[5, 7, 9, 11].map((h) => (
+              <div key={h} className="w-0.5 rounded-sm bg-white/80" style={{ height: h }} />
             ))}
           </div>
         </div>
         {/* Screen content */}
-        <div className={`flex-1 h-full bg-gradient-to-br ${gradient} flex flex-col items-center justify-center gap-3 px-4`}>
-          <span className="text-3xl">{icon}</span>
-          <div className="w-full space-y-2">
-            <div className="h-2 bg-white/20 rounded-full" />
-            <div className="h-2 bg-white/15 rounded-full w-4/5" />
-            <div className="h-2 bg-white/10 rounded-full w-3/5" />
-          </div>
-          <div className="w-full h-16 rounded-xl bg-white/10 border border-white/10" />
+        <div className="flex-1 h-full flex flex-col px-2 pt-3 gap-2">
+          {children}
+        </div>
+        {/* Nav bar */}
+        <div className="absolute bottom-0 inset-x-0 h-8 border-t border-white/08 flex items-center justify-around px-2"
+          style={{ background: '#1a1f2e' }}>
+          {['⌂', '⊞', '◎', 'Y', '⚙'].map((icon, i) => (
+            <span key={i} className="text-[10px]" style={{ color: i === 0 ? accentColor : '#ffffff40' }}>
+              {icon}
+            </span>
+          ))}
         </div>
       </div>
       <span className="text-xs text-white/40 font-medium tracking-wide text-center">{label}</span>
@@ -63,62 +74,88 @@ function PhoneFrame({ gradient, label, icon }: { gradient: string; label: string
   )
 }
 
-/* ─── Persona card ────────────────────────────────────────────────────────── */
-function PersonaCard({ name, age, role, goal, pain, color }: {
-  name: string; age: string; role: string; goal: string; pain: string; color: string
+/* ─── Process step ────────────────────────────────────────────────────────── */
+function PhaseStep({
+  number,
+  title,
+  activities,
+  result,
+}: {
+  number: string
+  title: string
+  activities: string[]
+  result: string
 }) {
   return (
-    <div className="glass rounded-2xl p-6 space-y-4 border border-white/08">
-      {/* Avatar */}
-      <div className="flex items-center gap-4">
-        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${color} flex items-center justify-center text-xl font-bold text-white`}>
-          {name.charAt(0)}
+    <div className="relative flex gap-6 pb-10">
+      <div className="flex flex-col items-center">
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
+          style={{ background: 'linear-gradient(135deg, #38bdf8, #1e3a5f)' }}
+        >
+          {number}
         </div>
-        <div>
-          <p className="font-semibold text-white text-sm">{name}</p>
-          <p className="text-xs text-white/40">{age} · {role}</p>
+        <div className="flex-1 w-px mt-2" style={{ background: 'linear-gradient(to bottom, #38bdf870, transparent)' }} />
+      </div>
+      <div className="flex-1">
+        <h3 className="font-display font-bold text-white text-lg mb-3">{title}</h3>
+        <ul className="space-y-2 mb-4">
+          {activities.map((a, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-white/55">
+              <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: '#38bdf8' }} />
+              {a}
+            </li>
+          ))}
+        </ul>
+        <div className="glass rounded-xl p-4 border border-sky-500/20">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: '#38bdf8' }}>
+            Result
+          </p>
+          <p className="text-sm text-white/60 leading-relaxed">{result}</p>
         </div>
-      </div>
-      {/* Goal */}
-      <div className="space-y-1">
-        <p className="text-xs font-semibold tracking-widest uppercase text-green-400">Goal</p>
-        <p className="text-sm text-white/65 leading-relaxed">{goal}</p>
-      </div>
-      {/* Pain */}
-      <div className="space-y-1">
-        <p className="text-xs font-semibold tracking-widest uppercase text-rose-400">Pain point</p>
-        <p className="text-sm text-white/65 leading-relaxed">{pain}</p>
       </div>
     </div>
   )
 }
 
-/* ─── Phase step ──────────────────────────────────────────────────────────── */
-function PhaseStep({ number, title, description, items }: {
-  number: string; title: string; description: string; items: string[]
+/* ─── Stat bar ────────────────────────────────────────────────────────────── */
+function StatBar({ label, pct }: { label: string; pct: number }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-white/50 w-28 shrink-0">{label}</span>
+      <div className="flex-1 h-2 rounded-full bg-white/08 overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: `${pct}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="h-full rounded-full"
+          style={{ background: 'linear-gradient(to right, #38bdf8, #1d4ed8)' }}
+        />
+      </div>
+      <span className="text-xs font-semibold text-white/70 w-12 text-right">{pct}%</span>
+    </div>
+  )
+}
+
+/* ─── Comparison row ──────────────────────────────────────────────────────── */
+function CompareRow({
+  task,
+  apkTime,
+  protoTime,
+  improvement,
+}: {
+  task: string
+  apkTime: string
+  protoTime: string
+  improvement: string
 }) {
   return (
-    <div className="relative flex gap-6">
-      {/* Number */}
-      <div className="flex flex-col items-center">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center text-sm font-bold text-white shrink-0">
-          {number}
-        </div>
-        <div className="flex-1 w-px bg-gradient-to-b from-pink-500/40 to-transparent mt-2" />
-      </div>
-      {/* Content */}
-      <div className="pb-10 flex-1">
-        <h3 className="font-display font-bold text-white text-lg mb-2">{title}</h3>
-        <p className="text-white/55 text-sm leading-relaxed mb-4">{description}</p>
-        <ul className="space-y-2">
-          {items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-white/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 mt-1.5 shrink-0" />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="grid grid-cols-4 gap-4 py-4 border-b border-white/06 text-sm">
+      <span className="text-white/60 col-span-1">{task}</span>
+      <span className="text-rose-400 font-medium">{apkTime}</span>
+      <span className="text-emerald-400 font-medium">{protoTime}</span>
+      <span className="text-sky-400 font-semibold">{improvement}</span>
     </div>
   )
 }
@@ -130,10 +167,14 @@ export default function ArtCityTourCaseStudy() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
+  /* accent = celeste/sky blue — from the project's brand book */
+  const accent = '#38bdf8'
+  const accentDark = '#1e3a5f'
+
   return (
     <div className="relative min-h-screen bg-[#0d0d0d] text-slate-100 overflow-x-hidden">
 
-      {/* ── Back navigation ─── */}
+      {/* ── Back nav ──────────────────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -145,7 +186,7 @@ export default function ArtCityTourCaseStudy() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-white/60 hover:text-white transition-colors duration-200 group"
         >
           <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" transform="rotate(180 12 12)" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Back
         </Link>
@@ -153,53 +194,66 @@ export default function ArtCityTourCaseStudy() {
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-900/30 via-rose-900/20 to-orange-900/20" />
+        {/* Ambient glow */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-pink-500/10 blur-[120px]" />
-          <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-orange-500/08 blur-[80px]" />
+          <div className="absolute top-0 inset-x-0 h-px" style={{ background: `linear-gradient(to right, transparent, ${accent}40, transparent)` }} />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-[120px]"
+            style={{ background: `${accent}12` }} />
+          <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] rounded-full blur-[80px]"
+            style={{ background: `${accentDark}18` }} />
         </div>
 
-        <motion.div
-          style={{ opacity: heroOpacity, y: heroY }}
-          className="relative max-w-7xl mx-auto px-6 w-full"
-        >
-          {/* Label row */}
+        <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
+          {/* Label */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex items-center gap-4 mb-6"
           >
-            <span className="w-8 h-px bg-pink-400" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2023</span>
+            <span className="w-8 h-px" style={{ background: accent }} />
+            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
+              I–II Sem 2021
+            </span>
+            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
+              TEC · Escuela de Diseño Industrial
+            </span>
           </motion.div>
 
           {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
           >
-            Art City<br />
+            Aplicación<br />
             <span style={{
-              background: 'linear-gradient(135deg, #f9a8d4, #fb7185, #fb923c)',
+              background: `linear-gradient(135deg, ${accent}, #60a5fa, #93c5fd)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}>Tour App</span>
+            }}>
+              Centro Histórico
+            </span>
           </motion.h1>
 
-          {/* Meta row */}
+          {/* Sub-title */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-white/50 text-lg mb-8 max-w-2xl"
+          >
+            Mobile UX redesign for the historic center tourism app of San José, Costa Rica —
+            a collaboration between the Instituto Tecnológico de Costa Rica and the Municipalidad de San José.
+          </motion.p>
+
+          {/* Tags */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-wrap gap-3 mb-10"
           >
-            {['Mobile UX', 'Product Design', 'Tourism', 'San José · CR'].map((tag) => (
+            {['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'San José · CR', 'Academic Project'].map((tag) => (
               <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
                 {tag}
               </span>
@@ -208,16 +262,15 @@ export default function ArtCityTourCaseStudy() {
 
           {/* Quick stats */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
           >
             {[
-              { value: '3', label: 'Design Phases' },
-              { value: '3', label: 'User Personas' },
-              { value: '40+', label: 'Screens' },
-              { value: '2023', label: 'Year' },
+              { value: '3', label: 'Design Stages' },
+              { value: '120', label: 'Survey Responses' },
+              { value: '10', label: 'Usability Testers' },
+              { value: '2', label: 'Semesters' },
             ].map((stat) => (
               <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
                 <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
@@ -235,22 +288,26 @@ export default function ArtCityTourCaseStudy() {
             <Reveal>
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-6 h-px bg-pink-400" />
-                  <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Overview</span>
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
                 </div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                  Navigating culture through design
+                  Redesigning the city's cultural compass
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Art City Tour is San José, Costa Rica's premier urban art experience — a curated circuit of
-                  murals, sculptures, and cultural installations spread across the city's historic center.
-                  Yet despite its rich offering, visitors struggled to discover and navigate the route without
-                  a guide or prior knowledge.
+                  The Municipalidad de San José had developed an existing APK (Android application package)
+                  to help visitors navigate the historic center of San José, Costa Rica — home to museums,
+                  theaters, parks, heritage sites, public art, and cultural events.
+                </p>
+                <p className="text-white/60 leading-relaxed mb-4">
+                  However, usability testing of the existing app revealed significant problems across three
+                  areas: design patterns, interaction flow, and overall user experience. Tasks that should
+                  take seconds were taking users several minutes.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Our challenge was to design a mobile application that would empower tourists and locals alike
-                  to independently explore the art tour, providing contextual information about each piece
-                  while offering an intuitive wayfinding experience.
+                  As part of a special assistantship at TEC's Escuela de Diseño Industrial, our team was
+                  commissioned to conduct a full UX redesign — from research and feature definition,
+                  through design and validation, to handoff for development.
                 </p>
               </div>
             </Reveal>
@@ -258,28 +315,35 @@ export default function ArtCityTourCaseStudy() {
             <Reveal delay={0.15}>
               <div className="space-y-4">
                 <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">My Role</p>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    UX/UI Designer — responsible for user research, information architecture, interaction design,
-                    visual design, and prototype delivery.
-                  </p>
-                </div>
-                <div className="glass rounded-2xl p-6 border border-white/08">
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Team</p>
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     {[
-                      'Felipe González Guardia',
-                      'José Pablo Campos Sequeira',
-                      'Andrés Alberto Bravo A.',
-                    ].map((name) => (
-                      <p key={name} className="text-white/70 text-sm">{name}</p>
+                      { name: 'José Pablo Campos', role: 'UX/UI Designer' },
+                      { name: 'Felipe Víctor Benavides', role: 'UX/UI Designer' },
+                      { name: 'Maria del Carmen Valverde Solano', role: 'Professor Advisor' },
+                    ].map((m) => (
+                      <div key={m.name} className="flex items-center justify-between">
+                        <p className="text-white/70 text-sm">{m.name}</p>
+                        <p className="text-xs text-white/30">{m.role}</p>
+                      </div>
                     ))}
                   </div>
                 </div>
                 <div className="glass rounded-2xl p-6 border border-white/08">
+                  <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Institution</p>
+                  <p className="text-white/70 text-sm">Instituto Tecnológico de Costa Rica (TEC)</p>
+                  <p className="text-white/40 text-xs mt-1">Escuela de Diseño Industrial</p>
+                  <p className="text-white/40 text-xs">Special Assistantship — I & II Semester 2021</p>
+                </div>
+                <div className="glass rounded-2xl p-6 border border-white/08">
+                  <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Client</p>
+                  <p className="text-white/70 text-sm">Municipalidad de San José</p>
+                  <p className="text-white/40 text-xs mt-1">Centro Histórico de San José, Costa Rica</p>
+                </div>
+                <div className="glass rounded-2xl p-6 border border-white/08">
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Tools</p>
                   <div className="flex flex-wrap gap-2">
-                    {['Figma', 'FigJam', 'Maze', 'Miro', 'Google Forms'].map((tool) => (
+                    {['Figma', 'Google Forms', 'Material Design', 'Atomic Design', 'SCRUM'].map((tool) => (
                       <span key={tool} className="px-2.5 py-1 rounded-full text-xs text-white/50 bg-white/04 border border-white/08">
                         {tool}
                       </span>
@@ -292,255 +356,138 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── Problem & Goals ───────────────────────────────────────────────── */}
-      <section className="py-20 bg-gradient-to-r from-pink-500/05 via-transparent to-orange-500/05">
+      {/* ── Design Stages ─────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="w-6 h-px bg-pink-400" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Problem Space</span>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                I Semester 2021 — Design Process
+              </span>
             </div>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <Reveal>
-              <div className="glass rounded-3xl p-8 border border-white/08 h-full">
-                <div className="w-10 h-10 rounded-2xl bg-rose-500/20 flex items-center justify-center mb-5">
-                  <svg className="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                  </svg>
-                </div>
-                <h3 className="font-display font-bold text-white text-xl mb-4">The Problem</h3>
-                <p className="text-white/60 leading-relaxed text-sm">
-                  Art City Tour lacked a dedicated digital experience for navigation. Visitors had to rely on
-                  paper maps, word of mouth, or generic mapping apps that provided no cultural context.
-                  This created friction, confusion, and missed opportunities for meaningful cultural engagement.
-                </p>
-                <ul className="mt-5 space-y-2">
-                  {[
-                    'No centralized, art-specific navigation tool',
-                    'Paper maps became outdated with new installations',
-                    'No contextual information about artworks',
-                    'Difficulty planning a route in advance',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-white/50">
-                      <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="glass rounded-3xl p-8 border border-white/08 h-full">
-                <div className="w-10 h-10 rounded-2xl bg-green-500/20 flex items-center justify-center mb-5">
-                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-display font-bold text-white text-xl mb-4">Design Goals</h3>
-                <p className="text-white/60 leading-relaxed text-sm">
-                  We set out to create an experience that felt as vibrant and alive as the art it represented —
-                  intuitive enough for tourists unfamiliar with the city, and rich enough to delight
-                  local art enthusiasts.
-                </p>
-                <ul className="mt-5 space-y-2">
-                  {[
-                    'Provide clear, art-specific turn-by-turn navigation',
-                    'Surface rich content about each artwork and artist',
-                    'Enable offline functionality for areas with poor connectivity',
-                    'Support multiple languages (Spanish & English)',
-                    'Design an accessible, inclusive experience',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-white/50">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 mt-1.5 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Process ───────────────────────────────────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-6 h-px bg-pink-400" />
-                <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Design Process</span>
-              </div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
-                Three phases,{' '}
-                <span style={{
-                  background: 'linear-gradient(135deg, #f9a8d4, #fb7185, #fb923c)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>one vision</span>
-              </h2>
-            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-16">
+              Three stages,{' '}
+              <span style={{
+                background: `linear-gradient(135deg, ${accent}, #60a5fa)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>one validated design</span>
+            </h2>
           </Reveal>
 
           <div className="max-w-2xl">
             <Reveal delay={0.1}>
               <PhaseStep
                 number="01"
-                title="Research & Analysis"
-                description="We started by deeply understanding the context — the tour itself, its users, and the existing digital landscape. We conducted user interviews, competitive analysis, and field research at the actual art installations."
-                items={[
-                  'On-site user interviews with 12 tourists and 5 local art enthusiasts',
-                  'Competitive analysis of 6 existing city guide and navigation apps',
-                  'Survey with 45 responses to quantify pain points',
-                  'Affinity mapping and thematic analysis of qualitative data',
-                  'Created 3 primary user personas from research findings',
-                  'Defined key HMW (How Might We) questions to guide ideation',
+                title="Diagnosis APK"
+                activities={[
+                  'Google Forms survey to understand what functionalities users wanted in a San José tourism app',
+                  'Validated feature importance levels from the existing APK',
+                  'Added "Agregar a Favoritos" (Add to Favorites) based on user requests',
+                  'Removed "Tour Operators" feature — low demand',
+                  'Digital prototyping usability tests with 10 participants (ages 16–60, beginner to expert)',
+                  'Identified problems in 3 areas: Design Patterns, Interaction Flow, and User Experience',
+                  'Feature definition workshops with the municipality team',
+                  'Defined legal scope (e.g. restrictions on including private venues like hotels/restaurants)',
                 ]}
+                result="Arquitectura Alfa — all validated content organized into logical groupings based on user-assigned associations, covering 5 main sections: Descubrir, Actividades, Rutas, Movilidad, and Ajustes."
               />
             </Reveal>
 
             <Reveal delay={0.15}>
               <PhaseStep
                 number="02"
-                title="Planning & Information Architecture"
-                description="With research insights in hand, we structured the app's information architecture and defined core user flows. We validated our structure through card sorting and tree testing before committing to wireframes."
-                items={[
-                  'Card sorting exercise with 8 participants to validate IA',
-                  'Defined 5 core user flows: Onboarding, Explore Map, Artwork Detail, Route Planning, Offline Mode',
-                  'Low-fidelity wireframes for all primary screens',
-                  'Interactive prototype for early usability testing (2 rounds)',
-                  'Iterative refinement based on usability test findings',
-                  'Created component inventory and design token structure',
+                title="Pattern Hunting & Proposal"
+                activities={[
+                  'Competitive analysis of existing urban tourism apps to identify dominant design patterns',
+                  'Documented color usage, image presentation, and location display conventions',
+                  'Produced an information architecture with assigned design patterns per section',
+                  'Applied Atomic Design methodology: Atoms → Molecules → Organisms → Templates → Pages',
+                  'Material Design navigation bar with 5 primary tabs: Descubrir, Actividades, Movilidad, Rutas, Ajustes',
+                  'Color system based on the Centro Histórico brand book — celeste (sky blue) as primary interactive color',
+                  'Iconography from Material Design + custom icons for domain-specific categories',
+                  'Designed high-fidelity screens for all 5 sections; implemented interactive digital prototype',
                 ]}
+                result="A fully designed, interactive prototype ready for usability validation — using Material Design patterns for consistency, with celeste as the primary accent color applied to all interactive elements."
               />
             </Reveal>
 
             <Reveal delay={0.2}>
               <PhaseStep
                 number="03"
-                title="Interface Design"
-                description="With a validated structure, we brought the app to life visually. The design system reflected the vibrancy of Costa Rican urban art — bold, accessible, and intentional."
-                items={[
-                  'Built a comprehensive design system in Figma',
-                  'SF Pro Display / SF Pro Text as the system typeface for legibility in outdoor use',
-                  'Color-coded screen categories: purple (navigation), red (artwork detail), pink (social/sharing)',
-                  'Designed 40+ unique screens in high fidelity',
-                  'Created interactive prototype for final usability validation',
-                  'Documented components, states, and accessibility guidelines',
+                title="Usability Testing & Validation"
+                activities={[
+                  'Ran heuristic usability tests with selected participants (including repeat testers from Stage 01)',
+                  'Compared task completion times: original APK vs. new prototype',
+                  'Survey with 120 responses to rank and prioritize content categories by user interest',
+                  'Icon validation survey with 93 participants for the "Rutas" navigation icon',
+                  'Category hierarchy reordered based on user-assigned relevance scores',
+                  'Delivered Figma Design System and prototype to the development team on June 24',
                 ]}
+                result="Significant reduction in task completion times across all measured tasks. Users reported greater satisfaction. The design system and prototype were handed off to the computing team for implementation using the SCRUM methodology."
               />
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── User Personas ─────────────────────────────────────────────────── */}
-      <section className="py-20 bg-gradient-to-b from-transparent via-pink-500/05 to-transparent">
+      {/* ── Color system ──────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px bg-pink-400" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">User Research</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Who are we designing for?
-            </h2>
-            <p className="text-white/50 text-sm max-w-xl mb-12">
-              Three distinct personas emerged from our research, each representing a different relationship with
-              urban art and the city.
-            </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <Reveal delay={0.05}>
-              <PersonaCard
-                name="Catalina Vargas"
-                age="28"
-                role="International Tourist"
-                goal="Discover Costa Rican culture through art during a week-long trip to San José without needing a guided tour."
-                pain="Overwhelmed by unfamiliar streets, can't find context about artworks, and doesn't want to be dependent on poor mobile data."
-                color="from-pink-500 to-rose-600"
-              />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <PersonaCard
-                name="Julieta Ureña"
-                age="35"
-                role="Local Art Enthusiast"
-                goal="Keep up with new art installations added to the circuit and share discoveries with her community of fellow art lovers."
-                pain="Existing apps don't go deep enough — she wants artist bios, inspiration stories, and social sharing within an art-first context."
-                color="from-violet-500 to-purple-600"
-              />
-            </Reveal>
-            <Reveal delay={0.15}>
-              <PersonaCard
-                name="Marco Jara"
-                age="52"
-                role="Cultural Director"
-                goal="Promote the Art City Tour to international visitors and ensure that the digital presence reflects the quality of the physical experience."
-                pain="Current materials don't convey the cultural depth of the tour. Digital touchpoints feel generic and disconnected from the art world."
-                color="from-orange-500 to-amber-600"
-              />
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Design System ─────────────────────────────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px bg-pink-400" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Design System</span>
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Design System</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">
-              Built for vibrancy and clarity
+              Atomic Design + Material Design
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Typography */}
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Methodology */}
             <Reveal delay={0.05}>
-              <div className="glass rounded-2xl p-6 border border-white/08">
-                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Typography</p>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-2xl font-bold text-white" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      SF Pro Display
-                    </p>
-                    <p className="text-xs text-white/30 mt-1">Headlines & UI Labels</p>
-                  </div>
-                  <div>
-                    <p className="text-base text-white/70" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                      SF Pro Text — designed for small sizes, optimized for screen legibility in outdoor conditions.
-                    </p>
-                    <p className="text-xs text-white/30 mt-1">Body & Descriptions</p>
-                  </div>
+              <div className="glass rounded-2xl p-6 border border-white/08 h-full">
+                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Methodology</p>
+                <p className="text-sm font-bold text-white mb-3">Atomic Design</p>
+                <p className="text-sm text-white/55 leading-relaxed mb-5">
+                  Components were designed from the smallest unit upward: atoms (colors, type, icons) combined
+                  into molecules (buttons, cards, nav bars), assembled into organisms, placed in templates,
+                  and delivered as complete pages.
+                </p>
+                <div className="flex items-center gap-1.5 text-xs text-white/40">
+                  <span className="px-2 py-1 rounded glass border border-white/08">Atoms</span>
+                  <span>→</span>
+                  <span className="px-2 py-1 rounded glass border border-white/08">Molecules</span>
+                  <span>→</span>
+                  <span className="px-2 py-1 rounded glass border border-white/08">Organisms</span>
                 </div>
               </div>
             </Reveal>
 
             {/* Color system */}
             <Reveal delay={0.1}>
-              <div className="glass rounded-2xl p-6 border border-white/08">
+              <div className="glass rounded-2xl p-6 border border-white/08 h-full">
                 <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Color System</p>
+                <p className="text-xs text-white/40 leading-relaxed mb-4">
+                  Based on the Centro Histórico brand book + Material Design color proportions.
+                  Celeste is applied exclusively to interactive elements.
+                </p>
                 <div className="space-y-3">
                   {[
-                    { name: 'Navigation', color: '#7C3AED', hex: '#7C3AED', label: 'Purple — wayfinding & maps' },
-                    { name: 'Artwork Detail', color: '#E11D48', hex: '#E11D48', label: 'Red — content & info screens' },
-                    { name: 'Social', color: '#EC4899', hex: '#EC4899', label: 'Pink — sharing & community' },
-                    { name: 'Surface', color: '#1a1a2e', hex: '#1A1A2E', label: 'Dark navy — base surfaces' },
+                    { name: 'Primary (Celeste)', color: '#38bdf8', note: 'Interactive elements, active states' },
+                    { name: 'Secondary (Navy)', color: '#1e3a5f', note: 'Headers, navigation bar' },
+                    { name: 'Text Gray', color: '#444444', note: 'General body text' },
+                    { name: 'Inactive Gray', color: '#888888', note: 'Leading icons, input borders' },
+                    { name: 'App Background', color: '#f5f5f5', note: 'Main surface — light, minimal' },
                   ].map((c) => (
                     <div key={c.name} className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl shrink-0" style={{ background: c.color }} />
+                      <div className="w-8 h-8 rounded-xl shrink-0 border border-white/08" style={{ background: c.color }} />
                       <div>
                         <p className="text-xs font-medium text-white/70">{c.name}</p>
-                        <p className="text-xs text-white/30">{c.label}</p>
+                        <p className="text-xs text-white/30">{c.note}</p>
                       </div>
                     </div>
                   ))}
@@ -548,107 +495,379 @@ export default function ArtCityTourCaseStudy() {
               </div>
             </Reveal>
 
-            {/* Principles */}
+            {/* Navigation */}
             <Reveal delay={0.15}>
-              <div className="glass rounded-2xl p-6 border border-white/08">
-                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Design Principles</p>
-                <div className="space-y-4">
+              <div className="glass rounded-2xl p-6 border border-white/08 h-full">
+                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">
+                  Navigation Structure
+                </p>
+                <p className="text-xs text-white/40 mb-5 leading-relaxed">
+                  Material Design navigation bar with 5 primary tabs. Content categories
+                  ordered by user relevance scores from 120-person survey.
+                </p>
+                <div className="space-y-2">
                   {[
-                    { title: 'Contextual first', desc: 'Every screen surfaces relevant information based on user location and intent.' },
-                    { title: 'Outdoor optimized', desc: 'High contrast ratios (7:1+) and large touch targets for sunlight readability.' },
-                    { title: 'Offline capable', desc: 'Core flows work without internet. Maps and artwork data download on first launch.' },
-                  ].map((p) => (
-                    <div key={p.title}>
-                      <p className="text-sm font-semibold text-white">{p.title}</p>
-                      <p className="text-xs text-white/40 leading-relaxed mt-0.5">{p.desc}</p>
+                    { section: 'Descubrir', desc: 'Parks, boulevards, museums, galleries, heritage, art', icon: '⌂' },
+                    { section: 'Actividades', desc: 'GAM Cultural calendar', icon: '⊞' },
+                    { section: 'Rutas', desc: 'SJO routes, custom routes, nearby', icon: 'Y' },
+                    { section: 'Movilidad', desc: 'Bike rental, train stops', icon: '◎' },
+                    { section: 'Ajustes', desc: 'Profile, favorites, settings, help', icon: '⚙' },
+                  ].map((item) => (
+                    <div key={item.section} className="flex items-start gap-3">
+                      <span className="text-xs w-5 mt-0.5" style={{ color: accent }}>{item.icon}</span>
+                      <div>
+                        <p className="text-xs font-semibold text-white/80">{item.section}</p>
+                        <p className="text-xs text-white/35">{item.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
             </Reveal>
           </div>
+
+          {/* Phone mockups */}
+          <Reveal delay={0.2}>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-10 py-8">
+              <PhoneFrame label="Home — Descubrir" accentColor="#38bdf8">
+                <div className="space-y-1.5">
+                  <div className="h-4 rounded" style={{ background: '#38bdf820', width: '60%' }} />
+                  <div className="flex gap-2 overflow-hidden">
+                    {['PARQUES', 'BULEVARES', 'PATRIMONIO'].map((t) => (
+                      <span key={t} className="text-[6px] font-bold whitespace-nowrap px-1.5 py-0.5 rounded"
+                        style={{ color: t === 'PARQUES' ? '#38bdf8' : '#ffffff40', borderBottom: t === 'PARQUES' ? '1px solid #38bdf8' : 'none' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-[8px] text-white/50 font-semibold">Cerca de mí</p>
+                <div className="grid grid-cols-2 gap-1 flex-1">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div key={i} className="rounded-lg bg-white/06 aspect-square" />
+                  ))}
+                </div>
+                <p className="text-[8px] text-white/50 font-semibold mt-1">Recomendados</p>
+              </PhoneFrame>
+
+              <PhoneFrame label="Place Detail" accentColor="#38bdf8">
+                <div className="w-full h-16 rounded-xl bg-white/08" />
+                <div className="space-y-1.5 mt-1">
+                  <div className="h-3 rounded bg-white/15 w-4/5" />
+                  <div className="h-2 rounded bg-white/08 w-3/5" />
+                  <div className="border-t border-white/06 pt-1.5 space-y-1">
+                    {[
+                      { icon: '📍', text: 'Calle Central, Avenida 1-3' },
+                      { icon: '🕐', text: 'M–V 8:00–16:30' },
+                      { icon: '📞', text: '+506 2007-7475' },
+                    ].map((row) => (
+                      <div key={row.text} className="flex items-center gap-1.5">
+                        <span className="text-[8px]">{row.icon}</span>
+                        <span className="text-[7px] text-white/40">{row.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </PhoneFrame>
+
+              <PhoneFrame label="Rutas (Routes)" accentColor="#1e3a5f">
+                <div className="space-y-1.5 flex-1">
+                  <p className="text-[8px] text-white/50 font-semibold">Rutas SJO</p>
+                  {['Ruta Museos', 'Ruta Patrimonio', 'Ruta Arte Público'].map((r) => (
+                    <div key={r} className="flex items-center justify-between p-2 rounded-xl bg-white/06 border border-white/06">
+                      <span className="text-[7px] text-white/60">{r}</span>
+                      <span className="text-[7px]" style={{ color: '#38bdf8' }}>↓</span>
+                    </div>
+                  ))}
+                  <p className="text-[8px] text-white/50 font-semibold mt-2">Cerca de mí</p>
+                  <div className="h-12 rounded-xl bg-white/06" />
+                </div>
+              </PhoneFrame>
+
+              <PhoneFrame label="Favoritos" accentColor="#38bdf8">
+                <p className="text-[8px] text-white/50 font-semibold">Mis Favoritos</p>
+                <div className="space-y-1.5 flex-1">
+                  {['Museo Nacional', 'Teatro Nacional', 'Iglesia El Carmen'].map((item) => (
+                    <div key={item} className="flex items-center gap-2 p-2 rounded-xl bg-white/06">
+                      <div className="w-6 h-6 rounded-lg bg-white/10 shrink-0" />
+                      <span className="text-[7px] text-white/60">{item}</span>
+                      <span className="ml-auto text-[8px]" style={{ color: '#38bdf8' }}>♥</span>
+                    </div>
+                  ))}
+                </div>
+              </PhoneFrame>
+
+              <PhoneFrame label="Ajustes" accentColor="#1e3a5f">
+                <div className="flex flex-col items-center py-2 gap-1">
+                  <div className="w-10 h-10 rounded-full bg-white/10" />
+                  <div className="h-2 rounded bg-white/20 w-16" />
+                  <div className="h-1.5 rounded bg-white/10 w-12" />
+                </div>
+                <div className="space-y-1 flex-1">
+                  {['Idioma', 'Notificaciones', 'Contacto', 'Ayuda', 'Términos'].map((item) => (
+                    <div key={item} className="flex items-center justify-between px-2 py-1 rounded-lg bg-white/04">
+                      <span className="text-[7px] text-white/50">{item}</span>
+                      <span className="text-[8px] text-white/20">›</span>
+                    </div>
+                  ))}
+                </div>
+              </PhoneFrame>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── Screen Previews ───────────────────────────────────────────────── */}
-      <section className="py-20 overflow-hidden">
+      {/* ── Usability Results ─────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px bg-pink-400" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Key Screens</span>
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                Usability Results
+              </span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">
-              The experience
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              APK vs. Prototype — task performance
             </h2>
+            <p className="text-white/50 text-sm max-w-xl mb-10">
+              Participants who tested the original APK were retested on the new prototype.
+              All measured tasks showed meaningful time reductions.
+            </p>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="flex flex-wrap justify-center gap-8 md:gap-12 py-8">
-              <PhoneFrame
-                gradient="from-violet-900 to-indigo-900"
-                label="Onboarding"
-                icon="🗺️"
-              />
-              <PhoneFrame
-                gradient="from-violet-800 via-purple-800 to-indigo-800"
-                label="Map View"
-                icon="📍"
-              />
-              <PhoneFrame
-                gradient="from-rose-900 via-red-900 to-rose-800"
-                label="Artwork Detail"
-                icon="🎨"
-              />
-              <PhoneFrame
-                gradient="from-pink-900 via-rose-800 to-pink-800"
-                label="Artist Profile"
-                icon="👤"
-              />
-              <PhoneFrame
-                gradient="from-amber-900 via-orange-900 to-orange-800"
-                label="Route Planner"
-                icon="🧭"
-              />
+            <div className="glass rounded-2xl border border-white/08 overflow-hidden mb-8">
+              {/* Header */}
+              <div className="grid grid-cols-4 gap-4 px-6 py-3 border-b border-white/06 text-xs font-semibold tracking-widest uppercase">
+                <span className="text-white/30">Task</span>
+                <span className="text-rose-400">APK avg time</span>
+                <span className="text-emerald-400">Prototype avg</span>
+                <span style={{ color: accent }}>Improvement</span>
+              </div>
+              <div className="px-6">
+                <CompareRow
+                  task="Find Museo Nacional info"
+                  apkTime="24 sec"
+                  protoTime="13 sec"
+                  improvement="−46%"
+                />
+                <CompareRow
+                  task="Find Teatro El Triciclo"
+                  apkTime="55 sec"
+                  protoTime="51 sec"
+                  improvement="−7%"
+                />
+                <CompareRow
+                  task="Visit Favorites tab"
+                  apkTime="N/A"
+                  protoTime="7 sec"
+                  improvement="New feature"
+                />
+                <CompareRow
+                  task="Download Museos route"
+                  apkTime="2 min 44 sec"
+                  protoTime="1 min 9 sec"
+                  improvement="−58%"
+                />
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="mt-8 glass rounded-2xl p-6 border border-white/08 max-w-3xl">
-              <p className="text-sm text-white/50 leading-relaxed">
-                <span className="text-white/80 font-medium">Note:</span> Visual previews above represent the screen categories
-                and color-coding system from the design. The full interactive prototype with all 40+ screens is available
-                on Behance.
-              </p>
+          <Reveal delay={0.15}>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="glass rounded-2xl p-6 border border-white/08">
+                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Worst APK case</p>
+                <p className="font-display font-bold text-3xl text-rose-400 mb-1">6 min 25 sec</p>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  Finding Museo Nacional info when the user accidentally navigated to the map first,
+                  unable to locate the information there.
+                </p>
+              </div>
+              <div className="glass rounded-2xl p-6 border border-white/08">
+                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Key finding</p>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  Residual timing issues in the prototype were attributed to <span className="text-white/80">prototype load times and desktop testing conditions</span>,
+                  not to the interface itself — confirming the design decisions were sound.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Key Insights ──────────────────────────────────────────────────── */}
-      <section className="py-20 bg-gradient-to-r from-pink-500/05 via-transparent to-orange-500/05">
+      {/* ── Category prioritization ───────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div>
+              <Reveal>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                    Validation — 120 responses
+                  </span>
+                </div>
+                <h2 className="font-display text-3xl font-bold text-white mb-4">
+                  Content category ranking
+                </h2>
+                <p className="text-white/50 text-sm mb-8 leading-relaxed">
+                  A 120-person survey asked users to rate each content category 1–5.
+                  Results were used to reorder the navigation hierarchy within the "Descubrir" section.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Museos', pct: 85.8 },
+                    { label: 'Teatros', pct: 83.5 },
+                    { label: 'Patrimonios', pct: 78.3 },
+                    { label: 'Galerías', pct: 78.2 },
+                    { label: 'Arte Público', pct: 77.7 },
+                    { label: 'Monumentos', pct: 73.2 },
+                    { label: 'Parques', pct: 71.0 },
+                    { label: 'Boulevares', pct: 61.2 },
+                    { label: 'Mercados', pct: 59.8 },
+                    { label: 'Iglesias', pct: 55.8 },
+                  ].map((item) => (
+                    <StatBar key={item.label} label={item.label} pct={item.pct} />
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Icon validation */}
+            <div>
+              <Reveal delay={0.1}>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                    Validation — 93 responses
+                  </span>
+                </div>
+                <h2 className="font-display text-3xl font-bold text-white mb-4">
+                  Route icon recognition
+                </h2>
+                <p className="text-white/50 text-sm mb-8 leading-relaxed">
+                  Usability testing revealed confusion with the "Rutas" navigation icon.
+                  A survey of 93 participants tested 5 icon options to validate collective mental models.
+                  The original icon scored highest — it was kept.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.15}>
+                <div className="glass rounded-2xl p-6 border border-white/08 space-y-4">
+                  {[
+                    { icon: 'Y', label: 'Fork/route split (original)', pct: 42, highlight: true },
+                    { icon: '↗', label: 'Navigation arrow', pct: 28, highlight: false },
+                    { icon: '⊞', label: 'Map pin', pct: 12, highlight: false },
+                    { icon: '⇄', label: 'Bidirectional arrows', pct: 9.5, highlight: false },
+                    { icon: '▣', label: 'Bookmark / open book', pct: 8.5, highlight: false },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-4">
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center text-lg font-bold shrink-0"
+                        style={{
+                          background: item.highlight ? `${accent}20` : 'rgba(255,255,255,0.04)',
+                          border: item.highlight ? `1px solid ${accent}40` : '1px solid rgba(255,255,255,0.06)',
+                          color: item.highlight ? accent : 'rgba(255,255,255,0.3)',
+                        }}
+                      >
+                        {item.icon}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="text-xs text-white/60">{item.label}</p>
+                          <p className="text-xs font-semibold" style={{ color: item.highlight ? accent : 'rgba(255,255,255,0.4)' }}>
+                            {item.pct}%
+                          </p>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-white/06 overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${(item.pct / 42) * 100}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: 'easeOut' }}
+                            className="h-full rounded-full"
+                            style={{ background: item.highlight ? accent : 'rgba(255,255,255,0.15)' }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <p className="text-xs text-white/30 pt-2 border-t border-white/06">
+                    Decision: Original icon retained with 42% recognition — the highest score among alternatives.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── II Semester handoff ───────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px bg-pink-400" />
-              <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Research Insights</span>
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                II Semester 2021 — Handoff & Development
+              </span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">
-              What we discovered
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              From design to development
             </h2>
+            <p className="text-white/50 text-sm max-w-2xl mb-12 leading-relaxed">
+              The second semester focused on transitioning the validated design into a working application.
+              The Figma Design System and interactive prototype were handed off to a computing team who
+              implemented the app using the SCRUM methodology, with Alonso Obando as Scrum Master.
+            </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { value: '78%', label: 'of users wanted offline maps', color: 'text-pink-400' },
-              { value: '65%', label: 'found existing navigation confusing', color: 'text-rose-400' },
-              { value: '9/10', label: 'wanted artist context while viewing', color: 'text-orange-400' },
-              { value: '82%', label: 'would share discoveries in-app', color: 'text-violet-400' },
-            ].map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.07}>
-                <div className="glass rounded-2xl p-6 border border-white/08 text-center">
-                  <p className={`font-display font-bold text-4xl ${stat.color} mb-2`}>{stat.value}</p>
-                  <p className="text-sm text-white/50 leading-snug">{stat.label}</p>
+              {
+                phase: 'Stage 01',
+                activities: [
+                  'Storyboard for onboarding flow',
+                  'Requirements list with development team',
+                  'Developer-ready asset preparation',
+                  'Progress follow-up',
+                ],
+              },
+              {
+                phase: 'Stage 02',
+                activities: [
+                  'Second APK version validation',
+                  'UX review of implemented screens',
+                  'Progress follow-up meetings',
+                ],
+              },
+              {
+                phase: 'Stage 03',
+                activities: [
+                  'Correction iterations',
+                  'Design system documentation for future designers',
+                  'Progress follow-up',
+                  'Official launch',
+                ],
+              },
+            ].map((s, i) => (
+              <Reveal key={s.phase} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08">
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: accent }}>
+                    {s.phase}
+                  </p>
+                  <ul className="space-y-2 mt-3">
+                    {s.activities.map((a) => (
+                      <li key={a} className="flex items-start gap-2 text-sm text-white/55">
+                        <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: accent }} />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -657,28 +876,34 @@ export default function ArtCityTourCaseStudy() {
       </section>
 
       {/* ── Reflection ────────────────────────────────────────────────────── */}
-      <section className="py-24">
+      <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <Reveal>
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="w-6 h-px bg-pink-400" />
-                  <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">Reflection</span>
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>
+                    Reflection
+                  </span>
                 </div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                  Learnings & outcomes
+                  Key learnings
                 </h2>
-                <p className="text-white/60 leading-relaxed mb-6">
-                  This project reinforced the value of context-first research. Early assumptions about what tourists
-                  needed were challenged by the reality of field interviews — offline capability, which we initially
-                  considered a secondary feature, emerged as the most critical requirement.
+                <p className="text-white/60 leading-relaxed mb-4">
+                  This project demonstrated the value of testing against a real baseline. Having the original
+                  APK as a benchmark made it possible to quantify the impact of design decisions — not just
+                  describe them. Task times dropped by up to 58% in direct comparisons.
+                </p>
+                <p className="text-white/60 leading-relaxed mb-4">
+                  Working directly with the municipal client taught us to navigate institutional constraints:
+                  the legal complexity of including private venues required negotiation with stakeholders
+                  and reshaped the information architecture mid-project.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Working within the constraints of a city-scale information architecture also sharpened our
-                  understanding of scalable design systems. The color-coded screen categories we developed
-                  reduced cognitive load significantly in usability testing, helping users orient themselves
-                  within the app as quickly as they would in the physical space.
+                  Using Atomic Design from the start meant the final handoff was a complete,
+                  self-documenting Design System — not just a set of screens. The computing team
+                  received a Figma file they could use as both specification and reference guide.
                 </p>
               </div>
             </Reveal>
@@ -687,28 +912,28 @@ export default function ArtCityTourCaseStudy() {
               <div className="space-y-4">
                 {[
                   {
-                    icon: '🎯',
-                    title: 'Offline-first architecture',
-                    desc: 'Re-prioritized feature set after research revealed poor connectivity in historic San José.',
+                    title: 'Quantified impact',
+                    desc: 'Baseline APK vs prototype comparison gave concrete evidence of design improvements — not just preference.',
                   },
                   {
-                    icon: '🎨',
-                    title: 'Color as navigation',
-                    desc: 'The screen-type color system became a navigational layer — users knew where they were by hue alone.',
+                    title: 'Stakeholder navigation',
+                    desc: 'Legal constraints on private venues forced mid-project IA pivots. Institutional design requires flexibility.',
                   },
                   {
-                    icon: '🌍',
-                    title: 'Multilingual from the start',
-                    desc: 'Building bilingual content architecture early prevented costly redesigns during localization.',
+                    title: 'Atomic Design as handoff',
+                    desc: 'Building components bottom-up meant the Design System was ready for developers from day one.',
                   },
                   {
-                    icon: '✅',
-                    title: 'Validated in 2 rounds',
-                    desc: 'Two rounds of usability testing reduced critical errors by 67% from prototype to final design.',
+                    title: 'Data-driven decisions',
+                    desc: '120-person category survey and 93-person icon test replaced assumptions with evidence for key navigation choices.',
+                  },
+                  {
+                    title: 'Material Design pays off',
+                    desc: 'Familiar navigation patterns reduced learning curve. Users leveraged prior knowledge to explore the app faster.',
                   },
                 ].map((item) => (
                   <div key={item.title} className="glass rounded-2xl p-5 border border-white/08 flex items-start gap-4">
-                    <span className="text-2xl shrink-0">{item.icon}</span>
+                    <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: accent }} />
                     <div>
                       <p className="font-semibold text-white text-sm mb-1">{item.title}</p>
                       <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
@@ -721,17 +946,17 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── CTA / Links ───────────────────────────────────────────────────── */}
+      {/* ── CTA ───────────────────────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/08">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                  See the full prototype
+                  See the full design on Behance
                 </h2>
                 <p className="text-white/50 text-sm">
-                  All 40+ screens, components, and the interactive prototype are on Behance.
+                  Complete screens, design system, and prototype available on Behance.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -741,7 +966,8 @@ export default function ArtCityTourCaseStudy() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 text-white text-sm font-semibold"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold"
+                  style={{ background: `linear-gradient(135deg, ${accent}, #1d4ed8)` }}
                 >
                   View on Behance
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -758,12 +984,13 @@ export default function ArtCityTourCaseStudy() {
             </div>
           </Reveal>
 
-          {/* Next project nudge */}
+          {/* Next project */}
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
               <Link href="/" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-xl">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
+                  style={{ background: 'linear-gradient(135deg, #10b981, #0d9488)' }}>
                   🏦
                 </div>
                 <div>
@@ -796,9 +1023,7 @@ export default function ArtCityTourCaseStudy() {
             }}>JP</span>
             <span className="text-white/60 font-light"> Campos</span>
           </span>
-          <p className="text-xs text-white/30">
-            UX/UI Designer · Costa Rica
-          </p>
+          <p className="text-xs text-white/30">UX/UI Designer · Costa Rica</p>
         </div>
       </footer>
     </div>
