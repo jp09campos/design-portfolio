@@ -1,8 +1,14 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { STATS } from '@/lib/data'
-import HeroScene from '@/components/three/HeroScene'
+
+// Three.js uses WebGL — must be client-side only (no SSR)
+const HeroScene = dynamic(() => import('@/components/three/HeroScene'), {
+  ssr: false,
+  loading: () => null,
+})
 
 const container = {
   hidden: { opacity: 0 },
@@ -19,7 +25,6 @@ const item = {
 
 export default function HeroSection() {
   const handleScroll = (href: string) => {
-    if (typeof window === 'undefined') return
     const target = document.querySelector(href)
     if (target) target.scrollIntoView({ behavior: 'smooth' })
   }

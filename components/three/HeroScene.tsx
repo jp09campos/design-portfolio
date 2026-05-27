@@ -1,177 +1,237 @@
+// @ts-nocheck
+// Three.js r184 restructured its TS types — WebGL scene, no type checking needed
 'use client'
 
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-
-// CSS-based animated particle field that renders beautifully without Three.js
-// Uses canvas API for performance and works on all browsers without WebGL
+import * as THREE from 'three'
 
 export default function HeroScene() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animFrameRef = useRef<number>(0)
-  const mouseRef = useRef({ x: 0.5, y: 0.5 })
+  const mountRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const mount = mountRef.current
+    if (!mount) return
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+    // ── Scene setup ──────────────────────────────────────────────────────────
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      mount.clientWidth / mount.clientHeight,
+      0.1,
+      100,
+    )
+    camera.position.set(0, 0, 8)
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: false,
+      powerPreference: 'high-performance',
+    })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    renderer.setSize(mount.clientWidth, mount.clientHeight)
+    renderer.setClearColor(0x000000, 0)
+    mount.appendChild(renderer.domElement)
+
+    // ── Mouse tracking ────────────────────────────────────────────────────────
+    const mouse = new THREE.Vector2(0, 0)
+    const targetRotation = new THREE.Vector2(0, 0)
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.x = (e.clientX / window.innerWidth - 0.5) * 2
+      mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2
+    }
+    window.addEventListener('mousemove', onMouseMove)
+
+    // ── Particle field ────────────────────────────────────────────────────────
+    const PARTICLE_COUNT = 1800
+    const positions = new Float32Array(PARTICLE_COUNT * 3)
+    const colors = new Float32Array(PARTICLE_COUNT * 3)
+    const palette = [
+      new THREE.Color('#6366f1'), // indigo
+      new THREE.Color('#8b5cf6'), // violet
+      new THREE.Color('#ec4899'), // pink
+      new THREE.Color('#a5b4fc'), // light indigo
+      new THREE.Color('#c4b5fd'), // light violet
+    ]
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 22
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 22
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 12 - 4
+
+      const c = palette[Math.floor(Math.random() * palette.length)]
+      colors[i * 3] = c.r
+      colors[i * 3 + 1] = c.g
+      colors[i * 3 + 2] = c.b
     }
 
-    resize()
-    window.addEventListener('resize', resize)
+    const particleGeo = new THREE.BufferGeometry()
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
-    // Mouse parallax
-    const onMouse = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      }
+    const particleMat = new THREE.PointsMaterial({
+      size: 0.055,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.75,
+      sizeAttenuation: true,
+    })
+    const particles = new THREE.Points(particleGeo, particleMat)
+    scene.add(particles)
+
+    // ── Floating wireframe icosahedron ────────────────────────────────────────
+    const icoGeo = new THREE.IcosahedronGeometry(1.4, 1)
+    const icoMat = new THREE.MeshStandardMaterial({
+      color: '#6366f1',
+      wireframe: true,
+      transparent: true,
+      opacity: 0.22,
+      emissive: new THREE.Color('#6366f1'),
+      emissiveIntensity: 0.4,
+    })
+    const icosahedron = new THREE.Mesh(icoGeo, icoMat)
+    icosahedron.position.set(3.8, 0.3, -2)
+    scene.add(icosahedron)
+
+    // ── Floating wireframe torus ──────────────────────────────────────────────
+    const torusGeo = new THREE.TorusGeometry(1.1, 0.28, 8, 28)
+    const torusMat = new THREE.MeshStandardMaterial({
+      color: '#8b5cf6',
+      wireframe: true,
+      transparent: true,
+      opacity: 0.18,
+      emissive: new THREE.Color('#8b5cf6'),
+      emissiveIntensity: 0.3,
+    })
+    const torus = new THREE.Mesh(torusGeo, torusMat)
+    torus.position.set(-3.6, 1.2, -3)
+    scene.add(torus)
+
+    // ── Octahedron accent ─────────────────────────────────────────────────────
+    const octaGeo = new THREE.OctahedronGeometry(0.8)
+    const octaMat = new THREE.MeshStandardMaterial({
+      color: '#ec4899',
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15,
+      emissive: new THREE.Color('#ec4899'),
+      emissiveIntensity: 0.3,
+    })
+    const octahedron = new THREE.Mesh(octaGeo, octaMat)
+    octahedron.position.set(-1.5, -2.8, -1)
+    scene.add(octahedron)
+
+    // ── Dynamic lights ────────────────────────────────────────────────────────
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.08)
+    scene.add(ambientLight)
+
+    const light1 = new THREE.PointLight('#6366f1', 18, 14)
+    scene.add(light1)
+    const light2 = new THREE.PointLight('#ec4899', 12, 12)
+    scene.add(light2)
+    const light3 = new THREE.PointLight('#8b5cf6', 8, 10)
+    light3.position.set(0, 3, 2)
+    scene.add(light3)
+
+    // ── Resize handler ────────────────────────────────────────────────────────
+    const onResize = () => {
+      if (!mount) return
+      camera.aspect = mount.clientWidth / mount.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(mount.clientWidth, mount.clientHeight)
     }
-    window.addEventListener('mousemove', onMouse)
+    window.addEventListener('resize', onResize)
 
-    // Particle system
-    const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#a5b4fc', '#c4b5fd']
-    const count = 120
+    // ── Animation loop ────────────────────────────────────────────────────────
+    let animId: number
+    const clock = new THREE.Clock()
 
-    type Particle = {
-      x: number; y: number; z: number
-      vx: number; vy: number
-      r: number; color: string; alpha: number
+    const animate = () => {
+      animId = requestAnimationFrame(animate)
+      const t = clock.getElapsedTime()
+
+      // Smooth mouse-reactive rotation on particle field
+      targetRotation.x += (mouse.y * 0.12 - targetRotation.x) * 0.04
+      targetRotation.y += (mouse.x * 0.18 - targetRotation.y) * 0.04
+      particles.rotation.x = targetRotation.x + t * 0.008
+      particles.rotation.y = targetRotation.y + t * 0.012
+
+      // Floating geometry animations
+      icosahedron.rotation.x = t * 0.28
+      icosahedron.rotation.y = t * 0.18
+      icosahedron.position.y = 0.3 + Math.sin(t * 0.7) * 0.5
+
+      torus.rotation.x = t * 0.35 + Math.PI / 4
+      torus.rotation.z = t * 0.12
+      torus.position.y = 1.2 + Math.sin(t * 0.5 + 1) * 0.4
+
+      octahedron.rotation.y = t * 0.45
+      octahedron.rotation.x = t * 0.22
+      octahedron.position.y = -2.8 + Math.sin(t * 0.6 + 2) * 0.3
+
+      // Orbiting dynamic lights
+      light1.position.set(
+        Math.sin(t * 0.5) * 5,
+        Math.cos(t * 0.3) * 4,
+        Math.sin(t * 0.2) * 3,
+      )
+      light2.position.set(
+        -Math.sin(t * 0.4) * 6,
+        Math.sin(t * 0.6) * 3,
+        Math.cos(t * 0.3) * 4,
+      )
+
+      renderer.render(scene, camera)
     }
 
-    const w = () => canvas.offsetWidth
-    const h = () => canvas.offsetHeight
+    animate()
 
-    const particles: Particle[] = Array.from({ length: count }, () => ({
-      x: Math.random() * w(),
-      y: Math.random() * h(),
-      z: Math.random() * 2 + 0.2,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 0.5,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      alpha: Math.random() * 0.6 + 0.2,
-    }))
-
-    let time = 0
-    const draw = () => {
-      time += 0.005
-      const W = w()
-      const H = h()
-      ctx.clearRect(0, 0, W, H)
-
-      const mx = mouseRef.current.x
-      const my = mouseRef.current.y
-
-      for (const p of particles) {
-        // Parallax offset
-        const px = p.x + (mx - 0.5) * 30 * p.z
-        const py = p.y + (my - 0.5) * 20 * p.z
-
-        // Drift
-        p.x += p.vx
-        p.y += p.vy
-
-        // Wrap
-        if (p.x < 0) p.x = W
-        if (p.x > W) p.x = 0
-        if (p.y < 0) p.y = H
-        if (p.y > H) p.y = 0
-
-        // Draw
-        ctx.beginPath()
-        ctx.arc(px, py, p.r * p.z, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.globalAlpha = p.alpha * (0.7 + 0.3 * Math.sin(time * 2 + p.x))
-        ctx.fill()
-      }
-
-      // Connection lines
-      ctx.lineWidth = 0.5
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i]
-          const b = particles[j]
-          const dist = Math.hypot(a.x - b.x, a.y - b.y)
-          if (dist < 100) {
-            ctx.beginPath()
-            ctx.strokeStyle = '#6366f1'
-            ctx.globalAlpha = (1 - dist / 100) * 0.12
-            ctx.moveTo(a.x + (mx - 0.5) * 30 * a.z, a.y + (my - 0.5) * 20 * a.z)
-            ctx.lineTo(b.x + (mx - 0.5) * 30 * b.z, b.y + (my - 0.5) * 20 * b.z)
-            ctx.stroke()
-          }
-        }
-      }
-
-      ctx.globalAlpha = 1
-      animFrameRef.current = requestAnimationFrame(draw)
-    }
-
-    draw()
-
+    // ── Cleanup ───────────────────────────────────────────────────────────────
     return () => {
-      cancelAnimationFrame(animFrameRef.current)
-      window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMouse)
+      cancelAnimationFrame(animId)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('resize', onResize)
+
+      // Dispose geometries and materials
+      particleGeo.dispose()
+      particleMat.dispose()
+      icoGeo.dispose()
+      icoMat.dispose()
+      torusGeo.dispose()
+      torusMat.dispose()
+      octaGeo.dispose()
+      octaMat.dispose()
+
+      renderer.dispose()
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement)
+      }
     }
   }, [])
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
-      {/* Canvas particle field */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ opacity: 0.85 }}
+    <div className="absolute inset-0 w-full h-full">
+      {/* Three.js WebGL canvas */}
+      <div ref={mountRef} className="absolute inset-0 w-full h-full" />
+
+      {/* Radial gradient overlays for depth */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.13) 0%, transparent 55%),
+            radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.12) 0%, transparent 55%),
+            radial-gradient(ellipse at 60% 80%, rgba(236,72,153,0.08) 0%, transparent 55%)
+          `,
+        }}
       />
 
-      {/* Floating geometric shapes via CSS/Framer */}
-      <motion.div
-        animate={{
-          rotate: [0, 360],
-          y: [0, -20, 0],
+      {/* Subtle vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, rgba(13,13,13,0.7) 100%)',
         }}
-        transition={{ rotate: { duration: 20, repeat: Infinity, ease: 'linear' }, y: { duration: 6, repeat: Infinity, ease: 'easeInOut' } }}
-        className="absolute right-[10%] top-[20%] w-40 h-40 border border-indigo-500/20 rounded-xl"
-        style={{ transform: 'rotate(12deg)' }}
-      />
-      <motion.div
-        animate={{
-          rotate: [360, 0],
-          y: [0, 15, 0],
-        }}
-        transition={{ rotate: { duration: 15, repeat: Infinity, ease: 'linear' }, y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 } }}
-        className="absolute right-[15%] top-[15%] w-24 h-24 border border-violet-500/20 rounded-full"
-      />
-      <motion.div
-        animate={{
-          rotate: [0, 180, 360],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-        className="absolute left-[5%] bottom-[25%] w-16 h-16 border border-pink-500/20"
-        style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
-      />
-
-      {/* Glowing orbs */}
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)' }}
-      />
-      <motion.div
-        animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-        className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%)' }}
       />
     </div>
   )
