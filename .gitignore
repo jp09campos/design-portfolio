@@ -44,3 +44,7 @@ pnpm-debug.log*
 
 # Vercel
 .vercel
+
+# Local npm config — contains internal Walmart registry URL, must not ship to Vercel
+.npmrc
+package-lock.json
