@@ -4,8 +4,9 @@ node_modules/
 .pnp.js
 
 # Build output
+.next/
+out/
 dist/
-dist-ssr/
 build/
 
 # Environment files
@@ -28,9 +29,7 @@ build/
 
 # TypeScript build info
 tsconfig.tsbuildinfo
-
-# A11y reports (dev only)
-.ld-a11y-report.json
+next-env.d.ts
 
 # Logs
 *.log
@@ -39,6 +38,5 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Bun
-bun.lockb
-bun.lock
+# Vercel
+.vercel
