@@ -9,6 +9,10 @@ out/
 dist/
 build/
 
+# Vendor overrides — never ignore vendored packages
+!vendor/
+!vendor/**
+
 # Environment files
 .env
 .env.local
