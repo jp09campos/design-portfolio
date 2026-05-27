@@ -460,7 +460,7 @@ export default function PortfolioPage() {
           />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
             {SKILLS.map((skill) => (
-              <Tag key={skill} color="neutral" variant="secondary">
+              <Tag key={skill} color="gray" variant="secondary">
                 {skill}
               </Tag>
             ))}
