@@ -70,7 +70,7 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
             <motion.a
-              href="mailto:jpcampossequeira@gmail.com"
+              href="mailto:j.p11sequeira@gmail.com"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               className="px-4 py-2 text-sm font-medium rounded-full glass hover:bg-white/10 transition-colors duration-200"
@@ -125,7 +125,7 @@ export default function Navbar() {
               ))}
               <li className="pt-2">
                 <a
-                  href="mailto:jpcampossequeira@gmail.com"
+                  href="mailto:j.p11sequeira@gmail.com"
                   className="inline-block px-5 py-2.5 text-sm font-medium rounded-full bg-indigo-500 hover:bg-indigo-400 transition-colors"
                 >
                   Hire me

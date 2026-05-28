@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { SOCIAL_LINKS } from '@/lib/data'
 
@@ -33,17 +33,6 @@ const ICON_MAP: Record<string, React.ComponentType> = {
 export default function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Build mailto link as a simple form action
-    const subject = encodeURIComponent(`Portfolio contact from ${formState.name}`)
-    const body = encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`)
-    window.open(`mailto:j.p11sequeira@gmail.com?subject=${subject}&body=${body}`, '_blank')
-    setSubmitted(true)
-  }
 
   return (
     <section id="contact" ref={sectionRef} className="section-padding">
@@ -72,145 +61,123 @@ export default function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          {/* Contact form */}
+        {/* Contact info — centered, max 3xl */}
+        <div className="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
+          {/* Email */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            {submitted ? (
-              <div className="glass rounded-2xl p-8 text-center h-full flex flex-col items-center justify-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/15 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-display font-bold text-xl text-white">Message sent!</h3>
-                <p className="text-white/40 text-sm">Your email client should have opened. I&apos;ll get back to you soon.</p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors underline underline-offset-4"
-                >
-                  Send another message
-                </button>
+            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-pink-500/15 flex items-center justify-center">
+                <svg className="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-5">
-                <div>
-                  <label htmlFor="name" className="block text-xs text-white/40 font-medium tracking-wider uppercase mb-2">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    value={formState.name}
-                    onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
-                    placeholder="Your name"
-                    className="w-full px-4 py-3 rounded-xl bg-white/05 border border-white/10 text-white placeholder-white/20 text-sm outline-none focus:border-indigo-500/50 focus:bg-indigo-500/05 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-xs text-white/40 font-medium tracking-wider uppercase mb-2">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={formState.email}
-                    onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-3 rounded-xl bg-white/05 border border-white/10 text-white placeholder-white/20 text-sm outline-none focus:border-indigo-500/50 focus:bg-indigo-500/05 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-xs text-white/40 font-medium tracking-wider uppercase mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={5}
-                    value={formState.message}
-                    onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
-                    placeholder="Tell me about your project..."
-                    className="w-full px-4 py-3 rounded-xl bg-white/05 border border-white/10 text-white placeholder-white/20 text-sm outline-none focus:border-indigo-500/50 focus:bg-indigo-500/05 transition-colors resize-none"
-                  />
-                </div>
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-3.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-sm tracking-wide transition-colors shadow-[0_0_30px_rgba(99,102,241,0.25)]"
-                >
-                  Send Message
-                </motion.button>
-              </form>
-            )}
-          </motion.div>
-
-          {/* Right: contact info + social */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col gap-6"
-          >
-            {/* Direct email */}
-            <div className="glass rounded-2xl p-6">
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase mb-3">
-                Direct Email
-              </p>
+              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Email</p>
               <a
                 href="mailto:j.p11sequeira@gmail.com"
-                className="text-white/80 hover:text-white transition-colors text-lg font-medium font-display"
+                className="text-white/80 hover:text-white transition-colors text-sm font-medium break-all"
               >
                 j.p11sequeira@gmail.com
               </a>
             </div>
+          </motion.div>
 
-            {/* Location */}
-            <div className="glass rounded-2xl p-6">
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase mb-3">
-                Location
-              </p>
-              <p className="text-white/70 font-medium">San José, Costa Rica</p>
-              <p className="text-white/30 text-sm mt-1">Available for remote work worldwide</p>
+          {/* Location */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-indigo-500/15 flex items-center justify-center">
+                <svg className="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Location</p>
+              <div>
+                <p className="text-white/80 font-medium text-sm">San José, Costa Rica</p>
+                <p className="text-white/30 text-xs mt-1">Available worldwide · Remote</p>
+              </div>
             </div>
+          </motion.div>
 
-            {/* Social links */}
-            <div className="glass rounded-2xl p-6">
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase mb-4">
-                Find me online
-              </p>
-              <div className="flex flex-col gap-3">
-                {SOCIAL_LINKS.map((link) => {
-                  const Icon = ICON_MAP[link.icon]
-                  return (
-                    <motion.a
-                      key={link.name}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ x: 4 }}
-                      className="flex items-center gap-3 text-white/50 hover:text-white transition-colors group"
-                    >
-                      <span className="w-9 h-9 rounded-full bg-white/05 border border-white/08 flex items-center justify-center group-hover:border-white/20 transition-colors">
-                        <Icon />
-                      </span>
-                      <span className="font-medium text-sm">{link.name}</span>
-                      <svg className="w-3 h-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                      </svg>
-                    </motion.a>
-                  )
-                })}
+          {/* Hire me CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
+              </div>
+              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Status</p>
+              <div>
+                <p className="text-white/80 font-medium text-sm">Available for projects</p>
+                <p className="text-white/30 text-xs mt-1">Open to collaborations</p>
               </div>
             </div>
           </motion.div>
         </div>
+
+        {/* Social links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="max-w-3xl mx-auto mt-6"
+        >
+          <div className="glass rounded-2xl p-6">
+            <p className="text-xs text-white/30 font-semibold tracking-widest uppercase mb-5 text-center">
+              Find me online
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {SOCIAL_LINKS.map((link) => {
+                const Icon = ICON_MAP[link.icon]
+                return (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -3, scale: 1.05 }}
+                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full glass border border-white/08 hover:border-white/20 text-white/50 hover:text-white transition-colors group"
+                  >
+                    <Icon />
+                    <span className="font-medium text-sm">{link.name}</span>
+                  </motion.a>
+                )
+              })}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Hire me button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-10"
+        >
+          <motion.a
+            href="mailto:j.p11sequeira@gmail.com?subject=Project%20Inquiry%20—%20Portfolio&body=Hi%20José%20Pablo%2C%0A%0AI%20visited%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20potential%20project%20with%20you.%0A%0AProject%20details%3A%0A%0A"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-sm tracking-wide transition-colors shadow-[0_0_40px_rgba(99,102,241,0.35)]"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Hire me
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   )
