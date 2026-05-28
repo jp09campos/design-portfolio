@@ -41,7 +41,7 @@ export default function ContactSection() {
     // Build mailto link as a simple form action
     const subject = encodeURIComponent(`Portfolio contact from ${formState.name}`)
     const body = encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`)
-    window.open(`mailto:jpcampossequeira@gmail.com?subject=${subject}&body=${body}`, '_blank')
+    window.open(`mailto:j.p11sequeira@gmail.com?subject=${subject}&body=${body}`, '_blank')
     setSubmitted(true)
   }
 
@@ -164,10 +164,10 @@ export default function ContactSection() {
                 Direct Email
               </p>
               <a
-                href="mailto:jpcampossequeira@gmail.com"
+                href="mailto:j.p11sequeira@gmail.com"
                 className="text-white/80 hover:text-white transition-colors text-lg font-medium font-display"
               >
-                jpcampossequeira@gmail.com
+                j.p11sequeira@gmail.com
               </a>
             </div>
 

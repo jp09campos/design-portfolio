@@ -62,18 +62,64 @@ export default function AboutSection() {
               </p>
               <p>
                 My background blends product thinking, human-centered research, and visual craft.
-                I&apos;ve worked across fintech, tourism, government, and consumer products — always
-                with the same goal: reduce friction, increase delight, ship with intention.
+                I&apos;ve worked across fintech, e-commerce, tourism, government, and enterprise
+                platforms — always with the same goal: reduce friction, increase delight, ship
+                with intention.
               </p>
               <p>
-                When I&apos;m not designing, I&apos;m exploring emerging tech, sketching,
-                or discussing design philosophy on Perspectivas Podcast.
+                Fluent in English and Spanish, currently pursuing a Master&apos;s in User
+                Experience Design at UNIR while designing enterprise tools at Walmart Central
+                America.
               </p>
+            </motion.div>
+
+            {/* Education */}
+            <motion.div
+              custom={3}
+              variants={fadeUp}
+              initial="hidden"
+              animate={isInView ? 'show' : 'hidden'}
+              className="mt-8 space-y-3"
+            >
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">
+                Education
+              </p>
+              {[
+                {
+                  degree: "Master's in User Experience Design",
+                  school: 'UNIR',
+                  year: 'Expected 2026',
+                  active: true,
+                },
+                {
+                  degree: 'Specialization in Creative UX/UI',
+                  school: 'LCI Veritas',
+                  year: '2024',
+                  active: false,
+                },
+                {
+                  degree: 'B.S. Industrial Design Engineering',
+                  school: 'Instituto Tecnológico de Costa Rica',
+                  year: '2020',
+                  active: false,
+                },
+              ].map((edu) => (
+                <div key={edu.degree} className="flex items-start gap-3">
+                  <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${edu.active ? 'bg-indigo-400' : 'bg-white/20'}`} />
+                  <div>
+                    <span className="text-sm text-white/75 font-medium">{edu.degree}</span>
+                    <span className="text-sm text-white/35"> · {edu.school}</span>
+                    <span className={`text-xs ml-2 px-2 py-0.5 rounded-full ${edu.active ? 'bg-indigo-500/15 text-indigo-400' : 'text-white/30 bg-white/05'}`}>
+                      {edu.year}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </motion.div>
 
             {/* CTA buttons */}
             <motion.div
-              custom={3}
+              custom={4}
               variants={fadeUp}
               initial="hidden"
               animate={isInView ? 'show' : 'hidden'}
@@ -102,6 +148,16 @@ export default function AboutSection() {
                 className="px-5 py-2.5 rounded-full glass hover:bg-white/10 text-sm font-medium text-white/80 hover:text-white transition-colors"
               >
                 Twine
+              </a>
+              <a
+                href="/cv-jose-pablo-campos.pdf"
+                download
+                className="px-5 py-2.5 rounded-full glass hover:bg-white/10 text-sm font-medium text-white/80 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Download CV
               </a>
             </motion.div>
           </div>
