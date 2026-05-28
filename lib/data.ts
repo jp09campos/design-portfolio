@@ -112,7 +112,7 @@ export const EXPERIENCE = [
   {
     id: 'sit-exp',
     role: 'UX Researcher',
-    company: 'SIT – Sistema de Información Tributaria',
+    company: 'SIT – Soluciones Inteligentes en Tecnología',
     period: '2023 – 2024',
     description:
       'Conducted UX research to support the full redesign of the company\'s website. Led a multi-phase research plan including surveys, focus groups, and usability audits. Synthesized findings into actionable insights, resulting in improved site architecture and measurably increased user satisfaction.',
