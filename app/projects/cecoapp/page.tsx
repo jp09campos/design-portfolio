@@ -579,21 +579,25 @@ export default function CECOAppCaseStudy() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                  See the full prototype on Figma
+                  Explore the interactive prototype
                 </h2>
-                <p className="text-white/50 text-sm">Complete flows, design system, and annotated specs available upon request.</p>
+                <p className="text-white/50 text-sm">Complete flows, design system, and annotated specs — live on Figma.</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/#contact"
+                <motion.a
+                  href="https://www.figma.com/proto/CKFV2GZwMbopWNDIYjXKps/Prototipo?node-id=53-17278&p=f&t=7ShqCqjCVjpXhjge-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A189&starting-point-node-id=53%3A17278"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold"
                   style={{ background: `linear-gradient(135deg, ${accent}, #7c3aed)` }}
                 >
-                  Request access
+                  View Prototype
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                </Link>
+                </motion.a>
                 <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08">
                   Back to portfolio
                 </Link>
