@@ -88,7 +88,10 @@ function ExperienceItem({
               <h3 className="font-display font-bold text-white text-lg leading-tight">
                 {exp.role}
               </h3>
-              <p className={`text-sm font-semibold bg-gradient-to-r ${exp.color} bg-clip-text text-transparent mt-0.5`}>
+              <p
+                className={`text-sm font-semibold bg-gradient-to-r ${exp.color} bg-clip-text mt-0.5`}
+                style={{ WebkitTextFillColor: 'transparent', color: 'transparent' }}
+              >
                 {exp.company}
               </p>
             </div>
