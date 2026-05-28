@@ -85,8 +85,8 @@ export const PROJECTS = [
 export const EXPERIENCE = [
   {
     id: 'walmart-exp',
-    role: 'UX/UI Designer',
-    company: 'Walmart Central America (D&A)',
+    role: 'Product Designer',
+    company: 'Walmart CAM — Central America',
     period: '2024 – Present',
     description:
       'Designing technology platforms to improve the experience and performance of Walmart associates. Apply UX methodologies including user interviews and feedback loops to ensure solutions meet real user needs and align with stakeholder goals. Collaborate with data analysts and business managers to transform complex datasets into actionable, readable visuals.',
