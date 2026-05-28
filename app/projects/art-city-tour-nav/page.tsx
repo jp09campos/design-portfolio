@@ -689,8 +689,8 @@ export default function ArtCityTourNavCaseStudy() {
                   🏛️
                 </div>
                 <div>
-                  <p className="font-display font-bold text-white text-lg group-hover:text-pink-400 transition-colors">Art City Tour — App Redesign</p>
-                  <p className="text-sm text-white/40">Same event, different challenge: redesigning the Centro Histórico tourism app</p>
+                  <p className="font-display font-bold text-white text-lg group-hover:text-pink-400 transition-colors">SJO Turismo App — Redesign</p>
+                  <p className="text-sm text-white/40">Same city, different challenge: redesigning the Centro Histórico tourism app</p>
                 </div>
                 <svg className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto"
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">

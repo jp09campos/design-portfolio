@@ -226,14 +226,14 @@ export default function ArtCityTourCaseStudy() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
           >
-            Aplicación<br />
+            SJO Turismo<br />
             <span style={{
               background: `linear-gradient(135deg, ${accent}, #60a5fa, #93c5fd)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>
-              Centro Histórico
+              App Redesign
             </span>
           </motion.h1>
 
@@ -243,7 +243,7 @@ export default function ArtCityTourCaseStudy() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-white/50 text-lg mb-8 max-w-2xl"
           >
-            Mobile UX redesign for the historic center tourism app of San José, Costa Rica —
+            UX redesign of the SJO Turismo app for the Centro Histórico de San José, Costa Rica —
             a collaboration between the Instituto Tecnológico de Costa Rica and the Municipalidad de San José.
           </motion.p>
 

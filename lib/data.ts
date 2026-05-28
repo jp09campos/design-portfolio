@@ -27,10 +27,10 @@ export const PROJECTS = [
   },
   {
     id: 'art-city-tour',
-    title: 'Art City Tour — App Redesign',
+    title: 'SJO Turismo App — Redesign',
     category: 'Mobile UX · UX Research · Tourism',
     description:
-      'UX redesign of the Centro Histórico de San José tourism app — a collaboration between TEC and the Municipalidad de San José. The original APK had critical navigation failures: finding a theater took up to 1 min 41 sec, changing map layers required 4 min. Through diagnostic testing with 10 users, Atomic Design, pattern hunting, and a 120-person content survey, delivered a validated prototype that cut key task times by up to 71%.',
+      'UX redesign of the SJO Turismo app for the Centro Histórico de San José — a collaboration between TEC and the Municipalidad de San José. The original APK had critical navigation failures: finding a theater took up to 1 min 41 sec, changing map layers required 4 min. Through diagnostic testing with 10 users, Atomic Design, pattern hunting, and a 120-person content survey, delivered a validated prototype that cut key task times by up to 71%.',
     gradient: 'from-pink-500 via-rose-500 to-orange-500',
     bgGradient: 'from-pink-500/10 via-rose-500/10 to-orange-500/10',
     tags: ['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'Usability Testing'],
