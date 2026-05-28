@@ -12,6 +12,7 @@ const PROJECT_ROUTES: Record<string, string> = {
   'art-city-tour': '/projects/sjo-turismo',
   'art-city-tour-nav': '/projects/art-city-tour-nav',
   'fulzer': '/projects/fulzer',
+  'ecommerce-wm': '/projects/ecommerce-wm',
 }
 
 const fadeUp = {
