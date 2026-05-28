@@ -93,6 +93,8 @@ export const EXPERIENCE = [
     tags: ['Enterprise UX', 'Data Visualization', 'User Interviews', 'Stakeholder Management', 'Design Systems'],
     type: 'full-time',
     color: 'from-sky-500 to-blue-600',
+    colorFrom: '#0ea5e9',
+    colorTo: '#2563eb',
   },
   {
     id: 'cafsa-exp',
@@ -104,6 +106,8 @@ export const EXPERIENCE = [
     tags: ['Design Systems', 'Fintech', 'User Research', 'Figma', 'Accessibility'],
     type: 'full-time',
     color: 'from-emerald-500 to-teal-500',
+    colorFrom: '#10b981',
+    colorTo: '#14b8a6',
   },
   {
     id: 'sit-exp',
@@ -115,6 +119,8 @@ export const EXPERIENCE = [
     tags: ['UX Research', 'Usability Audits', 'Focus Groups', 'Information Architecture'],
     type: 'freelance',
     color: 'from-blue-500 to-indigo-500',
+    colorFrom: '#3b82f6',
+    colorTo: '#6366f1',
   },
   {
     id: 'feitec-exp',
@@ -124,8 +130,10 @@ export const EXPERIENCE = [
     description:
       'Managed a team of 5 creatives producing content for social media campaigns and events, ensuring alignment with the organization\'s identity. Led strategic planning and execution of audiovisual communication projects to engage the student body. Developed templates and branding assets to streamline design processes.',
     tags: ['Team Leadership', 'Art Direction', 'Branding', 'Social Media', 'Content Strategy'],
-    type: 'full-time',
+    type: 'internship',
     color: 'from-violet-500 to-purple-500',
+    colorFrom: '#8b5cf6',
+    colorTo: '#a855f7',
   },
   {
     id: 'sjo-exp',
@@ -135,8 +143,10 @@ export const EXPERIENCE = [
     description:
       'Designed a tourism app for the Centro Histórico of San José, promoting historical and cultural exploration. Collaborated with multidisciplinary teams from TEC and the local government to ensure accurate and inclusive design. Developed wireframes and prototypes for mobile and web interfaces, focusing on accessibility and user engagement.',
     tags: ['Tourism UX', 'Mobile Design', 'Wireframing', 'Accessibility', 'Government'],
-    type: 'full-time',
+    type: 'internship',
     color: 'from-amber-500 to-orange-500',
+    colorFrom: '#f59e0b',
+    colorTo: '#f97316',
   },
 ]
 

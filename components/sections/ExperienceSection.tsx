@@ -73,7 +73,10 @@ function ExperienceItem({
     >
       {/* Dot on center line */}
       <div className="hidden sm:block absolute left-6 md:left-1/2 top-6 w-3 h-3 rounded-full -translate-x-1.5 z-10">
-        <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${exp.color}`} />
+        <div
+          className="w-3 h-3 rounded-full"
+          style={{ background: `linear-gradient(135deg, ${exp.colorFrom}, ${exp.colorTo})` }}
+        />
       </div>
 
       {/* Content card - alternates sides on desktop */}
@@ -89,8 +92,12 @@ function ExperienceItem({
                 {exp.role}
               </h3>
               <p
-                className={`text-sm font-semibold bg-gradient-to-r ${exp.color} bg-clip-text mt-0.5`}
-                style={{ WebkitTextFillColor: 'transparent', color: 'transparent' }}
+                className="text-sm font-semibold mt-0.5 bg-clip-text"
+                style={{
+                  backgroundImage: `linear-gradient(to right, ${exp.colorFrom}, ${exp.colorTo})`,
+                  WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                }}
               >
                 {exp.company}
               </p>
@@ -102,9 +109,11 @@ function ExperienceItem({
               <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${
                 exp.type === 'full-time'
                   ? 'bg-indigo-500/15 text-indigo-300 border border-indigo-500/20'
+                  : exp.type === 'internship'
+                  ? 'bg-amber-500/15 text-amber-300 border border-amber-500/20'
                   : 'bg-pink-500/15 text-pink-300 border border-pink-500/20'
               }`}>
-                {exp.type === 'full-time' ? 'Full-time' : 'Freelance'}
+                {exp.type === 'full-time' ? 'Full-time' : exp.type === 'internship' ? 'Internship' : 'Freelance'}
               </span>
             </div>
           </div>
