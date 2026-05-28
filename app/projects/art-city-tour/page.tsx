@@ -988,16 +988,16 @@ export default function ArtCityTourCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-              <Link href="/" className="group flex items-center gap-4">
+              <Link href="/projects/fulzer" className="group flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-                  style={{ background: 'linear-gradient(135deg, #10b981, #0d9488)' }}>
-                  🏦
+                  style={{ background: 'linear-gradient(135deg, #14b8a6, #0d9488)' }}>
+                  🚚
                 </div>
                 <div>
-                  <p className="font-display font-bold text-white text-lg group-hover:text-emerald-400 transition-colors">
-                    CAFSA Digital Products
+                  <p className="font-display font-bold text-white text-lg group-hover:text-teal-400 transition-colors">
+                    Fulzer — Food Truck Design
                   </p>
-                  <p className="text-sm text-white/40">Fintech UX · Design System · Web App</p>
+                  <p className="text-sm text-white/40">Industrial Design · Ergonomics · Product Design</p>
                 </div>
                 <svg
                   className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto"

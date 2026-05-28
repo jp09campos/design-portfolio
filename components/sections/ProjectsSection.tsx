@@ -11,6 +11,7 @@ const PROJECT_ROUTES: Record<string, string> = {
   'cecoapp': '/projects/cecoapp',
   'art-city-tour': '/projects/art-city-tour',
   'art-city-tour-nav': '/projects/art-city-tour-nav',
+  'fulzer': '/projects/fulzer',
 }
 
 const fadeUp = {
