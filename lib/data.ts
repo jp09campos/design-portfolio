@@ -108,12 +108,12 @@ export const EXPERIENCE = [
   {
     id: 'sit-exp',
     role: 'UX Researcher',
-    company: 'SIT',
+    company: 'SIT – Sistema de Información Tributaria',
     period: '2023 – 2024',
     description:
       'Conducted UX research to support the full redesign of the company\'s website. Led a multi-phase research plan including surveys, focus groups, and usability audits. Synthesized findings into actionable insights, resulting in improved site architecture and measurably increased user satisfaction.',
     tags: ['UX Research', 'Usability Audits', 'Focus Groups', 'Information Architecture'],
-    type: 'full-time',
+    type: 'freelance',
     color: 'from-blue-500 to-indigo-500',
   },
   {
