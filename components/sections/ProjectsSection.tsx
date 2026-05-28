@@ -7,7 +7,10 @@ import { PROJECTS } from '@/lib/data'
 
 /* Projects that have a dedicated case study page */
 const PROJECT_ROUTES: Record<string, string> = {
+  'onedesk': '/projects/onedesk',
+  'cecoapp': '/projects/cecoapp',
   'art-city-tour': '/projects/art-city-tour',
+  'art-city-tour-nav': '/projects/art-city-tour-nav',
 }
 
 const fadeUp = {
