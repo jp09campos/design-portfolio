@@ -1,4 +1,5 @@
 export const PROJECTS = [
+  // ── 2026 ──────────────────────────────────────────────────────
   {
     id: 'onedesk',
     title: 'OneDesk — Walmart Centroamérica',
@@ -9,7 +10,7 @@ export const PROJECTS = [
     bgGradient: 'from-sky-500/10 via-blue-500/10 to-cyan-500/10',
     tags: ['Enterprise UX', 'RBAC Design', 'Design System', 'HTML Prototyping', 'Multi-role UX'],
     icon: '🏢',
-    year: '2025',
+    year: '2026',
     featured: true,
   },
   {
@@ -22,46 +23,7 @@ export const PROJECTS = [
     bgGradient: 'from-indigo-500/10 via-violet-500/10 to-purple-600/10',
     tags: ['Mobile Design', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing'],
     icon: '📱',
-    year: '2023',
-    featured: true,
-  },
-  {
-    id: 'art-city-tour',
-    title: 'SJO Turismo App — Redesign',
-    category: 'Mobile UX · UX Research · Tourism',
-    description:
-      'UX redesign of the SJO Turismo app for the Centro Histórico de San José — a collaboration between TEC and the Municipalidad de San José. The original APK had critical navigation failures: finding a theater took up to 1 min 41 sec, changing map layers required 4 min. Through diagnostic testing with 10 users, Atomic Design, pattern hunting, and a 120-person content survey, delivered a validated prototype that cut key task times by up to 71%.',
-    gradient: 'from-pink-500 via-rose-500 to-orange-500',
-    bgGradient: 'from-pink-500/10 via-rose-500/10 to-orange-500/10',
-    tags: ['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'Usability Testing'],
-    icon: '🏛️',
-    year: '2021',
-    featured: true,
-  },
-  {
-    id: 'art-city-tour-nav',
-    title: 'Art City Tour — Navigation App',
-    category: 'Mobile UX · Product Design · Tourism',
-    description:
-      'Designed a real-time navigation app for Art City Tour, a nocturnal cultural event in San José where visitors move between art venues in shuttle buses. Structured around 3 core sections — Transport, Routes, and Friends — so critical tasks like finding the nearest bus stop are solvable in a single tap. Dark UI with monochromatic color coding per section, SF Pro + SF Symbols design system, and WCAG contrast ratios validated between AA and AAA.',
-    gradient: 'from-violet-600 via-purple-600 to-fuchsia-600',
-    bgGradient: 'from-violet-600/10 via-purple-600/10 to-fuchsia-600/10',
-    tags: ['Mobile UX', 'Navigation Design', 'SF Design System', 'Accessibility', 'WCAG'],
-    icon: '🌙',
-    year: '2021',
-    featured: true,
-  },
-  {
-    id: 'fulzer',
-    title: 'Fulzer — Food Truck Design',
-    category: 'Industrial Design · Ergonomics · Product Design',
-    description:
-      'Graduation project in Industrial Design Engineering — designed an adaptive stainless steel modular furniture system for food trucks in Costa Rica with Fulzer. Applied RULA ergonomic analysis, user interviews with 7 operators, and journey mapping to solve spatial and postural problems in mobile kitchens as narrow as 49 cm. The modular solution nearly doubled usable circulation space and was validated against Fulzer\'s real manufacturing constraints.',
-    gradient: 'from-teal-500 via-emerald-400 to-cyan-400',
-    bgGradient: 'from-teal-500/10 via-emerald-400/10 to-cyan-400/10',
-    tags: ['Industrial Design', 'Ergonomics (RULA)', 'Modular System', 'User Research', 'Graduation Project'],
-    icon: '🚚',
-    year: '2021',
+    year: '2026',
     featured: true,
   },
   {
@@ -75,6 +37,47 @@ export const PROJECTS = [
     tags: ['UX Research', 'Digital Tours', 'CSAT Study', 'Competitive Analysis', 'Walmart CA'],
     icon: '📊',
     year: '2026',
+    featured: true,
+  },
+  // ── 2023 ──────────────────────────────────────────────────────
+  {
+    id: 'fulzer',
+    title: 'Fulzer — Food Truck Design',
+    category: 'Industrial Design · Ergonomics · Product Design',
+    description:
+      'Graduation project in Industrial Design Engineering — designed an adaptive stainless steel modular furniture system for food trucks in Costa Rica with Fulzer. Applied RULA ergonomic analysis, user interviews with 7 operators, and journey mapping to solve spatial and postural problems in mobile kitchens as narrow as 49 cm. The modular solution nearly doubled usable circulation space and was validated against Fulzer\'s real manufacturing constraints.',
+    gradient: 'from-teal-500 via-emerald-400 to-cyan-400',
+    bgGradient: 'from-teal-500/10 via-emerald-400/10 to-cyan-400/10',
+    tags: ['Industrial Design', 'Ergonomics (RULA)', 'Modular System', 'User Research', 'Graduation Project'],
+    icon: '🚚',
+    year: '2023',
+    featured: true,
+  },
+  // ── 2022 ──────────────────────────────────────────────────────
+  {
+    id: 'art-city-tour-nav',
+    title: 'Art City Tour — Navigation App',
+    category: 'Mobile UX · Product Design · Tourism',
+    description:
+      'Designed a real-time navigation app for Art City Tour, a nocturnal cultural event in San José where visitors move between art venues in shuttle buses. Structured around 3 core sections — Transport, Routes, and Friends — so critical tasks like finding the nearest bus stop are solvable in a single tap. Dark UI with monochromatic color coding per section, SF Pro + SF Symbols design system, and WCAG contrast ratios validated between AA and AAA.',
+    gradient: 'from-violet-600 via-purple-600 to-fuchsia-600',
+    bgGradient: 'from-violet-600/10 via-purple-600/10 to-fuchsia-600/10',
+    tags: ['Mobile UX', 'Navigation Design', 'SF Design System', 'Accessibility', 'WCAG'],
+    icon: '🌙',
+    year: '2022',
+    featured: true,
+  },
+  {
+    id: 'art-city-tour',
+    title: 'SJO Turismo App — Redesign',
+    category: 'Mobile UX · UX Research · Tourism',
+    description:
+      'UX redesign of the SJO Turismo app for the Centro Histórico de San José — a collaboration between TEC and the Municipalidad de San José. The original APK had critical navigation failures: finding a theater took up to 1 min 41 sec, changing map layers required 4 min. Through diagnostic testing with 10 users, Atomic Design, pattern hunting, and a 120-person content survey, delivered a validated prototype that cut key task times by up to 71%.',
+    gradient: 'from-pink-500 via-rose-500 to-orange-500',
+    bgGradient: 'from-pink-500/10 via-rose-500/10 to-orange-500/10',
+    tags: ['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'Usability Testing'],
+    icon: '🏛️',
+    year: '2022',
     featured: true,
   },
 ]

@@ -78,14 +78,6 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
         </svg>
       </div>
 
-      {/* "Case Study" badge for linked projects */}
-      {href && (
-        <div className="absolute top-5 right-5">
-          <span className="text-xs font-semibold tracking-wider uppercase text-white/50 px-2.5 py-1 rounded-full bg-white/08 border border-white/10">
-            Case Study →
-          </span>
-        </div>
-      )}
     </>
   )
 
