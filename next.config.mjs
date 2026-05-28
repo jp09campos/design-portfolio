@@ -8,6 +8,15 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects/art-city-tour',
+        destination: '/projects/sjo-turismo',
+        permanent: true,
+      },
+    ]
+  },
   webpack(config) {
     // Resolve `import * as THREE from 'three'` to the vendored build file.
     // This bypasses npm's file: protocol entirely, which crashes on Node 24.

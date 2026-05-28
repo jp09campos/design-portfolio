@@ -9,7 +9,7 @@ import { PROJECTS } from '@/lib/data'
 const PROJECT_ROUTES: Record<string, string> = {
   'onedesk': '/projects/onedesk',
   'cecoapp': '/projects/cecoapp',
-  'art-city-tour': '/projects/art-city-tour',
+  'art-city-tour': '/projects/sjo-turismo',
   'art-city-tour-nav': '/projects/art-city-tour-nav',
   'fulzer': '/projects/fulzer',
 }

@@ -683,7 +683,7 @@ export default function ArtCityTourNavCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Related Project</p>
-              <Link href="/projects/art-city-tour" className="group flex items-center gap-4">
+              <Link href="/projects/sjo-turismo" className="group flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
                   style={{ background: 'linear-gradient(135deg, #ec4899, #f97316)' }}>
                   🏛️
