@@ -1,5 +1,18 @@
 export const PROJECTS = [
   {
+    id: 'onedesk',
+    title: 'OneDesk — Walmart Centroamérica',
+    category: 'Enterprise UX · Product Design · SaaS',
+    description:
+      'Designed a unified enterprise platform for Walmart Central America resolving 3 critical operations: warranty lifecycle management with 5-role RBAC, a digital ticket portal targeting $434K/year in print savings, and centralized fiscal document consultation. Delivered high-fidelity HTML/CSS/JS prototypes on GitHub Pages as functional dev specifications, applying Walmart\'s Living Design System with role-based access control throughout 3 iterative phases.',
+    gradient: 'from-sky-500 via-blue-500 to-cyan-500',
+    bgGradient: 'from-sky-500/10 via-blue-500/10 to-cyan-500/10',
+    tags: ['Enterprise UX', 'RBAC Design', 'Design System', 'HTML Prototyping', 'Multi-role UX'],
+    icon: '🏢',
+    year: '2025',
+    featured: true,
+  },
+  {
     id: 'cecoapp',
     title: 'CECOApp',
     category: 'Mobile UX · Product Design · E-commerce',
