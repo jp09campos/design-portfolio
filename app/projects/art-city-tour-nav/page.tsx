@@ -102,72 +102,85 @@ export default function ArtCityTourNavCaseStudy() {
         </div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="w-8 h-px" style={{ background: accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2021</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">TEC · Escuela de Diseño Industrial</span>
-          </motion.div>
+          <div className="grid md:grid-cols-[1fr_340px] gap-10 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <span className="w-8 h-px" style={{ background: accent }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2021</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">TEC · Escuela de Diseño Industrial</span>
+              </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-          >
-            Art City Tour<br />
-            <span style={{
-              background: `linear-gradient(135deg, ${accent}, #c4b5fd, #ddd6fe)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              Navigation App
-            </span>
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+              >
+                Art City Tour<br />
+                <span style={{
+                  background: `linear-gradient(135deg, ${accent}, #c4b5fd, #ddd6fe)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}>
+                  Navigation App
+                </span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/50 text-lg mb-8 max-w-2xl"
-          >
-            Real-time navigation app for Art City Tour — a nocturnal cultural event in San José where visitors
-            move between art venues in shuttle buses. Designed for orientation, transport tracking, and friend
-            coordination without cognitive overload.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-white/50 text-lg mb-8 max-w-2xl"
+              >
+                Real-time navigation app for Art City Tour — a nocturnal cultural event in San José where visitors
+                move between art venues in shuttle buses. Designed for orientation, transport tracking, and friend
+                coordination without cognitive overload.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap gap-3 mb-10"
-          >
-            {['Mobile UX', 'Navigation Design', 'SF Design System', 'Accessibility', 'WCAG AA–AAA', 'Paper Prototyping'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap gap-3 mb-10"
+              >
+                {['Mobile UX', 'Navigation Design', 'SF Design System', 'Accessibility', 'WCAG AA–AAA', 'Paper Prototyping'].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
-          >
-            {[
-              { value: '15', label: 'Paper Prototype Users' },
-              { value: '3', label: 'User Personas' },
-              { value: '6', label: 'Apps Analyzed' },
-              { value: 'WCAG', label: 'AA – AAA Contrast' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
+              >
+                {[
+                  { value: '15', label: 'Paper Prototype Users' },
+                  { value: '3', label: 'User Personas' },
+                  { value: '6', label: 'Apps Analyzed' },
+                  { value: 'WCAG', label: 'AA – AAA Contrast' },
+                ].map((stat) => (
+                  <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
+                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="hidden md:block self-end pb-4"
+            >
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style={{ maxHeight: 560 }}>
+                <Image src="/art-city-tour-media-files/mockup-1.png" alt="Art City Tour app screen" width={390} height={844} className="w-full h-auto" />
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 
@@ -376,51 +389,78 @@ export default function ArtCityTourNavCaseStudy() {
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
-            {[
-              {
-                section: 'Transport',
-                icon: '🚌',
-                color: accent,
-                desc: 'Real-time location of shuttle buses and stops. The highest-traffic feature — accounts for 35% of expected usage. One tap to see the nearest bus stop.',
-                features: ['Live bus positions', 'Stop list with distance', 'Arrival time estimates', 'Route for each bus'],
-              },
-              {
-                section: 'Routes',
-                icon: '🗺️',
-                color: '#f87171',
-                desc: 'Preset and custom routes between venues. Directions from current location. Second-highest traffic cluster at 15% of expected usage.',
-                features: ['Preset venue routes', 'Custom route builder', 'Turn-by-turn directions', 'Walking distance + time'],
-              },
-              {
-                section: 'Friends',
-                icon: '👥',
-                color: '#f9a8d4',
-                desc: 'Real-time location and coordination with other attendees. Built for La Pelotera — the majority persona at 59%.',
-                features: ['Friend location on map', 'Meetup suggestions', 'Group coordination', 'In-app messaging'],
-              },
-            ].map((s, i) => (
-              <Reveal key={s.section} delay={i * 0.08}>
-                <div className="glass rounded-2xl border border-white/08 overflow-hidden h-full">
-                  <div className="h-1" style={{ background: `linear-gradient(to right, ${s.color}, ${s.color}80)` }} />
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-2xl">{s.icon}</span>
-                      <h3 className="font-display font-bold text-white text-lg">{s.section}</h3>
-                    </div>
-                    <p className="text-sm text-white/55 leading-relaxed mb-5">{s.desc}</p>
-                    <ul className="space-y-2">
-                      {s.features.map((f) => (
-                        <li key={f} className="flex items-center gap-2 text-xs text-white/45">
-                          <span className="w-1 h-1 rounded-full shrink-0" style={{ background: s.color }} />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
+          <div className="space-y-16 mb-10">
+            {/* Transport */}
+            <Reveal delay={0.05}>
+              <div className="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">🚌</span>
+                    <h3 className="font-display font-bold text-white text-xl">Transport</h3>
                   </div>
+                  <p className="text-white/60 leading-relaxed mb-5">Real-time location of shuttle buses and stops. The highest-traffic feature — accounts for 35% of expected usage. One tap to see the nearest bus stop.</p>
+                  <ul className="space-y-2">
+                    {['Live bus positions', 'Stop list with distance', 'Arrival time estimates', 'Route for each bus'].map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-white/50">
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </Reveal>
-            ))}
+                <div className="rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                  <Image src="/art-city-tour-media-files/mockup-2.png" alt="Transport section" width={390} height={844} className="w-full h-auto" />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Routes */}
+            <Reveal delay={0.05}>
+              <div className="grid md:grid-cols-2 gap-10 items-center">
+                <div className="md:order-2">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">🗺️</span>
+                    <h3 className="font-display font-bold text-white text-xl">Routes</h3>
+                  </div>
+                  <p className="text-white/60 leading-relaxed mb-5">Preset and custom routes between venues. Directions from current location. Second-highest traffic cluster at 15% of expected usage.</p>
+                  <ul className="space-y-2">
+                    {['Preset venue routes', 'Custom route builder', 'Turn-by-turn directions', 'Walking distance + time'].map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-white/50">
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#f87171' }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="md:order-1 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                  <Image src="/art-city-tour-media-files/mockup-3.png" alt="Routes section" width={390} height={844} className="w-full h-auto" />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Friends */}
+            <Reveal delay={0.05}>
+              <div className="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">👥</span>
+                    <h3 className="font-display font-bold text-white text-xl">Friends</h3>
+                  </div>
+                  <p className="text-white/60 leading-relaxed mb-5">Real-time location and coordination with other attendees. Built for La Pelotera — the majority persona at 59%.</p>
+                  <ul className="space-y-2">
+                    {['Friend location on map', 'Meetup suggestions', 'Group coordination', 'In-app messaging'].map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-white/50">
+                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#f9a8d4' }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                  <Image src="/art-city-tour-media-files/mockup-4.png" alt="Friends section" width={390} height={844} className="w-full h-auto" />
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           {/* Design system callout */}
@@ -519,6 +559,12 @@ export default function ArtCityTourNavCaseStudy() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={0.15}>
+            <div className="mt-10 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+              <Image src="/art-city-tour-media-files/mockup-6-wcag.png" alt="WCAG accessibility validation" width={1200} height={900} className="w-full h-auto" />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -635,35 +681,16 @@ export default function ArtCityTourNavCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.2}>
+            <div className="mt-12 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+              <Image src="/art-city-tour-media-files/mockup-5.png" alt="Art City Tour app overview" width={1200} height={844} className="w-full h-auto" />
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Screens */}
-      <section className="py-20 border-t border-white/06">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">App screens</h2>
-          </Reveal>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Array.from({ length: 5 }, (_, i) => i + 1).map((n, i) => (
-              <Reveal key={n} delay={i * 0.06}>
-                <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
-                  <Image src={`/art-city-tour-media-files/mockup-${n}.png`} alt={`Art City Tour screen ${n}`} width={390} height={844} className="w-full h-auto" />
-                </div>
-              </Reveal>
-            ))}
-            <Reveal delay={0.3}>
-              <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
-                <Image src="/art-city-tour-media-files/mockup-6-wcag.png" alt="WCAG accessibility validation" width={1200} height={900} className="w-full h-auto" />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA */}
       <section className="py-20 border-t border-white/08">

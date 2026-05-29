@@ -158,80 +158,93 @@ export default function ArtCityTourCaseStudy() {
         </div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          {/* Label */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="w-8 h-px" style={{ background: accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
-              I–II Sem 2021
-            </span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
-              TEC · Escuela de Diseño Industrial
-            </span>
-          </motion.div>
+          <div className="grid md:grid-cols-[1fr_340px] gap-10 items-end">
+            <div>
+              {/* Label */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <span className="w-8 h-px" style={{ background: accent }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
+                  I–II Sem 2021
+                </span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">
+                  TEC · Escuela de Diseño Industrial
+                </span>
+              </motion.div>
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-          >
-            SJO Turismo<br />
-            <span style={{
-              background: `linear-gradient(135deg, ${accent}, #60a5fa, #93c5fd)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              App Redesign
-            </span>
-          </motion.h1>
+              {/* Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+              >
+                SJO Turismo<br />
+                <span style={{
+                  background: `linear-gradient(135deg, ${accent}, #60a5fa, #93c5fd)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}>
+                  App Redesign
+                </span>
+              </motion.h1>
 
-          {/* Sub-title */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/50 text-lg mb-8 max-w-2xl"
-          >
-            UX redesign of the SJO Turismo app for the Centro Histórico de San José, Costa Rica —
-            a collaboration between the Instituto Tecnológico de Costa Rica and the Municipalidad de San José.
-          </motion.p>
+              {/* Sub-title */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-white/50 text-lg mb-8 max-w-2xl"
+              >
+                UX redesign of the SJO Turismo app for the Centro Histórico de San José, Costa Rica —
+                a collaboration between the Instituto Tecnológico de Costa Rica and the Municipalidad de San José.
+              </motion.p>
 
-          {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap gap-3 mb-10"
-          >
-            {['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'San José · CR', 'Academic Project'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+              {/* Tags */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap gap-3 mb-10"
+              >
+                {['Mobile UX', 'UX Research', 'Atomic Design', 'Material Design', 'San José · CR', 'Academic Project'].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
 
-          {/* Quick stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
-          >
-            {[
-              { value: '3', label: 'Design Stages' },
-              { value: '120', label: 'Survey Responses' },
-              { value: '10', label: 'Usability Testers' },
-              { value: '2', label: 'Semesters' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+              {/* Quick stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
+              >
+                {[
+                  { value: '3', label: 'Design Stages' },
+                  { value: '120', label: 'Survey Responses' },
+                  { value: '10', label: 'Usability Testers' },
+                  { value: '2', label: 'Semesters' },
+                ].map((stat) => (
+                  <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
+                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="hidden md:block self-end pb-4"
+            >
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style={{ maxHeight: 560 }}>
+                <Image src="/sjo-turismo-media-files/mockup-1.png" alt="SJO Turismo app screen" width={390} height={844} className="w-full h-auto" />
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 
@@ -789,28 +802,6 @@ export default function ArtCityTourCaseStudy() {
                 ))}
               </div>
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Screens ──────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-white/06">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Redesigned App</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Final prototype</h2>
-          </Reveal>
-          <div className="grid md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n, i) => (
-              <Reveal key={n} delay={i * 0.08}>
-                <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
-                  <Image src={`/sjo-turismo-media-files/mockup-${n}.png`} alt={`SJO Turismo screen ${n}`} width={390} height={844} className="w-full h-auto" />
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

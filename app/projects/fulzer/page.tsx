@@ -104,6 +104,8 @@ export default function FulzerCaseStudy() {
         </div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
+          <div className="grid md:grid-cols-[1fr_420px] gap-10 items-end">
+          <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -170,6 +172,18 @@ export default function FulzerCaseStudy() {
               </div>
             ))}
           </motion.div>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.55 }}
+            className="hidden md:block self-end pb-4"
+          >
+            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
+              <Image src="/fulzer-media-files/graphic-1.png" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
+            </div>
+          </motion.div>
+          </div>
         </motion.div>
       </section>
 
@@ -204,19 +218,8 @@ export default function FulzerCaseStudy() {
                     and real manufacturing restrictions?&rdquo;
                   </p>
                 </div>
-                <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="text-xs font-semibold tracking-widests uppercase text-white/30 mb-3">Partnership</p>
-                  <p className="text-white/70 text-sm">Fulzer</p>
-                  <p className="text-white/40 text-xs mt-1">Stainless Steel Furniture Manufacturer · Costa Rica</p>
-                  <p className="text-white/40 text-xs">Graduation Project · TEC — Escuela de Diseño Industrial</p>
-                </div>
-                <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Methods</p>
-                  <div className="flex flex-wrap gap-2">
-                    {['RULA Analysis', 'User Interviews', 'Journey Mapping', 'CAD / 3D Modeling', 'Anthropometrics', 'DFM'].map((m) => (
-                      <span key={m} className="px-2.5 py-1 rounded-full text-xs text-white/50 bg-white/04 border border-white/08">{m}</span>
-                    ))}
-                  </div>
+                <div className="rounded-3xl overflow-hidden border border-white/08 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
+                  <Image src="/fulzer-media-files/graphic-2.png" alt="Fulzer RULA ergonomic analysis" width={1200} height={900} className="w-full h-auto" />
                 </div>
               </div>
             </Reveal>
@@ -283,6 +286,11 @@ export default function FulzerCaseStudy() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.3}>
+            <div className="mt-8 rounded-3xl overflow-hidden border border-white/08">
+              <Image src="/fulzer-media-files/graphic-3.png" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -446,6 +454,16 @@ export default function FulzerCaseStudy() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.15}>
+            <div className="grid md:grid-cols-2 gap-4 mt-8">
+              <div className="rounded-3xl overflow-hidden border border-white/08">
+                <Image src="/fulzer-media-files/graphic-4.png" alt="Fulzer technical drawing" width={1200} height={900} className="w-full h-auto" />
+              </div>
+              <div className="rounded-3xl overflow-hidden border border-white/08">
+                <Image src="/fulzer-media-files/mockup-4.png" alt="Fulzer furniture prototype" width={1200} height={900} className="w-full h-auto" />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -602,43 +620,22 @@ export default function FulzerCaseStudy() {
               ))}
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Design Visuals */}
-      <section className="py-20 border-t border-white/06">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Design Visuals</span>
+          <Reveal delay={0.2}>
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {['mockup-1.jpg','mockup-2.jpg','mockup-3.jpg'].map((f, i) => (
+                <div key={f} className="rounded-2xl overflow-hidden border border-white/08">
+                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+1}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              ))}
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">3D renders &amp; prototypes</h2>
+            <div className="grid md:grid-cols-2 gap-4 mt-4">
+              {['mockup-5.jpg'].map((f, i) => (
+                <div key={f} className="rounded-2xl overflow-hidden border border-white/08">
+                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+4}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              ))}
+            </div>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            {Array.from({ length: 4 }, (_, i) => i + 1).map((n, i) => (
-              <Reveal key={n} delay={i * 0.05}>
-                <div className="rounded-2xl overflow-hidden border border-white/08">
-                  <Image src={`/fulzer-media-files/graphic-${n}.png`} alt={`Fulzer design render ${n}`} width={1200} height={900} className="w-full h-auto" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              { file: 'mockup-1.jpg' },
-              { file: 'mockup-2.jpg' },
-              { file: 'mockup-3.jpg' },
-              { file: 'mockup-4.png' },
-              { file: 'mockup-5.jpg' },
-            ].map((item, i) => (
-              <Reveal key={item.file} delay={i * 0.05}>
-                <div className="rounded-2xl overflow-hidden border border-white/08">
-                  <Image src={`/fulzer-media-files/${item.file}`} alt={`Fulzer product ${i + 1}`} width={1200} height={900} className="w-full h-auto" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
