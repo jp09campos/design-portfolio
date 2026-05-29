@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -190,11 +191,6 @@ export default function FulzerCaseStudy() {
                   but most were still using improvised, non-ergonomic furniture. Workers completed
                   shifts of up to 14 hours in mobile kitchens never designed for human workflow.
                 </p>
-                <p className="text-white/60 leading-relaxed">
-                  The challenge: design a functional, adaptive, and manufacturable system that improved
-                  ergonomics, workflow, and space utilization inside highly constrained mobile kitchens —
-                  while staying aligned with Fulzer&apos;s real industrial manufacturing processes.
-                </p>
               </div>
             </Reveal>
 
@@ -272,18 +268,6 @@ export default function FulzerCaseStudy() {
                 desc: 'Standard table heights didn\'t account for the actual cooking equipment placed on them — fryers, griddles, and combi ovens raised effective working height significantly.',
                 stat: 'Wrong ergonomics',
               },
-              {
-                icon: '🕐',
-                title: 'Long Shifts, High Physical Load',
-                desc: 'Workers sustained risky postures for shifts of up to 14 hours — 5 out of 7 studied trucks had women working in the kitchen, with reported back and neck pain.',
-                stat: 'Up to 14h shifts',
-              },
-              {
-                icon: '🍳',
-                title: 'Configuration Variety',
-                desc: 'Different types of food (burgers, tacos, pastries, coffee) required radically different kitchen layouts — a single rigid solution couldn\'t serve all operators.',
-                stat: 'Many configs',
-              },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.07}>
                 <div className="glass rounded-2xl p-5 border border-white/08 h-full">
@@ -332,8 +316,6 @@ export default function FulzerCaseStudy() {
                 activities={[
                   'Interviews with workers and owners of 7 different food trucks across Costa Rica',
                   'Mapped workflow patterns, operational problems, and food types per truck',
-                  'Documented equipment used, simultaneous workers, and shift durations',
-                  'Identified that 5/7 trucks had women working in the kitchen — ergonomic baseline critical',
                   'Key finding: the primary problem was internal space constraint, not aesthetic or storage',
                 ]}
                 result="Clear hierarchy of user needs — circulation space and postural safety ranked highest across all 7 operators. Long shifts (up to 14h) made ergonomic improvements a health priority, not a preference."
@@ -347,10 +329,7 @@ export default function FulzerCaseStudy() {
                 accent={accent}
                 activities={[
                   'Personas and journey maps built from interview data',
-                  'Complete food preparation journey mapped to identify friction points during service',
                   'Anthropometric analysis: percentile-based reach zones and functional reach',
-                  'Work triangle analysis for optimal zone placement within the truck',
-                  'Minimum circulation space standards research and field measurement',
                   'Analysis of Fulzer\'s manufacturing processes and material constraints (SS304)',
                 ]}
                 result="Journey map revealed 4 high-friction moments during peak service. Anthropometric data established height ranges for adjustable surfaces across the worker population."
@@ -364,9 +343,7 @@ export default function FulzerCaseStudy() {
                 accent={accent}
                 activities={[
                   'Applied RULA (Rapid Upper Limb Assessment) method to analyze postural risk',
-                  'Analyzed postures for frying, grilling, and elevated equipment tasks',
                   'Results: Level 7 — maximum risk category, requiring urgent workstation redesign',
-                  'Identified target height ranges to eliminate the risk postures detected',
                   'Calculated required adjustment range based on 5th–95th percentile worker population',
                 ]}
                 result="RULA Level 7 (maximum risk) confirmed the urgency of the redesign. Defined a required height adjustment range of ±12 cm from the standard surface to eliminate postural hazards."
@@ -379,11 +356,8 @@ export default function FulzerCaseStudy() {
                 title="Create"
                 accent={accent}
                 activities={[
-                  'Generated multiple concept directions based on research constraints',
-                  'Evaluated concepts against ergonomic, spatial, sanitary, and manufacturing criteria',
                   'Selected concept: "Adaptive Minimalism" — modular, adjustable, visually clean',
                   'CAD development of the modular stainless steel 304 furniture system',
-                  '3D modeling and technical drawings aligned with Fulzer\'s production processes',
                   'Surface, joint, and adjustment mechanism design validated against SS304 fabrication',
                 ]}
                 result="Final design: adjustable-height modular furniture system using concentric tubes and set screws. Minimal surfaces for easy cleaning. Sliding doors to optimize space. Compatible with Fulzer's existing manufacturing lines."
@@ -396,78 +370,13 @@ export default function FulzerCaseStudy() {
                 title="Validate"
                 accent={accent}
                 activities={[
-                  'Technical validation against Fulzer\'s manufacturing constraints',
                   'Spatial simulation: new layout tested against circulation minimums',
                   'Ergonomic re-evaluation of redesigned workstation configurations',
-                  'Compatibility confirmed with different types of cooking equipment',
                   'Final documentation: technical drawings, manufacturing specs, and design system',
                 ]}
                 result="Validated solution: aisles expanded from 49 cm to ~100 cm. Postural risk eliminated in tested configurations. Manufacturing viability confirmed by Fulzer's engineering team."
               />
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* UX Applied to Physical Product */}
-      <section className="py-20 border-t border-white/06">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>UX Applied to Physical Product</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6">
-              Digital methods, physical outcome
-            </h2>
-            <p className="text-white/60 leading-relaxed max-w-2xl mb-12">
-              Although this was an industrial design project, it deliberately applied UX tools typically
-              reserved for digital products — because the underlying challenge was a human experience problem,
-              not a manufacturing one.
-            </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                tool: 'User Personas',
-                desc: 'Built from interviews with 7 food truck operators — capturing different food types, crew sizes, and workflow patterns to ensure the solution served the full range of real users.',
-                icon: '👤',
-              },
-              {
-                tool: 'Journey Mapping',
-                desc: 'Complete food preparation journey mapped — from mise en place through service and cleaning. Identified the 4 highest-friction moments that directly informed spatial and height decisions.',
-                icon: '🗺️',
-              },
-              {
-                tool: 'Pain Point Analysis',
-                desc: 'Friction points were categorized as spatial (collision, reach), ergonomic (posture, height), and operational (flow interruptions) — each mapped to specific design requirements.',
-                icon: '📍',
-              },
-              {
-                tool: 'Functional Space Architecture',
-                desc: 'The interior of the food truck was treated as an "information architecture" problem — zones mapped by frequency and task relationship, not by tradition or available space.',
-                icon: '📐',
-              },
-              {
-                tool: 'Interaction Flows',
-                desc: 'Worker movement patterns during peak service were diagrammed as interaction flows — identifying bottlenecks, decision points, and critical path collisions.',
-                icon: '🔄',
-              },
-              {
-                tool: 'Task-Based Ergonomic Evaluation',
-                desc: 'RULA analysis was performed on specific task postures — not generic positions. Each risky posture was traced back to its causing equipment-surface combination.',
-                icon: '📊',
-              },
-            ].map((item, i) => (
-              <Reveal key={item.tool} delay={i * 0.07}>
-                <div className="glass rounded-2xl p-6 border border-white/08 h-full">
-                  <span className="text-2xl mb-3 block">{item.icon}</span>
-                  <h3 className="font-semibold text-white text-sm mb-2">{item.tool}</h3>
-                  <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
@@ -693,6 +602,43 @@ export default function FulzerCaseStudy() {
               ))}
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* Design Visuals */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Design Visuals</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">3D renders &amp; prototypes</h2>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            {Array.from({ length: 4 }, (_, i) => i + 1).map((n, i) => (
+              <Reveal key={n} delay={i * 0.05}>
+                <div className="rounded-2xl overflow-hidden border border-white/08">
+                  <Image src={`/fulzer-media-files/graphic-${n}.png`} alt={`Fulzer design render ${n}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              { file: 'mockup-1.jpg' },
+              { file: 'mockup-2.jpg' },
+              { file: 'mockup-3.jpg' },
+              { file: 'mockup-4.png' },
+              { file: 'mockup-5.jpg' },
+            ].map((item, i) => (
+              <Reveal key={item.file} delay={i * 0.05}>
+                <div className="rounded-2xl overflow-hidden border border-white/08">
+                  <Image src={`/fulzer-media-files/${item.file}`} alt={`Fulzer product ${i + 1}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

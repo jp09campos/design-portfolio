@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -188,11 +189,6 @@ export default function ArtCityTourNavCaseStudy() {
                   museums, and artistic spaces on shuttle buses. The experience had a concrete problem:
                   there was no quick access point to information about buses, venues, or real-time routes.
                 </p>
-                <p className="text-white/60 leading-relaxed">
-                  Users got lost, arrived late to events, and didn&apos;t know how far their next stop was.
-                  The challenge was to design an app that solved orientation, transport, and social
-                  coordination for an audience in motion — at night.
-                </p>
               </div>
             </Reveal>
 
@@ -255,10 +251,9 @@ export default function ArtCityTourNavCaseStudy() {
                 title="Research"
                 accent={accent}
                 activities={[
-                  'Analyzed 6 existing map applications using a complexity system — rating 20 features from 1 to 3',
+                  'Analyzed 6 existing map applications using a 20-feature complexity scoring system',
                   'Defined 3 user personas with representation percentages from survey data',
-                  'Traffic analysis via surveys to identify the functions representing 80% of expected usage',
-                  'Identified primary use cases: bus stop locator (18%), direction finder (15%), and bus times (17%) as the core need cluster',
+                  'Traffic analysis via surveys: bus stop locator (18%), bus times (17%), and directions (15%) represent 80% of expected usage',
                 ]}
                 result="Clear priority hierarchy: transport and navigation functions represent 80% of expected usage. Low-frequency features (reporting 3%, favorites 3%, capacity 4%) identified for de-prioritized placement."
               />
@@ -270,11 +265,9 @@ export default function ArtCityTourNavCaseStudy() {
                 title="Planning"
                 accent={accent}
                 activities={[
-                  'Card sorting to validate terminology and alpha information architecture',
-                  'Navigation paths to measure how many actions each critical user need required',
-                  'High-fidelity wireframes designed for all primary flows',
-                  'Paper prototyping validation with 15 users — testing navigation, terminology, and icon comprehension',
-                  'Filter icon iteration: original icon confused with settings — replaced following iOS/Android conventions',
+                  'Card sorting to validate terminology and information architecture',
+                  'Navigation paths analysis — critical tasks reduced to maximum 1 action',
+                  'Paper prototyping with 15 users — identified 2 iconography issues (filter icon confused with settings, replaced following iOS/Android conventions)',
                 ]}
                 result="Alpha architecture validated. Critical tasks reduced to maximum 1 action. Paper prototyping identified 2 iconography issues — both resolved before UI design phase."
               />
@@ -286,11 +279,9 @@ export default function ArtCityTourNavCaseStudy() {
                 title="UI Design"
                 accent={accent}
                 activities={[
-                  'Complete design system built on SF Pro typography and SF Symbols (iOS iconography)',
-                  'Monochromatic color scheme — one accent per section for instant visual orientation',
-                  'Dark background optimized for nighttime use context',
-                  'Photography direction: places shown with human activity and urban life — not empty venues',
-                  'WCAG accessibility tests — contrast ratios validated between 5.71 AA and 7.39 AAA across all screens',
+                  'Complete design system on SF Pro typography and SF Symbols — monochromatic color scheme (one accent per section)',
+                  'Dark background optimized for nighttime use; photography direction shows venues with human activity',
+                  'WCAG accessibility validation — contrast ratios between 5.71 (AA) and 7.39 (AAA) across all screens',
                 ]}
                 result="Complete design system with validated accessibility. All primary flows functional, all high-frequency tasks solvable in a single tap. Dark, monochromatic UI optimized for the nocturnal event context."
               />
@@ -643,6 +634,33 @@ export default function ArtCityTourNavCaseStudy() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Screens */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">App screens</h2>
+          </Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {Array.from({ length: 5 }, (_, i) => i + 1).map((n, i) => (
+              <Reveal key={n} delay={i * 0.06}>
+                <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                  <Image src={`/art-city-tour-media-files/mockup-${n}.png`} alt={`Art City Tour screen ${n}`} width={390} height={844} className="w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
+            <Reveal delay={0.3}>
+              <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                <Image src="/art-city-tour-media-files/mockup-6-wcag.png" alt="WCAG accessibility validation" width={1200} height={900} className="w-full h-auto" />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

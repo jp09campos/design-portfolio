@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -164,28 +165,28 @@ export default function OneDeskCaseStudy() {
                 icon: '💸',
                 title: 'Supply Cost',
                 stat: '$434K / yr',
-                desc: 'Massive physical ticket printing at checkout — estimated annual cost exceeding $434K in paper and supplies.',
+                desc: 'Physical ticket printing at checkout generating $434K/yr in paper and supply costs.',
                 color: '#fbbf24',
               },
               {
                 icon: '🔧',
                 title: 'Untraceable Warranties',
                 stat: 'No central tracking',
-                desc: 'Warranty cases managed without centralized traceability — difficult to follow across store, SAC, workshops, and commercial teams.',
+                desc: 'Warranty cases lacked centralized tracking across stores, SAC, workshops, and commercial teams.',
                 color: accent,
               },
               {
                 icon: '📄',
                 title: 'Manual Fiscal Documents',
                 stat: 'Hours of manual work',
-                desc: 'Government requests for fiscal documents handled manually by the Tax team — hours spent locating and consolidating vouchers.',
+                desc: 'Tax team handled government fiscal document requests manually — hours of work per request.',
                 color: '#f472b6',
               },
               {
                 icon: '📉',
                 title: 'Post-Sale NPS',
                 stat: 'Low satisfaction',
-                desc: 'Poor post-sale NPS driven by warranty resolution times with zero visibility for customers or internal teams.',
+                desc: 'Low post-sale NPS driven by zero warranty status visibility for customers and staff.',
                 color: '#34d399',
               },
             ].map((item, i) => (
@@ -299,27 +300,27 @@ export default function OneDeskCaseStudy() {
               {
                 number: '01',
                 title: 'High-Fidelity Iterative Prototyping',
-                desc: 'Functional HTML/CSS/JS SPA prototypes deployed on GitHub Pages — evaluated with real users without backend dependency.',
+                desc: 'Functional HTML/CSS/JS SPA prototypes on GitHub Pages — evaluated with real users without backend dependency.',
               },
               {
                 number: '02',
                 title: 'Walmart Living Design System',
-                desc: 'Consistent use of design tokens, SVG iconography from the official LD Icons toolkit, and reusable components to guarantee brand coherence across all screens.',
+                desc: 'Design tokens, official LD Icons, and reusable components for brand coherence across all screens.',
               },
               {
                 number: '03',
                 title: 'Role-Based Design (RBAC)',
-                desc: "Every screen designed from the consuming role's perspective — hiding or restricting irrelevant actions to reduce cognitive load and prevent errors.",
+                desc: "Every screen designed from the consuming role's perspective — hiding irrelevant actions to reduce cognitive load.",
               },
               {
                 number: '04',
                 title: 'Critical Flow Validation',
-                desc: 'SLA approval flows, bulk document selection, and loading/empty states designed with multiple error and success scenarios before reaching development.',
+                desc: 'SLA approvals, bulk document selection, and loading/empty/error states validated before development.',
               },
               {
                 number: '05',
                 title: 'Continuous Feedback Loop',
-                desc: 'Iterative adjustments from direct stakeholder reviews — UX bug fixes including badge logic per country, filter relocation to topbar, and removal of redundant actions.',
+                desc: 'Iterative fixes from stakeholder reviews — badge logic, filter placement, and removal of redundant actions.',
               },
             ].map((item, i) => (
               <Reveal key={item.number} delay={i * 0.07}>
@@ -572,6 +573,28 @@ export default function OneDeskCaseStudy() {
                 </div>
               </div>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Screens */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Platform in action</h2>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-4">
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((n, i) => (
+              <Reveal key={n} delay={i * 0.04}>
+                <div className="rounded-2xl overflow-hidden border border-white/08">
+                  <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

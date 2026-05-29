@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -189,10 +190,6 @@ export default function CECOAppCaseStudy() {
                   accompany the user from product discovery through post-sale, at a moment when m-commerce
                   was already the primary digital shopping channel.
                 </p>
-                <p className="text-white/60 leading-relaxed">
-                  This translated into low user loyalty, reduced digital conversion, and a growing competitive
-                  disadvantage against brands with their own app.
-                </p>
               </div>
             </Reveal>
 
@@ -255,10 +252,9 @@ export default function CECOAppCaseStudy() {
                 title="Discovery"
                 accent={accent}
                 activities={[
-                  'Online surveys to map user behavior and purchase motivations',
-                  'Semi-structured interviews to understand emotional drivers and pain points',
-                  'Analysis of existing Cecotec web user journeys',
-                  'Identification of key moments in the purchase cycle where mobile adds unique value',
+                  'Surveys and semi-structured interviews to map user behavior, purchase motivations, and emotional pain points',
+                  'Analysis of existing Cecotec web user journeys to identify mobile-specific value moments',
+                  'Mapped the purchase cycle to find where a mobile app creates unique value over the web',
                 ]}
                 result="Clear picture of user needs, motivations, and the specific moments where a mobile app creates more value than the web — especially for reordering, tracking, and loyalty."
               />
@@ -302,11 +298,9 @@ export default function CECOAppCaseStudy() {
                 title="Delivery"
                 accent={accent}
                 activities={[
-                  'Moderated usability test with 7 participants covering all 3 personas',
-                  'Tasks: product search, add to cart, checkout, order tracking, CecoClips',
-                  'Friction identified in visual hierarchy, accessibility, and key action prioritization',
-                  'All issues resolved in the prototype before final delivery',
-                  'Final design system delivered with annotated specs for development handoff',
+                  'Moderated usability test with 7 participants across all 3 personas — covering purchase, tracking, and CecoClips flows',
+                  'Friction identified in visual hierarchy, accessibility, and key action prioritization — all resolved before delivery',
+                  'Final Atomic Design system delivered with annotated specs for development handoff',
                 ]}
                 result="Functional prototype with validated purchase, tracking, and community flows — all usability frictions resolved. Zero unresolved issues at delivery."
               />
@@ -565,6 +559,28 @@ export default function CECOAppCaseStudy() {
                   <p className="font-display font-bold text-4xl mb-2" style={{ color: item.color }}>{item.value}</p>
                   <p className="font-semibold text-white text-sm mb-2">{item.label}</p>
                   <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Screens */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">App screens</h2>
+          </Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 7 }, (_, i) => i + 1).map((n, i) => (
+              <Reveal key={n} delay={i * 0.06}>
+                <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                  <Image src={`/cecoapp-media-files/mockup-${n}.png`} alt={`CECOApp screen ${n}`} width={390} height={844} className="w-full h-auto" />
                 </div>
               </Reveal>
             ))}

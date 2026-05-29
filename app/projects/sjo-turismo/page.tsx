@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 /* ─── Animation helpers ───────────────────────────────────────────────────── */
@@ -24,53 +25,6 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     >
       {children}
     </motion.div>
-  )
-}
-
-/* ─── Phone frame mockup ──────────────────────────────────────────────────── */
-function PhoneFrame({
-  label,
-  accentColor,
-  children,
-}: {
-  label: string
-  accentColor: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <div
-        className="w-28 h-52 md:w-32 md:h-60 rounded-3xl overflow-hidden shadow-2xl border border-white/12 relative"
-        style={{ background: '#1a1f2e' }}
-      >
-        {/* Status bar */}
-        <div
-          className="h-5 flex items-center justify-between px-3 text-white shrink-0"
-          style={{ background: accentColor }}
-        >
-          <span className="text-[8px] font-semibold opacity-90">12:30</span>
-          <div className="flex gap-1 items-center">
-            {[5, 7, 9, 11].map((h) => (
-              <div key={h} className="w-0.5 rounded-sm bg-white/80" style={{ height: h }} />
-            ))}
-          </div>
-        </div>
-        {/* Screen content */}
-        <div className="flex-1 h-full flex flex-col px-2 pt-3 gap-2">
-          {children}
-        </div>
-        {/* Nav bar */}
-        <div className="absolute bottom-0 inset-x-0 h-8 border-t border-white/08 flex items-center justify-around px-2"
-          style={{ background: '#1a1f2e' }}>
-          {['⌂', '⊞', '◎', 'Y', '⚙'].map((icon, i) => (
-            <span key={i} className="text-[10px]" style={{ color: i === 0 ? accentColor : '#ffffff40' }}>
-              {icon}
-            </span>
-          ))}
-        </div>
-      </div>
-      <span className="text-xs text-white/40 font-medium tracking-wide text-center">{label}</span>
-    </div>
   )
 }
 
@@ -299,16 +253,6 @@ export default function ArtCityTourCaseStudy() {
                   to help visitors navigate the historic center of San José, Costa Rica — home to museums,
                   theaters, parks, heritage sites, public art, and cultural events.
                 </p>
-                <p className="text-white/60 leading-relaxed mb-4">
-                  However, usability testing of the existing app revealed significant problems across three
-                  areas: design patterns, interaction flow, and overall user experience. Tasks that should
-                  take seconds were taking users several minutes.
-                </p>
-                <p className="text-white/60 leading-relaxed">
-                  As part of a special assistantship at TEC's Escuela de Diseño Industrial, our team was
-                  commissioned to conduct a full UX redesign — from research and feature definition,
-                  through design and validation, to handoff for development.
-                </p>
               </div>
             </Reveal>
 
@@ -383,14 +327,10 @@ export default function ArtCityTourCaseStudy() {
                 number="01"
                 title="Diagnosis APK"
                 activities={[
-                  'Google Forms survey to understand what functionalities users wanted in a San José tourism app',
-                  'Validated feature importance levels from the existing APK',
-                  'Added "Agregar a Favoritos" (Add to Favorites) based on user requests',
-                  'Removed "Tour Operators" feature — low demand',
-                  'Digital prototyping usability tests with 10 participants (ages 16–60, beginner to expert)',
-                  'Identified problems in 3 areas: Design Patterns, Interaction Flow, and User Experience',
-                  'Feature definition workshops with the municipality team',
-                  'Defined legal scope (e.g. restrictions on including private venues like hotels/restaurants)',
+                  'Google Forms survey to validate functionalities and identify missing features (added Favorites; removed low-demand Tour Operators)',
+                  'Usability tests with 10 participants on the existing APK — identified problems in 3 areas: Design Patterns, Interaction Flow, and UX',
+                  'Feature definition workshops with the municipality team and legal scope review',
+                  'Arquitectura Alfa: all content organized into 5 sections — Descubrir, Actividades, Rutas, Movilidad, and Ajustes',
                 ]}
                 result="Arquitectura Alfa — all validated content organized into logical groupings based on user-assigned associations, covering 5 main sections: Descubrir, Actividades, Rutas, Movilidad, and Ajustes."
               />
@@ -401,14 +341,10 @@ export default function ArtCityTourCaseStudy() {
                 number="02"
                 title="Pattern Hunting & Proposal"
                 activities={[
-                  'Competitive analysis of existing urban tourism apps to identify dominant design patterns',
-                  'Documented color usage, image presentation, and location display conventions',
-                  'Produced an information architecture with assigned design patterns per section',
-                  'Applied Atomic Design methodology: Atoms → Molecules → Organisms → Templates → Pages',
-                  'Material Design navigation bar with 5 primary tabs: Descubrir, Actividades, Movilidad, Rutas, Ajustes',
-                  'Color system based on the Centro Histórico brand book — celeste (sky blue) as primary interactive color',
-                  'Iconography from Material Design + custom icons for domain-specific categories',
-                  'Designed high-fidelity screens for all 5 sections; implemented interactive digital prototype',
+                  'Competitive analysis to identify dominant design patterns in urban tourism apps',
+                  'Applied Atomic Design (Atoms → Molecules → Organisms → Templates → Pages)',
+                  'Material Design navigation bar with 5 primary tabs; celeste (sky blue) as primary interactive color from the Centro Histórico brand book',
+                  'High-fidelity prototype built for all 5 sections — ready for usability validation',
                 ]}
                 result="A fully designed, interactive prototype ready for usability validation — using Material Design patterns for consistency, with celeste as the primary accent color applied to all interactive elements."
               />
@@ -419,12 +355,9 @@ export default function ArtCityTourCaseStudy() {
                 number="03"
                 title="Usability Testing & Validation"
                 activities={[
-                  'Ran heuristic usability tests with selected participants (including repeat testers from Stage 01)',
-                  'Compared task completion times: original APK vs. new prototype',
-                  'Survey with 120 responses to rank and prioritize content categories by user interest',
-                  'Icon validation survey with 93 participants for the "Rutas" navigation icon',
-                  'Category hierarchy reordered based on user-assigned relevance scores',
-                  'Delivered Figma Design System and prototype to the development team on June 24',
+                  'Heuristic usability tests with participants — compared task times: original APK vs. new prototype',
+                  'Survey with 120 responses to prioritize content categories; icon validation survey with 93 participants for the "Rutas" icon',
+                  'Figma Design System and prototype delivered to the computing team on June 24 for SCRUM development',
                 ]}
                 result="Significant reduction in task completion times across all measured tasks. Users reported greater satisfaction. The design system and prototype were handed off to the computing team for implementation using the SCRUM methodology."
               />
@@ -526,92 +459,14 @@ export default function ArtCityTourCaseStudy() {
             </Reveal>
           </div>
 
-          {/* Phone mockups */}
+          {/* Screens */}
           <Reveal delay={0.2}>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10 py-8">
-              <PhoneFrame label="Home — Descubrir" accentColor="#38bdf8">
-                <div className="space-y-1.5">
-                  <div className="h-4 rounded" style={{ background: '#38bdf820', width: '60%' }} />
-                  <div className="flex gap-2 overflow-hidden">
-                    {['PARQUES', 'BULEVARES', 'PATRIMONIO'].map((t) => (
-                      <span key={t} className="text-[6px] font-bold whitespace-nowrap px-1.5 py-0.5 rounded"
-                        style={{ color: t === 'PARQUES' ? '#38bdf8' : '#ffffff40', borderBottom: t === 'PARQUES' ? '1px solid #38bdf8' : 'none' }}>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {[1, 2, 3].map((n, i) => (
+                <div key={n} className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                  <Image src={`/sjo-turismo-media-files/mockup-${n}.png`} alt={`SJO Turismo screen ${n}`} width={390} height={844} className="w-full h-auto" />
                 </div>
-                <p className="text-[8px] text-white/50 font-semibold">Cerca de mí</p>
-                <div className="grid grid-cols-2 gap-1 flex-1">
-                  {[0, 1, 2, 3].map((i) => (
-                    <div key={i} className="rounded-lg bg-white/06 aspect-square" />
-                  ))}
-                </div>
-                <p className="text-[8px] text-white/50 font-semibold mt-1">Recomendados</p>
-              </PhoneFrame>
-
-              <PhoneFrame label="Place Detail" accentColor="#38bdf8">
-                <div className="w-full h-16 rounded-xl bg-white/08" />
-                <div className="space-y-1.5 mt-1">
-                  <div className="h-3 rounded bg-white/15 w-4/5" />
-                  <div className="h-2 rounded bg-white/08 w-3/5" />
-                  <div className="border-t border-white/06 pt-1.5 space-y-1">
-                    {[
-                      { icon: '📍', text: 'Calle Central, Avenida 1-3' },
-                      { icon: '🕐', text: 'M–V 8:00–16:30' },
-                      { icon: '📞', text: '+506 2007-7475' },
-                    ].map((row) => (
-                      <div key={row.text} className="flex items-center gap-1.5">
-                        <span className="text-[8px]">{row.icon}</span>
-                        <span className="text-[7px] text-white/40">{row.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </PhoneFrame>
-
-              <PhoneFrame label="Rutas (Routes)" accentColor="#1e3a5f">
-                <div className="space-y-1.5 flex-1">
-                  <p className="text-[8px] text-white/50 font-semibold">Rutas SJO</p>
-                  {['Ruta Museos', 'Ruta Patrimonio', 'Ruta Arte Público'].map((r) => (
-                    <div key={r} className="flex items-center justify-between p-2 rounded-xl bg-white/06 border border-white/06">
-                      <span className="text-[7px] text-white/60">{r}</span>
-                      <span className="text-[7px]" style={{ color: '#38bdf8' }}>↓</span>
-                    </div>
-                  ))}
-                  <p className="text-[8px] text-white/50 font-semibold mt-2">Cerca de mí</p>
-                  <div className="h-12 rounded-xl bg-white/06" />
-                </div>
-              </PhoneFrame>
-
-              <PhoneFrame label="Favoritos" accentColor="#38bdf8">
-                <p className="text-[8px] text-white/50 font-semibold">Mis Favoritos</p>
-                <div className="space-y-1.5 flex-1">
-                  {['Museo Nacional', 'Teatro Nacional', 'Iglesia El Carmen'].map((item) => (
-                    <div key={item} className="flex items-center gap-2 p-2 rounded-xl bg-white/06">
-                      <div className="w-6 h-6 rounded-lg bg-white/10 shrink-0" />
-                      <span className="text-[7px] text-white/60">{item}</span>
-                      <span className="ml-auto text-[8px]" style={{ color: '#38bdf8' }}>♥</span>
-                    </div>
-                  ))}
-                </div>
-              </PhoneFrame>
-
-              <PhoneFrame label="Ajustes" accentColor="#1e3a5f">
-                <div className="flex flex-col items-center py-2 gap-1">
-                  <div className="w-10 h-10 rounded-full bg-white/10" />
-                  <div className="h-2 rounded bg-white/20 w-16" />
-                  <div className="h-1.5 rounded bg-white/10 w-12" />
-                </div>
-                <div className="space-y-1 flex-1">
-                  {['Idioma', 'Notificaciones', 'Contacto', 'Ayuda', 'Términos'].map((item) => (
-                    <div key={item} className="flex items-center justify-between px-2 py-1 rounded-lg bg-white/04">
-                      <span className="text-[7px] text-white/50">{item}</span>
-                      <span className="text-[8px] text-white/20">›</span>
-                    </div>
-                  ))}
-                </div>
-              </PhoneFrame>
+              ))}
             </div>
           </Reveal>
         </div>
@@ -920,16 +775,8 @@ export default function ArtCityTourCaseStudy() {
                     desc: 'Legal constraints on private venues forced mid-project IA pivots. Institutional design requires flexibility.',
                   },
                   {
-                    title: 'Atomic Design as handoff',
-                    desc: 'Building components bottom-up meant the Design System was ready for developers from day one.',
-                  },
-                  {
                     title: 'Data-driven decisions',
                     desc: '120-person category survey and 93-person icon test replaced assumptions with evidence for key navigation choices.',
-                  },
-                  {
-                    title: 'Material Design pays off',
-                    desc: 'Familiar navigation patterns reduced learning curve. Users leveraged prior knowledge to explore the app faster.',
                   },
                 ].map((item) => (
                   <div key={item.title} className="glass rounded-2xl p-5 border border-white/08 flex items-start gap-4">
@@ -942,6 +789,28 @@ export default function ArtCityTourCaseStudy() {
                 ))}
               </div>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Screens ──────────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Redesigned App</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Final prototype</h2>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[1, 2, 3].map((n, i) => (
+              <Reveal key={n} delay={i * 0.08}>
+                <div className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                  <Image src={`/sjo-turismo-media-files/mockup-${n}.png`} alt={`SJO Turismo screen ${n}`} width={390} height={844} className="w-full h-auto" />
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
