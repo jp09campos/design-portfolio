@@ -1,183 +1,116 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { SOCIAL_LINKS } from '@/lib/data'
 
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-)
-
-const BehanceIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.336.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.66.665 1.45.665 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-.154 1.37s-.985.64-1.593.8c-.61.16-1.26.24-1.945.24H0V4.51h6.938v-.007zm-.4 5.77c.595 0 1.077-.14 1.45-.42.37-.28.557-.73.557-1.35 0-.34-.07-.62-.2-.85-.14-.23-.32-.4-.56-.54-.24-.13-.51-.22-.82-.26-.31-.04-.63-.06-.96-.06H3.24v3.48h3.3zm.2 6.03c.37 0 .72-.04 1.05-.1.33-.07.62-.18.87-.34.25-.16.44-.38.59-.65.14-.27.21-.62.21-1.05 0-.84-.23-1.44-.68-1.79-.46-.36-1.07-.54-1.84-.54H3.24v4.48h3.5zm10.35-9.3h5.91v1.35h-5.91V7.003zm-1.17 5.76c0-.7.14-1.33.41-1.87.28-.54.66-1 1.14-1.37.48-.37 1.04-.65 1.67-.84.63-.19 1.29-.29 1.98-.29.68 0 1.32.1 1.94.3.62.2 1.16.49 1.62.87.46.38.83.84 1.09 1.38.27.54.4 1.16.4 1.86v1.02h-8.05c.03.84.25 1.48.67 1.93.42.45 1.04.67 1.87.67.62 0 1.14-.14 1.57-.43.43-.28.7-.7.8-1.24h2.2c-.3 1.28-.9 2.2-1.8 2.77-.9.57-1.97.85-3.2.85-.73 0-1.4-.11-2.01-.34-.61-.23-1.13-.55-1.56-.97-.43-.42-.76-.94-.98-1.54-.22-.61-.33-1.28-.33-2.01v-.5zm7.63-.9c-.03-.7-.25-1.27-.65-1.7-.4-.43-.95-.64-1.63-.64-.37 0-.7.06-.99.18-.28.12-.52.28-.72.49-.2.21-.35.45-.46.73-.1.28-.16.56-.18.87h4.63l.05.07z" />
-  </svg>
-)
-
-const GlobeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="2" y1="12" x2="22" y2="12" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>
-)
-
-const ICON_MAP: Record<string, React.ComponentType> = {
-  linkedin: LinkedInIcon,
-  behance: BehanceIcon,
-  twine: GlobeIcon,
-}
+const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function ContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
+  const ref = useRef<HTMLElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contact" ref={sectionRef} className="section-padding">
+    <section id="contact" ref={ref} className="section-padding">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16 text-center"
+        {/* Section label */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-[11px] tracking-[0.2em] uppercase text-white/25 mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="w-8 h-px bg-pink-500" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-pink-400">
-              Get in Touch
-            </span>
-            <span className="w-8 h-px bg-pink-500" />
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Let&apos;s build something{' '}
-            <span className="gradient-text">amazing together</span>
-          </h2>
-          <p className="text-white/40 max-w-lg mx-auto">
-            Have a project in mind? I&apos;m always open to discussing design work, collaborations,
-            or creative challenges.
-          </p>
-        </motion.div>
+          Contact
+        </motion.p>
 
-        {/* Contact info — centered, max 3xl */}
-        <div className="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
-          {/* Email */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-pink-500/15 flex items-center justify-center">
-                <svg className="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Email</p>
-              <a
-                href="mailto:j.p11sequeira@gmail.com"
-                className="text-white/80 hover:text-white transition-colors text-sm font-medium break-all"
+        {/* 2-column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+          {/* Left — editorial CTA */}
+          <div>
+            <h2 className="font-display font-bold leading-[1.0] tracking-[-0.03em] mb-10">
+              {["Let's build", 'something worth', 'using.'].map((line, i) => (
+                <div key={line} className="overflow-hidden">
+                  <motion.span
+                    className={`block text-[clamp(2rem,4.5vw,4rem)] ${
+                      i === 1 ? 'text-white/32' : 'text-white'
+                    }`}
+                    initial={{ y: '110%' }}
+                    animate={inView ? { y: '0%' } : {}}
+                    transition={{ duration: 0.9, ease: EASE, delay: 0.1 + i * 0.1 }}
+                  >
+                    {line}
+                  </motion.span>
+                </div>
+              ))}
+            </h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, ease: EASE, delay: 0.45 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <Link
+                href="mailto:jp09campos@gmail.com"
+                className="text-[13px] font-medium text-[#080808] bg-white px-6 py-3 rounded-full tracking-wide hover:bg-white/90 transition-colors duration-200 text-center"
               >
-                j.p11sequeira@gmail.com
-              </a>
-            </div>
-          </motion.div>
+                Send an email
+              </Link>
+              <Link
+                href="https://linkedin.com/in/jp-campos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] font-medium text-white/60 border border-white/20 px-6 py-3 rounded-full tracking-wide hover:text-white hover:border-white/40 transition-all duration-200 text-center"
+              >
+                LinkedIn
+              </Link>
+            </motion.div>
+          </div>
 
-          {/* Location */}
+          {/* Right — contact details */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.3 }}
+            className="flex flex-col gap-8 md:pt-4"
           >
-            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/15 flex items-center justify-center">
-                <svg className="w-5 h-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Location</p>
-              <div>
-                <p className="text-white/80 font-medium text-sm">San José, Costa Rica</p>
-                <p className="text-white/30 text-xs mt-1">Available worldwide · Remote</p>
-              </div>
+            {/* Email */}
+            <div className="border-b border-white/[0.07] pb-6">
+              <p className="text-[11px] tracking-[0.16em] uppercase text-white/20 mb-2">Email</p>
+              <Link
+                href="mailto:jp09campos@gmail.com"
+                className="text-[15px] text-white/60 hover:text-white transition-colors duration-300 link-underline"
+              >
+                jp09campos@gmail.com
+              </Link>
             </div>
-          </motion.div>
 
-          {/* Hire me CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="glass rounded-2xl p-6 h-full flex flex-col items-center text-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-emerald-500/15 flex items-center justify-center">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </span>
-              </div>
-              <p className="text-xs text-white/30 font-semibold tracking-widest uppercase">Status</p>
-              <div>
-                <p className="text-white/80 font-medium text-sm">Available for projects</p>
-                <p className="text-white/30 text-xs mt-1">Open to collaborations</p>
+            {/* Location */}
+            <div className="border-b border-white/[0.07] pb-6">
+              <p className="text-[11px] tracking-[0.16em] uppercase text-white/20 mb-2">Location</p>
+              <p className="text-[15px] text-white/60">San José, Costa Rica</p>
+            </div>
+
+            {/* Social */}
+            <div>
+              <p className="text-[11px] tracking-[0.16em] uppercase text-white/20 mb-4">Social</p>
+              <div className="flex flex-col gap-3">
+                {SOCIAL_LINKS.map((s) => (
+                  <Link
+                    key={s.name}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[14px] text-white/40 hover:text-white/80 transition-colors duration-300 link-underline w-fit"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
               </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Social links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="max-w-3xl mx-auto mt-6"
-        >
-          <div className="glass rounded-2xl p-6">
-            <p className="text-xs text-white/30 font-semibold tracking-widest uppercase mb-5 text-center">
-              Find me online
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {SOCIAL_LINKS.map((link) => {
-                const Icon = ICON_MAP[link.icon]
-                return (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ y: -3, scale: 1.05 }}
-                    className="flex items-center gap-2.5 px-5 py-2.5 rounded-full glass border border-white/08 hover:border-white/20 text-white/50 hover:text-white transition-colors group"
-                  >
-                    <Icon />
-                    <span className="font-medium text-sm">{link.name}</span>
-                  </motion.a>
-                )
-              })}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Hire me button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-10"
-        >
-          <motion.a
-            href="mailto:j.p11sequeira@gmail.com?subject=Project%20Inquiry%20—%20Portfolio&body=Hi%20José%20Pablo%2C%0A%0AI%20visited%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20potential%20project%20with%20you.%0A%0AProject%20details%3A%0A%0A"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-sm tracking-wide transition-colors shadow-[0_0_40px_rgba(99,102,241,0.35)]"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Hire me
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   )

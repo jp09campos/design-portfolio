@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  background-color: #0d0d0d;
-  color: #f8fafc;
+  background-color: #080808;
+  color: #efefef;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -16,29 +16,22 @@ body {
 
 /* Glassmorphism utility */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.028);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
-/* Gradient text */
+/* Gradient text — neutral white to mid-gray */
 .gradient-text {
-  background: linear-gradient(135deg, #a5b4fc, #c4b5fd, #f9a8d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-warm {
-  background: linear-gradient(135deg, #fbbf24, #f97316, #ec4899);
+  background: linear-gradient(120deg, #ffffff 20%, #666666 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -46,66 +39,65 @@ body {
 
 /* Section padding */
 .section-padding {
-  padding: 6rem 0;
+  padding: 8rem 0;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0d0d;
+  background: #080808;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.4);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.7);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
-  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
-/* Noise texture overlay */
-.noise-overlay::before {
+/* Film grain overlay */
+.grain::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  inset: 0;
+  opacity: 0.032;
   pointer-events: none;
   z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
-/* Card hover glow */
+/* Card hover — border only, no glow */
 .card-glow {
-  transition: box-shadow 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 .card-glow:hover {
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15), 0 0 80px rgba(99, 102, 241, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Timeline connector line */
-.timeline-line {
-  background: linear-gradient(to bottom, #6366f1, #8b5cf6, #ec4899);
+/* Animated underline */
+.link-underline {
+  position: relative;
 }
-
-/* Cursor glow effect */
-.cursor-glow {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  transition: opacity 0.3s ease;
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ffffff;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
 }

@@ -9,7 +9,7 @@ import ContactSection from '@/components/sections/ContactSection'
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#0d0d0d]">
+    <div className="relative min-h-screen bg-[#080808] grain">
       <Navbar />
 
       <main>
