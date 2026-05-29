@@ -201,9 +201,7 @@ export default function FulzerCaseStudy() {
                   A fast-growing industry<br />with improvised workspaces
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  The accelerated growth of food trucks in Costa Rica had increased operational demand —
-                  but most were still using improvised, non-ergonomic furniture. Workers completed
-                  shifts of up to 14 hours in mobile kitchens never designed for human workflow.
+                  Food trucks in Costa Rica were growing fast — but most still ran on improvised, non-ergonomic furniture. Workers did up to 14-hour shifts in kitchens never designed for them.
                 </p>
               </div>
             </Reveal>
@@ -239,9 +237,7 @@ export default function FulzerCaseStudy() {
               Six simultaneous problems
             </h2>
             <p className="text-white/60 leading-relaxed max-w-2xl mb-12">
-              The project had to resolve multiple compounding problems at once — not sequentially.
-              Every design decision had to satisfy spatial, ergonomic, sanitary, and manufacturing
-              constraints simultaneously.
+              Multiple compounding problems, resolved simultaneously. Every decision had to satisfy spatial, ergonomic, sanitary, and manufacturing constraints at once.
             </p>
           </Reveal>
 
@@ -250,25 +246,25 @@ export default function FulzerCaseStudy() {
               {
                 icon: '📐',
                 title: 'Critically Narrow Aisles',
-                desc: 'Some food trucks operated with internal aisles of just 49 cm — generating constant workflow interruptions when two workers had to pass each other.',
+                desc: 'Aisles as narrow as 49 cm — constant workflow interruptions whenever two workers crossed paths.',
                 stat: '49 cm',
               },
               {
                 icon: '⚠️',
                 title: 'Postural Risk (RULA Max)',
-                desc: 'RULA ergonomic evaluation detected maximum postural risk levels caused by frying and elevated equipment placed on standard-height surfaces.',
+                desc: 'RULA detected maximum postural risk — caused by elevated equipment on standard-height surfaces.',
                 stat: 'RULA Level 7',
               },
               {
                 icon: '🔄',
                 title: 'Constant Worker Collisions',
-                desc: 'Improvised furniture layouts created recurring physical collisions between workers during service — slowing throughput and creating safety risks.',
+                desc: 'Improvised layouts created recurring collisions during service — slower throughput, higher safety risk.',
                 stat: 'Daily friction',
               },
               {
                 icon: '📏',
                 title: 'Incorrect Surface Heights',
-                desc: 'Standard table heights didn\'t account for the actual cooking equipment placed on them — fryers, griddles, and combi ovens raised effective working height significantly.',
+                desc: 'Standard heights ignored the cooking equipment on top — fryers and griddles raised the effective working height significantly.',
                 stat: 'Wrong ergonomics',
               },
             ].map((item, i) => (
@@ -326,7 +322,7 @@ export default function FulzerCaseStudy() {
                   'Mapped workflow patterns, operational problems, and food types per truck',
                   'Key finding: the primary problem was internal space constraint, not aesthetic or storage',
                 ]}
-                result="Clear hierarchy of user needs — circulation space and postural safety ranked highest across all 7 operators. Long shifts (up to 14h) made ergonomic improvements a health priority, not a preference."
+                result="Circulation space and postural safety ranked highest across all 7 operators. 14-hour shifts made ergonomics a health priority."
               />
             </Reveal>
 
@@ -368,7 +364,7 @@ export default function FulzerCaseStudy() {
                   'CAD development of the modular stainless steel 304 furniture system',
                   'Surface, joint, and adjustment mechanism design validated against SS304 fabrication',
                 ]}
-                result="Final design: adjustable-height modular furniture system using concentric tubes and set screws. Minimal surfaces for easy cleaning. Sliding doors to optimize space. Compatible with Fulzer's existing manufacturing lines."
+                result="Adjustable-height modular system — concentric tubes and set screws. Minimal surfaces, sliding doors, compatible with Fulzer's existing manufacturing lines."
               />
             </Reveal>
 
@@ -401,9 +397,7 @@ export default function FulzerCaseStudy() {
               Adaptive Minimalism
             </h2>
             <p className="text-white/60 leading-relaxed max-w-2xl mb-12">
-              The design concept: functional, compact, and visually clean solutions that respond to multiple
-              operational contexts. A modular stainless steel 304 system with adjustable height and
-              dimensions optimized for mobile kitchen workflow.
+              Functional, compact, visually clean — a modular SS304 system with adjustable height, optimized for mobile kitchen workflow.
             </p>
           </Reveal>
 
@@ -411,32 +405,32 @@ export default function FulzerCaseStudy() {
             {[
               {
                 title: 'Adjustable Height System',
-                desc: 'Concentric tube mechanism with set screws allows surface height adjustment across the required ±12 cm range — covering the full 5th–95th percentile worker population without tools.',
+                desc: 'Concentric tube + set screw allows ±12 cm height adjustment — covers 5th–95th percentile workers, no tools required.',
                 icon: '↕️',
               },
               {
                 title: 'Minimal, Sanitary Surfaces',
-                desc: 'Stainless steel 304 with smooth joints and no hidden corners — meeting food safety and sanitation requirements while simplifying daily cleaning for kitchen staff.',
+                desc: 'SS304, smooth joints, no hidden corners — meets food safety requirements and easy to clean daily.',
                 icon: '✨',
               },
               {
                 title: 'Sliding Doors',
-                desc: 'Cabinet doors slide rather than swing — eliminating the space penalty of traditional hinged doors in spaces where every centimeter counts.',
+                desc: 'Slides, not swings — eliminates the space penalty of hinged doors.',
                 icon: '↔️',
               },
               {
                 title: 'Equipment Compatibility',
-                desc: 'Designed to accommodate different cooking equipment footprints — fryers, griddles, combi ovens, and coffee stations — without requiring custom configurations per truck.',
+                desc: 'Accommodates different equipment footprints — fryers, griddles, combi ovens, coffee stations — no custom configs per truck.',
                 icon: '🍳',
               },
               {
                 title: 'Modular Assembly',
-                desc: 'Components connect and reconfigure between different truck layouts and food types — a single system serving burger trucks, taco carts, and pastry kitchens.',
+                desc: 'One system, multiple truck types — burger trucks, taco carts, pastry kitchens.',
                 icon: '🧩',
               },
               {
                 title: 'Fulzer Manufacturing Alignment',
-                desc: 'All structural decisions validated against Fulzer\'s production processes — enabling direct commercialization without retooling or custom fabrication per unit.',
+                desc: "Validated against Fulzer's production lines — direct commercialization, no retooling.",
                 icon: '🏭',
               },
             ].map((item, i) => (
@@ -485,25 +479,19 @@ export default function FulzerCaseStudy() {
                   <div>
                     <p className="font-semibold text-white mb-2">Enlarging the truck itself</p>
                     <p className="text-sm text-white/60 leading-relaxed">
-                      Expanding the physical dimensions of the food truck was structurally and economically
-                      unfeasible. Instead, we optimized the furniture and spatial organization within
-                      the existing footprint — the only viable path to improvement.
+                      Expanding the truck was structurally and economically unfeasible. We optimized within the existing footprint.
                     </p>
                   </div>
                   <div>
                     <p className="font-semibold text-white mb-2">High mechanical complexity</p>
                     <p className="text-sm text-white/60 leading-relaxed">
-                      Complex adjustable mechanisms (gas springs, linear actuators, motorized lifts) were
-                      evaluated and rejected. The solution needed to be simple to maintain, cheap to produce,
-                      and usable without training — a concentric tube with a set screw met all three criteria.
+                      Gas springs, actuators, motorized lifts — all evaluated and rejected. A concentric tube with a set screw was simple to maintain, cheap to produce, and usable without training.
                     </p>
                   </div>
                   <div>
                     <p className="font-semibold text-white mb-2">Visual differentiation over function</p>
                     <p className="text-sm text-white/60 leading-relaxed">
-                      Purely aesthetic concepts were discarded. &ldquo;Form follows function&rdquo; was applied literally —
-                      every visual decision was backed by a functional requirement. Clean lines emerged
-                      from sanitary constraints, not from stylistic preference.
+                      Form follows function, applied literally. Clean lines emerged from sanitary constraints — not style.
                     </p>
                   </div>
                 </div>
@@ -516,9 +504,7 @@ export default function FulzerCaseStudy() {
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Design Concept</p>
                   <p className="font-display font-bold text-white text-2xl mb-2">Adaptive Minimalism</p>
                   <p className="text-sm text-white/55 leading-relaxed">
-                    Functional, compact, and visually clean — designed to respond to multiple operational
-                    contexts without modification. Simplicity is not a stylistic choice; it&apos;s a
-                    technical and sanitary requirement.
+                    Functional, compact, visually clean — responds to multiple operational contexts without modification. Simplicity is a technical and sanitary requirement.
                   </p>
                 </div>
                 <div className="glass rounded-2xl p-6 border border-white/08">
@@ -575,8 +561,7 @@ export default function FulzerCaseStudy() {
                   </div>
                 </div>
                 <p className="text-sm text-white/50 leading-relaxed">
-                  Nearly doubled usable circulation space — eliminating constant worker collisions
-                  and restoring operational flow during peak service.
+                  Nearly doubled circulation — worker collisions eliminated, flow restored during peak service.
                 </p>
               </div>
             </Reveal>
@@ -598,8 +583,7 @@ export default function FulzerCaseStudy() {
                   </div>
                 </div>
                 <p className="text-sm text-white/50 leading-relaxed">
-                  Postural risk postures eliminated in all tested task configurations through
-                  the adjustable height system.
+                  Postural risk eliminated in all tested task configurations.
                 </p>
               </div>
             </Reveal>

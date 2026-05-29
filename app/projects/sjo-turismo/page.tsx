@@ -262,9 +262,7 @@ export default function ArtCityTourCaseStudy() {
                   Redesigning the city's cultural compass
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  The Municipalidad de San José had developed an existing APK (Android application package)
-                  to help visitors navigate the historic center of San José, Costa Rica — home to museums,
-                  theaters, parks, heritage sites, public art, and cultural events.
+                  The Municipalidad de San José had an existing APK to help visitors navigate the historic center — museums, theaters, parks, heritage sites, and cultural events.
                 </p>
               </div>
             </Reveal>
@@ -359,7 +357,7 @@ export default function ArtCityTourCaseStudy() {
                   'Material Design navigation bar with 5 primary tabs; celeste (sky blue) as primary interactive color from the Centro Histórico brand book',
                   'High-fidelity prototype built for all 5 sections — ready for usability validation',
                 ]}
-                result="A fully designed, interactive prototype ready for usability validation — using Material Design patterns for consistency, with celeste as the primary accent color applied to all interactive elements."
+                result="High-fidelity interactive prototype ready for validation — Material Design, celeste as primary interactive color."
               />
             </Reveal>
 
@@ -372,7 +370,7 @@ export default function ArtCityTourCaseStudy() {
                   'Survey with 120 responses to prioritize content categories; icon validation survey with 93 participants for the "Rutas" icon',
                   'Figma Design System and prototype delivered to the computing team on June 24 for SCRUM development',
                 ]}
-                result="Significant reduction in task completion times across all measured tasks. Users reported greater satisfaction. The design system and prototype were handed off to the computing team for implementation using the SCRUM methodology."
+                result="Significant task time reductions across all measured tasks. Design system and prototype handed off to the computing team for SCRUM development."
               />
             </Reveal>
           </div>
@@ -399,9 +397,7 @@ export default function ArtCityTourCaseStudy() {
                 <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Methodology</p>
                 <p className="text-sm font-bold text-white mb-3">Atomic Design</p>
                 <p className="text-sm text-white/55 leading-relaxed mb-5">
-                  Components were designed from the smallest unit upward: atoms (colors, type, icons) combined
-                  into molecules (buttons, cards, nav bars), assembled into organisms, placed in templates,
-                  and delivered as complete pages.
+                  Atoms (colors, type, icons) → Molecules (buttons, cards) → Organisms → Templates → Pages.
                 </p>
                 <div className="flex items-center gap-1.5 text-xs text-white/40">
                   <span className="px-2 py-1 rounded glass border border-white/08">Atoms</span>
@@ -555,8 +551,7 @@ export default function ArtCityTourCaseStudy() {
               <div className="glass rounded-2xl p-6 border border-white/08">
                 <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Key finding</p>
                 <p className="text-sm text-white/60 leading-relaxed">
-                  Residual timing issues in the prototype were attributed to <span className="text-white/80">prototype load times and desktop testing conditions</span>,
-                  not to the interface itself — confirming the design decisions were sound.
+                  Residual timing issues attributed to <span className="text-white/80">prototype load times and desktop testing conditions</span> — not the interface itself.
                 </p>
               </div>
             </div>
@@ -580,8 +575,7 @@ export default function ArtCityTourCaseStudy() {
                   Content category ranking
                 </h2>
                 <p className="text-white/50 text-sm mb-8 leading-relaxed">
-                  A 120-person survey asked users to rate each content category 1–5.
-                  Results were used to reorder the navigation hierarchy within the "Descubrir" section.
+                  120 participants rated each category 1–5. Results drove the navigation order within &quot;Descubrir&quot;.
                 </p>
               </Reveal>
 
@@ -618,9 +612,7 @@ export default function ArtCityTourCaseStudy() {
                   Route icon recognition
                 </h2>
                 <p className="text-white/50 text-sm mb-8 leading-relaxed">
-                  Usability testing revealed confusion with the "Rutas" navigation icon.
-                  A survey of 93 participants tested 5 icon options to validate collective mental models.
-                  The original icon scored highest — it was kept.
+                  Testing revealed confusion with the &quot;Rutas&quot; icon. 93 participants tested 5 options — the original scored highest and was kept.
                 </p>
               </Reveal>
 
@@ -688,9 +680,7 @@ export default function ArtCityTourCaseStudy() {
               From design to development
             </h2>
             <p className="text-white/50 text-sm max-w-2xl mb-12 leading-relaxed">
-              The second semester focused on transitioning the validated design into a working application.
-              The Figma Design System and interactive prototype were handed off to a computing team who
-              implemented the app using the SCRUM methodology, with Alonso Obando as Scrum Master.
+              The validated design was handed off to a computing team (Scrum Master: Alonso Obando) for SCRUM implementation.
             </p>
           </Reveal>
 
@@ -759,19 +749,13 @@ export default function ArtCityTourCaseStudy() {
                   Key learnings
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  This project demonstrated the value of testing against a real baseline. Having the original
-                  APK as a benchmark made it possible to quantify the impact of design decisions — not just
-                  describe them. Task times dropped by up to 58% in direct comparisons.
+                  Testing against a real baseline made it possible to quantify design impact — not just describe it. Task times dropped by up to 58%.
                 </p>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Working directly with the municipal client taught us to navigate institutional constraints:
-                  the legal complexity of including private venues required negotiation with stakeholders
-                  and reshaped the information architecture mid-project.
+                  Legal constraints on private venues required stakeholder negotiation and mid-project IA pivots — institutional design requires flexibility.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Using Atomic Design from the start meant the final handoff was a complete,
-                  self-documenting Design System — not just a set of screens. The computing team
-                  received a Figma file they could use as both specification and reference guide.
+                  Atomic Design from the start meant the handoff was a self-documenting Design System — not just screens. Specification and reference guide in one Figma file.
                 </p>
               </div>
             </Reveal>
@@ -781,7 +765,7 @@ export default function ArtCityTourCaseStudy() {
                 {[
                   {
                     title: 'Quantified impact',
-                    desc: 'Baseline APK vs prototype comparison gave concrete evidence of design improvements — not just preference.',
+                    desc: 'APK baseline made improvements quantifiable — not just perceived.',
                   },
                   {
                     title: 'Stakeholder navigation',
@@ -789,7 +773,7 @@ export default function ArtCityTourCaseStudy() {
                   },
                   {
                     title: 'Data-driven decisions',
-                    desc: '120-person category survey and 93-person icon test replaced assumptions with evidence for key navigation choices.',
+                    desc: '120-person survey and 93-person icon test replaced assumptions with evidence.',
                   },
                 ].map((item) => (
                   <div key={item.title} className="glass rounded-2xl p-5 border border-white/08 flex items-start gap-4">

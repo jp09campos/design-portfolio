@@ -168,8 +168,7 @@ export default function OneDeskCaseStudy() {
               Four critical problems across<br />Central America & Mexico
             </h2>
             <p className="text-white/60 leading-relaxed max-w-2xl mb-12">
-              Walmart operated across multiple countries with fragmented warranty management, physical ticket printing,
-              and manual fiscal document handling — all disconnected systems generating four compounding operational problems.
+              Fragmented warranty management, physical ticket printing, manual fiscal documents — three disconnected systems generating four compounding operational problems.
             </p>
           </Reveal>
 
@@ -244,13 +243,10 @@ export default function OneDeskCaseStudy() {
                   One platform,<br />three problems,<br />five user roles
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Design and iterate a unified platform — OneDesk — that resolved three distinct operational problems under
-                  one ecosystem, with 5 user profiles with radically different needs and permissions coexisting in the same
-                  interface without friction or unauthorized access.
+                  One platform. Three operational problems. Five user roles with radically different permissions — coexisting without friction.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Each role required a tailored experience: a store associate should never see the SLA approval flow, while
-                  an administrator needs full visibility across all countries and stages.
+                  A store associate sees only their store. An admin sees everything across all countries and stages.
                 </p>
               </div>
             </Reveal>
@@ -319,7 +315,7 @@ export default function OneDeskCaseStudy() {
               {
                 number: '01',
                 title: 'High-Fidelity Iterative Prototyping',
-                desc: 'Functional HTML/CSS/JS SPA prototypes on GitHub Pages — evaluated with real users without backend dependency.',
+                desc: 'Functional HTML/CSS/JS prototypes on GitHub Pages — validated with real users, no backend needed.',
               },
               {
                 number: '02',
@@ -329,7 +325,7 @@ export default function OneDeskCaseStudy() {
               {
                 number: '03',
                 title: 'Role-Based Design (RBAC)',
-                desc: "Every screen designed from the consuming role's perspective — hiding irrelevant actions to reduce cognitive load.",
+                desc: "Every screen designed from the consuming role's perspective — irrelevant actions hidden.",
               },
               {
                 number: '04',
@@ -339,7 +335,7 @@ export default function OneDeskCaseStudy() {
               {
                 number: '05',
                 title: 'Continuous Feedback Loop',
-                desc: 'Iterative fixes from stakeholder reviews — badge logic, filter placement, and removal of redundant actions.',
+                desc: 'Iterative fixes from reviews — badge logic, filter placement, redundant actions removed.',
               },
             ].map((item, i) => (
               <Reveal key={item.number} delay={i * 0.07}>
@@ -366,7 +362,7 @@ export default function OneDeskCaseStudy() {
               Three modules, one ecosystem
             </h2>
             <p className="text-white/50 text-sm max-w-xl mb-16 leading-relaxed">
-              Each module designed end-to-end with role-specific access, guided flows, and validated empty/loading/error states.
+              Each module built end-to-end — role access, guided flows, and all empty/loading/error states validated.
             </p>
           </Reveal>
 
@@ -385,7 +381,7 @@ export default function OneDeskCaseStudy() {
                   </div>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { title: 'Warranty Query', desc: 'Advanced filters (Country, Store, Status, Workshop, Dates), real-time search, and loading states with LD Icons.' },
+                      { title: 'Warranty Query', desc: 'Advanced filters (Country, Store, Status, Workshop, Dates) + real-time search with guided loading states.' },
                       { title: 'Warranty Registration', desc: 'Field validation and step-guided flow for creating new warranty cases.' },
                       { title: 'SLA Management', desc: 'Editable SLA matrix by country and stage. Approval flow: Consultant → Admin. Pending badges per affected country only.' },
                       { title: 'Role-Based Access', desc: 'TIENDA sees only their country/store (locked). CONSULTOR initiates approvals. ADMIN resolves them.' },
@@ -430,7 +426,7 @@ export default function OneDeskCaseStudy() {
                       { title: 'Bulk Selection', desc: 'Mass selection with download as Consolidated PDF or Individual PDFs — format choice only where it applies.' },
                       { title: 'Email Sending', desc: 'Recipient validation, personalized message, and success confirmation.' },
                       { title: 'Ticket Preview', desc: 'Full preview with product breakdown, taxes, and payment method.' },
-                      { title: 'Guided States', desc: 'Empty state, loading state, and no-results state for a guided experience at every step.' },
+                      { title: 'Guided States', desc: 'Empty, loading, and no-results states — guided experience at every step.' },
                     ].map((f) => (
                       <div key={f.title} className="rounded-xl p-4 border border-white/06 bg-white/[0.02]">
                         <p className="text-sm font-semibold text-white mb-1.5">{f.title}</p>
@@ -504,7 +500,7 @@ export default function OneDeskCaseStudy() {
               What we didn&apos;t choose — and why
             </h2>
             <p className="text-white/50 text-sm max-w-xl mb-10 leading-relaxed">
-              Five alternatives evaluated and discarded, with their justification.
+              Five evaluated alternatives — each discarded for a specific reason.
             </p>
           </Reveal>
 
@@ -558,8 +554,8 @@ export default function OneDeskCaseStudy() {
                 <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-4">Portal Ticket Digital</p>
                 <div className="space-y-4">
                   {[
-                    { value: '−5%', label: 'Print Reduction', desc: '$434,000 USD / year in projected supply savings', color: '#34d399' },
-                    { value: '↑', label: 'Post-Sale NPS', desc: 'Measurable increase after digital channel adoption', color: '#34d399' },
+                    { value: '−5%', label: 'Print Reduction', desc: '$434K/yr projected supply savings', color: '#34d399' },
+                    { value: '↑', label: 'Post-Sale NPS', desc: 'Measurable increase following digital channel adoption', color: '#34d399' },
                     { value: '↓', label: 'JECA Support Tickets', desc: 'Fewer support requests caused by missing receipts', color: '#34d399' },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4 py-3 border-b border-white/05 last:border-0">
@@ -606,8 +602,7 @@ export default function OneDeskCaseStudy() {
                   <div>
                     <p className="font-semibold text-white mb-1">Delivered as functional dev specifications</p>
                     <p className="text-sm text-white/55 leading-relaxed">
-                      The prototypes were designed to be handed off directly to the development team as high-fidelity functional specifications —
-                      reducing discovery time and eliminating ambiguity in business flows without requiring backend infrastructure during the design phase.
+                      Handed off as high-fidelity functional specs — reducing discovery time and eliminating ambiguity without requiring backend infrastructure.
                     </p>
                   </div>
                 </div>

@@ -199,10 +199,7 @@ export default function CECOAppCaseStudy() {
                   Closing the mobile gap for a<br />€510M brand
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Cecotec generated more than €510 million in annual sales operating exclusively from the web.
-                  The problem wasn&apos;t brand visibility — it was the absence of a mobile channel that could
-                  accompany the user from product discovery through post-sale, at a moment when m-commerce
-                  was already the primary digital shopping channel.
+                  €510M in annual sales with zero mobile presence. M-commerce was already the dominant channel — Cecotec had no way to reach users on mobile.
                 </p>
               </div>
             </Reveal>
@@ -257,7 +254,7 @@ export default function CECOAppCaseStudy() {
                   'Analysis of existing Cecotec web user journeys to identify mobile-specific value moments',
                   'Mapped the purchase cycle to find where a mobile app creates unique value over the web',
                 ]}
-                result="Clear picture of user needs, motivations, and the specific moments where a mobile app creates more value than the web — especially for reordering, tracking, and loyalty."
+                result="Mobile app adds unique value in reordering, tracking, and loyalty — not just a web port."
               />
             </Reveal>
 
@@ -273,7 +270,7 @@ export default function CECOAppCaseStudy() {
                   'Definition of 3 user personas: Ejecutiva Exigente, Comprador Técnico, Usuario Tradicional',
                   'Feature prioritization matrix balancing user need, business value, and technical effort',
                 ]}
-                result="Information architecture validated against real user mental models — not replicated from the existing web structure. 3 clear navigation categories supported by card sorting data."
+                result="IA validated against real user mental models. 3 card-sorted navigation categories — not replicated from the web."
               />
             </Reveal>
 
@@ -289,7 +286,7 @@ export default function CECOAppCaseStudy() {
                   'Interactive prototype built in Figma with real navigation flows',
                   'Accessibility and visual hierarchy review across all screens',
                 ]}
-                result="Complete high-fidelity interactive prototype with real purchase flows, order tracking, and community content (CecoClips) — ready for usability validation."
+                result="Complete high-fidelity prototype covering purchase, tracking, and CecoClips flows — ready for validation."
               />
             </Reveal>
 
@@ -303,7 +300,7 @@ export default function CECOAppCaseStudy() {
                   'Friction identified in visual hierarchy, accessibility, and key action prioritization — all resolved before delivery',
                   'Final Atomic Design system delivered with annotated specs for development handoff',
                 ]}
-                result="Functional prototype with validated purchase, tracking, and community flows — all usability frictions resolved. Zero unresolved issues at delivery."
+                result="All identified frictions resolved before delivery. Zero open issues at handoff."
               />
             </Reveal>
           </div>
@@ -328,21 +325,21 @@ export default function CECOAppCaseStudy() {
               {
                 name: 'Ejecutiva Exigente',
                 emoji: '👩‍💼',
-                desc: 'Busy professional. Values speed, reliability, and premium feel. Judges the app by how fast she can reorder or track a delivery.',
+                desc: 'Busy professional. Judges the app by how fast she can reorder or track a delivery.',
                 priorities: ['Quick reorder', 'Order tracking', 'Clean UI'],
                 color: accent,
               },
               {
                 name: 'Comprador Técnico',
                 emoji: '🔧',
-                desc: 'Researches specs in detail before buying. Reads all reviews. Wants complete product information and comparison tools.',
+                desc: 'Researches before buying. Needs complete specs, reviews, and comparison tools.',
                 priorities: ['Product details', 'Comparisons', 'Reviews'],
                 color: '#c4b5fd',
               },
               {
                 name: 'Usuario Tradicional',
                 emoji: '🧑‍🦳',
-                desc: 'Less experienced with mobile apps. Needs clear navigation, large touch targets, and guided flows without surprises.',
+                desc: 'Less experienced with mobile apps. Needs large tap targets, simple navigation, no surprises.',
                 priorities: ['Simple navigation', 'Accessibility', 'Clear CTAs'],
                 color: '#e9d5ff',
               },
@@ -391,28 +388,28 @@ export default function CECOAppCaseStudy() {
               {
                 number: '01',
                 title: 'Product Discovery',
-                desc: 'Personalized home feed, category browsing based on card sorting data (Home & Appliances, Fitness, Home Maintenance), and smart search with filters.',
+                desc: 'Personalized home feed, card-sorted category browsing, and smart search with filters.',
                 icon: '🔍',
                 color: accent,
               },
               {
                 number: '02',
                 title: 'Simple & Efficient Purchase',
-                desc: 'Streamlined checkout flow, saved addresses and payment methods, one-tap reorder. Designed to reduce friction for the Ejecutiva Exigente persona.',
+                desc: 'Streamlined checkout, saved addresses and payment methods, one-tap reorder.',
                 icon: '🛒',
                 color: '#c4b5fd',
               },
               {
                 number: '03',
                 title: 'Real-Time Order Tracking',
-                desc: 'Live order status updates, estimated delivery times, and push notifications. Eliminates the need to contact customer support for delivery status.',
+                desc: 'Live status, estimated delivery, push notifications. No need to contact support.',
                 icon: '📦',
                 color: '#e9d5ff',
               },
               {
                 number: '04',
                 title: 'CecoClips',
-                desc: 'Community content module — short videos and reviews from real users showing products in context. Designed for active user retention and loyalty building.',
+                desc: 'Short videos from real users showing products in use. Built for retention and loyalty.',
                 icon: '🎬',
                 color: '#f9a8d4',
               },
@@ -486,13 +483,10 @@ export default function CECOAppCaseStudy() {
                   What we didn&apos;t choose
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Basing the architecture on the existing web navigation structure would have been the fastest path.
-                  It was evaluated and explicitly rejected.
+                  Replicating the web structure was the fastest path — and was explicitly rejected.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Benchmarking and card sorting revealed that the mobile user&apos;s mental model was distinctly
-                  different from the web&apos;s. We traded immediate consistency with the existing platform for
-                  clarity and reduced friction in the mobile context.
+                  Card sorting showed mobile mental models differ from desktop. Clarity over consistency.
                 </p>
               </div>
             </Reveal>
@@ -523,8 +517,7 @@ export default function CECOAppCaseStudy() {
                 <div className="glass rounded-xl p-4 border border-white/08">
                   <p className="text-xs text-white/40 leading-relaxed">
                     <span className="text-white/70 font-medium">Why it mattered: </span>
-                    Mobile users browse by lifestyle context (fitness, home improvement) — not by product taxonomy.
-                    The web structure optimized for SEO and catalog depth, not for how people think about their needs.
+                    Mobile users browse by lifestyle context, not product taxonomy. The web was optimized for SEO — not for how people think.
                   </p>
                 </div>
               </div>
@@ -549,19 +542,19 @@ export default function CECOAppCaseStudy() {
               {
                 value: '0',
                 label: 'Unresolved Frictions',
-                desc: 'All visual hierarchy, accessibility, and CTA prioritization issues identified in usability testing were resolved before final delivery.',
+                desc: 'Every hierarchy, accessibility, and CTA issue from usability testing resolved before delivery.',
                 color: '#34d399',
               },
               {
                 value: '4',
                 label: 'Validated Flows',
-                desc: 'Purchase, order tracking, product search, and CecoClips flows all validated with real users across 3 distinct personas.',
+                desc: 'Purchase, tracking, search, and CecoClips — validated across all 3 personas.',
                 color: accent,
               },
               {
                 value: '✓',
                 label: 'Dev-Ready Handoff',
-                desc: 'Complete Atomic Design system and annotated Figma prototype delivered as functional specification — ready for development without ambiguity.',
+                desc: 'Complete Atomic Design system + annotated Figma prototype — dev-ready, zero ambiguity.',
                 color: '#c4b5fd',
               },
             ].map((item, i) => (

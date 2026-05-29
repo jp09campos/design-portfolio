@@ -198,9 +198,7 @@ export default function ArtCityTourNavCaseStudy() {
                   A nocturnal event with no<br />real-time navigation
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Art City Tour is a nocturnal cultural event in San José where visitors move between exhibitions,
-                  museums, and artistic spaces on shuttle buses. The experience had a concrete problem:
-                  there was no quick access point to information about buses, venues, or real-time routes.
+                  Art City Tour is a nocturnal cultural event in San José — visitors move between venues on shuttle buses. No quick access to bus info, routes, or real-time location.
                 </p>
               </div>
             </Reveal>
@@ -268,7 +266,7 @@ export default function ArtCityTourNavCaseStudy() {
                   'Defined 3 user personas with representation percentages from survey data',
                   'Traffic analysis via surveys: bus stop locator (18%), bus times (17%), and directions (15%) represent 80% of expected usage',
                 ]}
-                result="Clear priority hierarchy: transport and navigation functions represent 80% of expected usage. Low-frequency features (reporting 3%, favorites 3%, capacity 4%) identified for de-prioritized placement."
+                result="Transport and navigation = 80% of expected usage. Low-frequency features (3–4%) identified for de-prioritized placement."
               />
             </Reveal>
 
@@ -296,7 +294,7 @@ export default function ArtCityTourNavCaseStudy() {
                   'Dark background optimized for nighttime use; photography direction shows venues with human activity',
                   'WCAG accessibility validation — contrast ratios between 5.71 (AA) and 7.39 (AAA) across all screens',
                 ]}
-                result="Complete design system with validated accessibility. All primary flows functional, all high-frequency tasks solvable in a single tap. Dark, monochromatic UI optimized for the nocturnal event context."
+                result="Complete design system, validated accessibility. All high-frequency tasks — one tap. Dark UI optimized for nighttime use."
               />
             </Reveal>
           </div>
@@ -326,7 +324,7 @@ export default function ArtCityTourNavCaseStudy() {
                 name: 'La Pelotera',
                 emoji: '🎉',
                 pct: '59%',
-                desc: 'The majority persona. Came for the social experience — wants to find friends, discover what\'s happening nearby, and move spontaneously between venues.',
+                desc: 'The majority. Came for the social experience — finds friends, discovers nearby events, moves spontaneously.',
                 needs: ['Find friends', 'Nearby events', 'Social sharing'],
                 color: accent,
               },
@@ -342,7 +340,7 @@ export default function ArtCityTourNavCaseStudy() {
                 name: 'El Desubicado',
                 emoji: '😅',
                 pct: '17%',
-                desc: 'Lost from the start. Needs the clearest possible interface — large tap targets, simple language, and immediate wayfinding with no assumptions about prior knowledge.',
+                desc: 'Lost from the start. Needs large tap targets, simple language, and immediate wayfinding.',
                 needs: ['Simple navigation', 'Nearest stop', 'Quick orientation'],
                 color: '#ddd6fe',
               },
@@ -543,17 +541,13 @@ export default function ArtCityTourNavCaseStudy() {
                 <div className="glass rounded-2xl p-6 border border-white/08">
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Why dark UI</p>
                   <p className="text-sm text-white/60 leading-relaxed">
-                    The event takes place at night. A dark background reduces screen glare in low-light environments,
-                    preserves night vision, and makes colored accents pop clearly — improving wayfinding speed
-                    in the specific context where the app is used.
+                    Nighttime event. Dark UI reduces glare, preserves night vision, and makes colored accents pop — improving wayfinding speed in context.
                   </p>
                 </div>
                 <div className="glass rounded-2xl p-6 border border-white/08">
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">Photography direction</p>
                   <p className="text-sm text-white/60 leading-relaxed">
-                    All venue photography shows places with human activity and urban life — not empty interiors.
-                    Helps users recognize a venue from a distance and sets expectations about the social
-                    experience waiting for them.
+                    Venues shown with people and activity — not empty interiors. Helps users recognize a venue from a distance.
                   </p>
                 </div>
               </div>
@@ -582,13 +576,10 @@ export default function ArtCityTourNavCaseStudy() {
                   What we didn&apos;t choose
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-4">
-                  Traffic analysis revealed that reporting (3%), adding favorites (3%), and viewing venue capacity (4%)
-                  represented only 20% of expected usage. Desirable features — but not primary interface priority.
+                  Reporting (3%), favorites (3%), venue capacity (4%) = 20% of usage. Desirable — but not primary.
                 </p>
                 <p className="text-white/60 leading-relaxed">
-                  Giving them primary navigation visibility would have cluttered the interface for a user who
-                  is in motion and needs immediate orientation. These features were included — but de-prioritized
-                  to secondary actions within their relevant sections.
+                  Cluttering the interface for a user in motion was not an option. All included — but de-prioritized to secondary actions.
                 </p>
               </div>
             </Reveal>
@@ -630,8 +621,7 @@ export default function ArtCityTourNavCaseStudy() {
                 <div className="glass rounded-xl p-4 border border-white/08">
                   <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Icon change after paper prototype</p>
                   <p className="text-xs text-white/50 leading-relaxed">
-                    The original filter icon was consistently confused with settings by paper prototype testers.
-                    Changed to a convention already established in iOS and Android — backed by user evidence, not preference.
+                    Original filter icon confused with settings by prototype testers. Replaced with the iOS/Android convention — evidence, not preference.
                   </p>
                 </div>
               </div>
@@ -656,13 +646,13 @@ export default function ArtCityTourNavCaseStudy() {
               {
                 value: '0',
                 label: 'Task Failures (High-Frequency)',
-                desc: 'Finding the nearest bus stop, getting directions, and checking bus times — zero failures across all paper prototype sessions.',
+                desc: 'Bus stop, directions, bus times — zero failures across all paper prototype sessions.',
                 color: '#34d399',
               },
               {
                 value: '1',
                 label: 'Tap — Critical Tasks',
-                desc: 'Bus stop location and preset route viewing both accessible with a single tap from the app\'s home state.',
+                desc: 'Bus stop and preset route — single tap from home state.',
                 color: accent,
               },
               {
