@@ -14,8 +14,8 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       initial="hidden"
       animate={isInView ? 'show' : 'hidden'}
       variants={{
-        hidden: { opacity: 0, y: 28 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] } },
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] } },
       }}
     >
       {children}
@@ -40,10 +40,10 @@ function PhaseStep({
     <div className="relative flex gap-6 pb-10">
       <div className="flex flex-col items-center">
         <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
-          style={{ background: `linear-gradient(135deg, ${accent}, #7c3aed)` }}>
+          style={{ background: 'rgba(255,255,255,0.1)' }}>
           {number}
         </div>
-        <div className="flex-1 w-px mt-2" style={{ background: `linear-gradient(to bottom, ${accent}50, transparent)` }} />
+        <div className="flex-1 w-px mt-2" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)' }} />
       </div>
       <div className="flex-1 pb-4">
         <h3 className="font-display font-bold text-white text-lg mb-3">{title}</h3>
@@ -70,10 +70,10 @@ export default function ArtCityTourNavCaseStudy() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
-  const accent = '#a78bfa'
+  const accent = '#888888'
 
   return (
-    <div className="relative min-h-screen bg-[#0d0d0d] text-slate-100 overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
 
       {/* Back nav */}
       <motion.div
@@ -84,22 +84,15 @@ export default function ArtCityTourNavCaseStudy() {
       >
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-white/60 hover:text-white transition-colors duration-200 group"
+          className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300"
         >
-          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
+          ← Back to work
         </Link>
       </motion.div>
 
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 inset-x-0 h-px" style={{ background: `linear-gradient(to right, transparent, ${accent}40, transparent)` }} />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-[120px]" style={{ background: `${accent}0c` }} />
-          <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] rounded-full blur-[80px]" style={{ background: '#7c3aed15' }} />
-        </div>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
           <div className="grid md:grid-cols-[1fr_340px] gap-10 items-end">
@@ -121,14 +114,7 @@ export default function ArtCityTourNavCaseStudy() {
                 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
               >
                 Art City Tour<br />
-                <span style={{
-                  background: `linear-gradient(135deg, ${accent}, #c4b5fd, #ddd6fe)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
-                  Navigation App
-                </span>
+                <span className="text-white/45">Navigation App</span>
               </motion.h1>
 
               <motion.p
@@ -244,12 +230,7 @@ export default function ArtCityTourNavCaseStudy() {
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-16">
               Research, planning,{' '}
-              <span style={{
-                background: `linear-gradient(135deg, ${accent}, #c4b5fd)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span className="text-white/45">
                 and validated UI
               </span>
             </h2>
@@ -700,8 +681,7 @@ export default function ArtCityTourNavCaseStudy() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold"
-                  style={{ background: `linear-gradient(135deg, ${accent}, #7c3aed)` }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
                 >
                   View Prototype
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -745,37 +725,22 @@ export default function ArtCityTourNavCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Related Project</p>
-              <Link href="/projects/sjo-turismo" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-                  style={{ background: 'linear-gradient(135deg, #ec4899, #f97316)' }}>
-                  🏛️
-                </div>
+              <Link href="/projects/sjo-turismo" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
                 <div>
-                  <p className="font-display font-bold text-white text-lg group-hover:text-pink-400 transition-colors">SJO Turismo App — Redesign</p>
+                  <p className="font-display font-bold text-white text-lg">SJO Turismo App — Redesign</p>
                   <p className="text-sm text-white/40">Same city, different challenge: redesigning the Centro Histórico tourism app</p>
                 </div>
-                <svg className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto"
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
+                <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <footer className="border-t border-white/08 bg-[#0a0a0a] py-8">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <span className="font-display font-bold text-lg">
-            <span style={{
-              background: 'linear-gradient(135deg, #a5b4fc, #c4b5fd, #f9a8d4)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>JP</span>
-            <span className="text-white/60 font-light"> Campos</span>
-          </span>
-          <p className="text-xs text-white/30">UX/UI Designer · Costa Rica</p>
+      <footer className="border-t border-white/[0.06] py-8 px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <p className="text-[13px] text-white/30 font-display tracking-wide">© 2026 JP Campos</p>
+          <Link href="/" className="text-[13px] text-white/30 hover:text-white/60 transition-colors">← Back to work</Link>
         </div>
       </footer>
     </div>

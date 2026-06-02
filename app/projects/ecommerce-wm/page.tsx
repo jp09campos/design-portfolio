@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 
-const ACCENT = '#fbbf24'
+const ACCENT = '#888888'
 
 /* ── Reveal wrapper ───────────────────────────────────────────── */
 function Reveal({
@@ -21,9 +21,9 @@ function Reveal({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -44,8 +44,8 @@ function PhaseStep({
   return (
     <div className="flex gap-5">
       <div
-        className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-black"
-        style={{ background: ACCENT }}
+        className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white/80"
+        style={{ background: 'rgba(255,255,255,0.1)' }}
       >
         {number}
       </div>
@@ -119,8 +119,8 @@ function CompetitorRow({
 }) {
   const pct = (parseFloat(score) / 10) * 100
   return (
-    <div className={`flex items-center gap-4 p-3 rounded-xl ${highlight ? 'bg-amber-500/10 border border-amber-500/20' : 'bg-white/03'}`}>
-      <span className={`text-sm font-medium w-36 flex-shrink-0 ${highlight ? 'text-amber-300' : 'text-white/70'}`}>
+    <div className={`flex items-center gap-4 p-3 rounded-xl ${highlight ? 'bg-white/[0.06] border border-white/[0.12]' : 'bg-white/03'}`}>
+      <span className={`text-sm font-medium w-36 flex-shrink-0 ${highlight ? 'text-white' : 'text-white/70'}`}>
         {name}
       </span>
       <div className="flex-1 bg-white/08 rounded-full h-2 overflow-hidden">
@@ -129,12 +129,12 @@ function CompetitorRow({
           style={{
             width: `${pct}%`,
             background: highlight
-              ? 'linear-gradient(90deg, #fbbf24, #f59e0b)'
+              ? 'rgba(255,255,255,0.5)'
               : 'rgba(255,255,255,0.25)',
           }}
         />
       </div>
-      <span className={`text-sm font-bold w-10 text-right ${highlight ? 'text-amber-400' : 'text-white/60'}`}>
+      <span className={`text-sm font-bold w-10 text-right ${highlight ? 'text-white/80' : 'text-white/60'}`}>
         {score}
       </span>
     </div>
@@ -144,18 +144,10 @@ function CompetitorRow({
 /* ═══════════════════════════════════════════════════════════════ */
 export default function EcommerceWMPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-white">
+    <main className="min-h-screen bg-[#080808] text-[#efefef]">
       {/* ── Back nav ── */}
       <div className="fixed top-6 left-6 z-50">
-        <Link
-          href="/#projects"
-          className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors glass px-4 py-2 rounded-full"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
-        </Link>
+        <Link href="/" className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300">← Back to work</Link>
       </div>
 
       {/* ══════════════════════════════════════════════════════════
@@ -163,10 +155,7 @@ export default function EcommerceWMPage() {
       ══════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden pt-32 pb-24 px-6">
         {/* ambient glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full opacity-12 blur-[120px] pointer-events-none"
-          style={{ background: `radial-gradient(circle, ${ACCENT}, transparent 70%)` }}
-        />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <div className="max-w-5xl mx-auto relative z-10">
           {/* category pill */}
@@ -192,16 +181,7 @@ export default function EcommerceWMPage() {
             className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6"
           >
             Ecommerce{' '}
-            <span
-              className="inline-block"
-              style={{
-                background: `linear-gradient(135deg, ${ACCENT}, #f59e0b, #fb923c)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Analysis WM
-            </span>
+            <span className="text-white/45">Analysis WM</span>
           </motion.h1>
 
           <motion.p
@@ -339,7 +319,7 @@ export default function EcommerceWMPage() {
                   <div className="bg-white/08 rounded-full h-2 overflow-hidden">
                     <div
                       className="h-full rounded-full"
-                      style={{ width: '56%', background: 'linear-gradient(90deg, #fbbf24, #f59e0b)' }}
+                      style={{ width: '56%', background: 'rgba(255,255,255,0.35)' }}
                     />
                   </div>
                 </div>
@@ -466,7 +446,7 @@ export default function EcommerceWMPage() {
                   className="h-full rounded-full"
                   style={{
                     width: '64%',
-                    background: 'linear-gradient(90deg, #fbbf24, #f59e0b)',
+                    background: 'rgba(255,255,255,0.35)',
                   }}
                 />
               </div>
@@ -635,7 +615,7 @@ export default function EcommerceWMPage() {
               </div>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="glass rounded-2xl p-6 border border-amber-500/20">
+              <div className="glass rounded-2xl p-6 border border-white/[0.08]">
                 <div className="text-xs font-semibold tracking-wider uppercase mb-4 flex items-center gap-2" style={{ color: ACCENT }}>
                   <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: ACCENT }} />
                   P1 — Short term
@@ -698,39 +678,24 @@ export default function EcommerceWMPage() {
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <div className="glass rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-06 pointer-events-none"
-                style={{
-                  background: `radial-gradient(ellipse at center, ${ACCENT} 0%, transparent 70%)`,
-                }}
-              />
-              <div className="relative z-10">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: ACCENT }}>
-                  Next Case Study
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  OneDesk — Walmart Centroamérica
-                </h2>
-                <p className="text-white/50 mb-8 max-w-xl mx-auto">
-                  A unified enterprise platform for warranty management, digital ticketing,
-                  and fiscal document consultation across 5 roles and 3 phases.
-                </p>
-                <Link
-                  href="/projects/onedesk"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm text-black transition-all hover:scale-105"
-                  style={{ background: `linear-gradient(135deg, ${ACCENT}, #f59e0b)` }}
-                >
-                  View Case Study
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </Link>
+            <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
+            <Link href="/projects/onedesk" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
+              <div>
+                <p className="font-display font-bold text-white text-lg">OneDesk — Walmart Centroamérica</p>
+                <p className="text-sm text-white/40">Enterprise UX · Warranty Management · Internal Tools</p>
               </div>
-            </div>
+              <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
+            </Link>
           </Reveal>
         </div>
       </section>
+
+      <footer className="border-t border-white/[0.06] py-8 px-6">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <p className="text-[13px] text-white/30 font-display tracking-wide">© 2026 JP Campos</p>
+          <Link href="/" className="text-[13px] text-white/30 hover:text-white/60 transition-colors">← Back to work</Link>
+        </div>
+      </footer>
     </main>
   )
 }

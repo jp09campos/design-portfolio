@@ -14,8 +14,8 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       initial="hidden"
       animate={isInView ? 'show' : 'hidden'}
       variants={{
-        hidden: { opacity: 0, y: 28 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] } },
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] } },
       }}
     >
       {children}
@@ -41,10 +41,10 @@ export default function OneDeskCaseStudy() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
-  const accent = '#60a5fa'
+  const accent = '#888888'
 
   return (
-    <div className="relative min-h-screen bg-[#0d0d0d] text-slate-100 overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
 
       {/* Back nav */}
       <motion.div
@@ -55,22 +55,15 @@ export default function OneDeskCaseStudy() {
       >
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-white/60 hover:text-white transition-colors duration-200 group"
+          className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300"
         >
-          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
+          ← Back to work
         </Link>
       </motion.div>
 
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 inset-x-0 h-px" style={{ background: `linear-gradient(to right, transparent, ${accent}40, transparent)` }} />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-[120px]" style={{ background: `${accent}10` }} />
-          <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] rounded-full blur-[80px]" style={{ background: '#1e3a5f18' }} />
-        </div>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
           <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 items-end">
@@ -92,12 +85,7 @@ export default function OneDeskCaseStudy() {
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
           >
             OneDesk<br />
-            <span style={{
-              background: `linear-gradient(135deg, ${accent}, #93c5fd, #bfdbfe)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="text-white/45">
               Portal Unificado
             </span>
           </motion.h1>
@@ -299,14 +287,7 @@ export default function OneDeskCaseStudy() {
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">
               Five practices,{' '}
-              <span style={{
-                background: `linear-gradient(135deg, ${accent}, #93c5fd)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                one validated system
-              </span>
+              <span className="text-white/45">one validated system</span>
             </h2>
           </Reveal>
 
@@ -370,7 +351,7 @@ export default function OneDeskCaseStudy() {
             {/* Module 1 */}
             <Reveal>
               <div className="glass rounded-3xl border border-white/08 overflow-hidden">
-                <div className="h-1" style={{ background: `linear-gradient(to right, ${accent}, #93c5fd)` }} />
+                <div className="h-px bg-white/[0.1]" />
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
                     <div>
@@ -408,7 +389,7 @@ export default function OneDeskCaseStudy() {
             {/* Module 2 */}
             <Reveal delay={0.05}>
               <div className="glass rounded-3xl border border-white/08 overflow-hidden">
-                <div className="h-1" style={{ background: 'linear-gradient(to right, #10b981, #34d399)' }} />
+                <div className="h-px bg-white/[0.1]" />
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
                     <div>
@@ -448,7 +429,7 @@ export default function OneDeskCaseStudy() {
             {/* Module 3 */}
             <Reveal delay={0.1}>
               <div className="glass rounded-3xl border border-white/08 overflow-hidden">
-                <div className="h-1" style={{ background: 'linear-gradient(to right, #ec4899, #f472b6)' }} />
+                <div className="h-px bg-white/[0.1]" />
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
                     <div>
@@ -631,13 +612,9 @@ export default function OneDeskCaseStudy() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-semibold"
-                  style={{ background: `linear-gradient(135deg, ${accent}, #3b82f6)` }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
                 >
-                  Get in touch
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  Get in touch →
                 </Link>
                 <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08">
                   Back to portfolio
@@ -649,37 +626,22 @@ export default function OneDeskCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-              <Link href="/projects/cecoapp" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-                  style={{ background: 'linear-gradient(135deg, #6366f1, #7c3aed)' }}>
-                  📱
-                </div>
+              <Link href="/projects/cecoapp" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
                 <div>
-                  <p className="font-display font-bold text-white text-lg group-hover:text-indigo-400 transition-colors">CECOApp</p>
+                  <p className="font-display font-bold text-white text-lg">CECOApp</p>
                   <p className="text-sm text-white/40">Mobile UX · Product Design · E-commerce</p>
                 </div>
-                <svg className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto"
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
+                <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <footer className="border-t border-white/08 bg-[#0a0a0a] py-8">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <span className="font-display font-bold text-lg">
-            <span style={{
-              background: 'linear-gradient(135deg, #a5b4fc, #c4b5fd, #f9a8d4)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>JP</span>
-            <span className="text-white/60 font-light"> Campos</span>
-          </span>
-          <p className="text-xs text-white/30">UX/UI Designer · Costa Rica</p>
+      <footer className="border-t border-white/[0.06] py-8 px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <p className="text-[13px] text-white/30 font-display tracking-wide">© 2026 JP Campos</p>
+          <Link href="/" className="text-[13px] text-white/30 hover:text-white/60 transition-colors">← Back to work</Link>
         </div>
       </footer>
     </div>
