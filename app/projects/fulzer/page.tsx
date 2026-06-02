@@ -97,80 +97,87 @@ export default function FulzerCaseStudy() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <div className="grid md:grid-cols-[1fr_420px] gap-10 items-end">
-          <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="w-8 h-px" style={{ background: accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2021</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Graduation Project · TEC</span>
-          </motion.div>
+          <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <span className="w-8 h-px" style={{ background: accent }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2021</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Graduation Project · TEC</span>
+              </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-          >
-            Fulzer<br />
-            <span className="text-white/45">
-              Food Truck Design
-            </span>
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+              >
+                Fulzer<br />
+                <span className="text-white/45">
+                  Food Truck Design
+                </span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/50 text-lg mb-8 max-w-2xl"
-          >
-            Graduation project in Industrial Design Engineering — an adaptive stainless steel
-            furniture system for food trucks in Costa Rica, co-developed with Fulzer to solve
-            ergonomic, spatial, and operational challenges in mobile kitchens.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-white/50 text-lg mb-8 max-w-2xl"
+              >
+                Graduation project in Industrial Design Engineering — an adaptive stainless steel
+                furniture system for food trucks in Costa Rica, co-developed with Fulzer to solve
+                ergonomic, spatial, and operational challenges in mobile kitchens.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap gap-3 mb-10"
-          >
-            {['Industrial Design', 'Ergonomics (RULA)', 'Modular System', 'User Research', 'Journey Mapping', 'Fulzer · CR'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap gap-3 mb-10"
+              >
+                {['Industrial Design', 'Ergonomics (RULA)', 'Modular System', 'User Research', 'Journey Mapping', 'Fulzer · CR'].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
-          >
-            {[
-              { value: '7', label: 'Food Trucks Studied' },
-              { value: '49 cm', label: 'Narrowest Aisle Found' },
-              { value: '~100 cm', label: 'Post-Design Aisle Width' },
-              { value: 'RULA', label: 'Ergonomic Method' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.55 }}
-            className="hidden md:block self-end pb-4"
-          >
-            <div className="bg-white rounded-2xl p-6 overflow-hidden">
-              <Image src="/fulzer-media-files/graphic-1.svg" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-2 gap-4"
+              >
+                {[
+                  { value: '7', label: 'Food Trucks Studied' },
+                  { value: '49 cm', label: 'Narrowest Aisle Found' },
+                  { value: '~100 cm', label: 'Post-Design Aisle Width' },
+                  { value: 'RULA', label: 'Ergonomic Method' },
+                ].map((stat) => (
+                  <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
+                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Hero image — mockup-5 at 3/4 width */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="hidden md:flex justify-center items-end self-end pb-4"
+            >
+              <Image
+                src="/fulzer-media-files/mockup-5.jpg"
+                alt="Fulzer food truck"
+                width={1200}
+                height={900}
+                className="w-full max-w-none h-auto"
+                priority
+              />
+            </motion.div>
           </div>
         </motion.div>
       </section>
@@ -210,6 +217,12 @@ export default function FulzerCaseStudy() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={0.2}>
+            <div className="mt-10 bg-white rounded-2xl p-6 overflow-hidden">
+              <Image src="/fulzer-media-files/graphic-1.svg" alt="Fulzer food truck design overview" width={1200} height={900} className="w-full h-auto" />
+            </div>
+          </Reveal>
         </div>
       </section>
 
