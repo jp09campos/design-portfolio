@@ -97,7 +97,7 @@ export default function FulzerCaseStudy() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
+          <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-start">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ export default function FulzerCaseStudy() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.55 }}
-              className="hidden md:flex justify-center items-end self-end pb-4"
+              className="hidden md:flex justify-center items-start self-start"
             >
               <Image
                 src="/fulzer-media-files/mockup-5.jpg"
