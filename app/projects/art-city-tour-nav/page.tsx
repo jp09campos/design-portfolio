@@ -672,7 +672,7 @@ export default function ArtCityTourNavCaseStudy() {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
                   See the full project
                 </h2>
-                <p className="text-white/50 text-sm">Interactive prototypes and design system live on Figma · Screens on Behance.</p>
+                <p className="text-white/50 text-sm">Interactive prototype live on Figma · Screens on Behance.</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <motion.a
@@ -688,21 +688,7 @@ export default function ArtCityTourNavCaseStudy() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </motion.a>
-                <motion.a
-                  href="https://www.figma.com/proto/zusgQ4eURnNd6pO2uDUT83/Design-System-Final--Copy-?node-id=383-29509&p=f&t=krXKfOFeMBmPAFEA-1&scaling=scale-down&content-scaling=fixed&page-id=81%3A723&starting-point-node-id=383%3A29509"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm font-semibold text-white/80 hover:text-white border transition-colors"
-                  style={{ borderColor: `${accent}40` }}
-                >
-                  View Design System
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </motion.a>
-                <motion.a
+<motion.a
                   href="https://www.behance.net/josecamposdesigner"
                   target="_blank"
                   rel="noopener noreferrer"
