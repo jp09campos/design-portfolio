@@ -713,8 +713,8 @@ export default function ArtCityTourNavCaseStudy() {
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
               <Link href="/projects/art-city-tour" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
                 <div>
-                  <p className="font-display font-bold text-white text-lg">Art City Tour — Maps Design</p>
-                  <p className="text-sm text-white/40">Mobile UX · Design System · Tourism</p>
+                  <p className="font-display font-bold text-white text-lg">SJO Turismo App — Redesign</p>
+                  <p className="text-sm text-white/40">Mobile UX · UX Research · Tourism</p>
                 </div>
                 <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
               </Link>
