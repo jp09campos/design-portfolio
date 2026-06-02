@@ -2,20 +2,10 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { PROJECTS } from '@/lib/data'
 
 const EASE = [0.16, 1, 0.3, 1] as const
-
-// Map project ids → preview images
-const PROJECT_PREVIEWS: Record<string, string> = {
-  'onedesk':          '/onedesk-walmart-media-files/mockup-1.png',
-  'cecoapp':          '/cecoapp-media-files/mockup-1.png',
-  'art-city-tour':    '/sjo-turismo-media-files/mockup-1.png',
-  'art-city-tour-nav':'/art-city-tour-media-files/mockup-1.png',
-  'fulzer':           '/fulzer-media-files/graphic-1.png',
-}
 
 function ProjectRow({
   project,
@@ -25,24 +15,11 @@ function ProjectRow({
   index: number
 }) {
   const [hovered, setHovered] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const rowRef = useRef<HTMLDivElement>(null)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!rowRef.current) return
-    const rect = rowRef.current.getBoundingClientRect()
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
-  }
-
-  const previewSrc = PROJECT_PREVIEWS[project.id]
 
   return (
     <div
-      ref={rowRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
-      className="relative"
     >
       <Link href={`/projects/${project.id}`}>
         <motion.div
@@ -93,33 +70,6 @@ function ProjectRow({
           <span className="md:hidden text-white/25 text-sm shrink-0">→</span>
         </motion.div>
       </Link>
-
-      {/* Floating image preview — xl only */}
-      <AnimatePresence>
-        {hovered && previewSrc && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 6 }}
-            transition={{ duration: 0.28, ease: EASE }}
-            className="hidden xl:block absolute pointer-events-none z-30"
-            style={{
-              left: mousePos.x + 24,
-              top: mousePos.y - 90,
-            }}
-          >
-            <div className="w-72 h-44 rounded-xl overflow-hidden border border-white/[0.09] shadow-2xl shadow-black/60">
-              <Image
-                src={previewSrc}
-                alt={project.title}
-                fill
-                className="object-cover"
-                sizes="288px"
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }

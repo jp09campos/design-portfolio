@@ -716,10 +716,10 @@ export default function EcommerceWMPage() {
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-            <Link href="/projects/onedesk" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
+            <Link href="/projects/fulzer" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
               <div>
-                <p className="font-display font-bold text-white text-lg">OneDesk — Walmart Centroamérica</p>
-                <p className="text-sm text-white/40">Enterprise UX · Warranty Management · Internal Tools</p>
+                <p className="font-display font-bold text-white text-lg">Fulzer — Food Truck Design</p>
+                <p className="text-sm text-white/40">Industrial Design · Ergonomics · Product Design</p>
               </div>
               <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
             </Link>
