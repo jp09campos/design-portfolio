@@ -673,6 +673,43 @@ export default function EcommerceWMPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
+          NDA NOTICE
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div
+              className="rounded-3xl p-10 border"
+              style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.07)' }}
+            >
+              <div className="flex items-start gap-6">
+                <div
+                  className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mt-0.5"
+                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/40">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="font-display text-xl font-semibold text-white mb-3">
+                    Protected under NDA
+                  </h2>
+                  <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
+                    Due to legal and privacy arrangements established in the Walmart employment contract,
+                    the full research report, session recordings, raw data, and internal analysis
+                    documentation cannot be shared publicly. The findings presented on this page
+                    represent a curated summary approved for portfolio use.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
           CTA — Next project
       ══════════════════════════════════════════════════════════ */}
       <section className="py-24 px-6">

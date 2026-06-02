@@ -1,9 +1,17 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
+
+const EASE = [0.16, 1, 0.3, 1] as const
+
+// Gallery images: mockup-4 through mockup-12
+const GALLERY_IMAGES = Array.from({ length: 9 }, (_, i) => ({
+  src: `/onedesk-walmart-media-files/mockup-${i + 4}.png`,
+  alt: `OneDesk screen ${i + 4}`,
+}))
 
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -15,7 +23,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       animate={isInView ? 'show' : 'hidden'}
       variants={{
         hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] } },
+        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: EASE } },
       }}
     >
       {children}
@@ -23,15 +31,106 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
-function DecisionRow({ discarded, reason }: { discarded: string; reason: string }) {
+function Lightbox({
+  images,
+  activeIndex,
+  onClose,
+}: {
+  images: { src: string; alt: string }[]
+  activeIndex: number
+  onClose: () => void
+}) {
+  const [current, setCurrent] = useState(activeIndex)
+
+  const prev = useCallback(
+    () => setCurrent((i) => (i - 1 + images.length) % images.length),
+    [images.length],
+  )
+  const next = useCallback(
+    () => setCurrent((i) => (i + 1) % images.length),
+    [images.length],
+  )
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [prev, next, onClose])
+
   return (
-    <div className="grid grid-cols-2 gap-6 py-5 border-b border-white/06 text-sm last:border-0">
-      <div className="flex items-start gap-3">
-        <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-rose-500/60" />
-        <span className="text-white/60 leading-relaxed">{discarded}</span>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-xl flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl transition-colors"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      {/* Image container */}
+      <div
+        className="relative max-w-5xl w-full mx-6 md:mx-16"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.22, ease: EASE }}
+          >
+            <Image
+              src={images[current].src}
+              alt={images[current].alt}
+              width={1600}
+              height={900}
+              className="w-full h-auto"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Prev */}
+        <button
+          onClick={prev}
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/22 flex items-center justify-center text-white transition-colors"
+          aria-label="Previous"
+        >
+          ←
+        </button>
+
+        {/* Next */}
+        <button
+          onClick={next}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 hover:bg-white/22 flex items-center justify-center text-white transition-colors"
+          aria-label="Next"
+        >
+          →
+        </button>
+
+        {/* Counter */}
+        <p className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[12px] text-white/35 tabular-nums">
+          {current + 1} / {images.length}
+        </p>
       </div>
-      <span className="text-white/50 leading-relaxed">{reason}</span>
-    </div>
+    </motion.div>
   )
 }
 
@@ -41,10 +140,29 @@ export default function OneDeskCaseStudy() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
+  }
+
   const accent = '#888888'
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <Lightbox
+            images={GALLERY_IMAGES}
+            activeIndex={lightboxIndex}
+            onClose={() => setLightboxOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Back nav */}
       <motion.div
@@ -61,90 +179,99 @@ export default function OneDeskCaseStudy() {
         </Link>
       </motion.div>
 
-      {/* Hero */}
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }}
+        />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 items-end">
-          <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="w-8 h-px" style={{ background: accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2025</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Walmart Centroamérica</span>
-          </motion.div>
+          {/* 2-col grid: text left, larger mockup right */}
+          <div className="grid md:grid-cols-[1fr_1.8fr] gap-10 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <span className="w-8 h-px" style={{ background: accent }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2025</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Walmart Centroamérica</span>
+              </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-          >
-            OneDesk<br />
-            <span className="text-white/45">
-              Portal Unificado
-            </span>
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+              >
+                OneDesk<br />
+                <span className="text-white/45">Portal Unificado</span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/50 text-lg mb-8 max-w-2xl"
-          >
-            Unified enterprise platform for Walmart Central America — warranty lifecycle management,
-            digital ticket portal, and centralized fiscal document consultation under one ecosystem,
-            with 5 user roles with radically different permissions coexisting without friction.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-white/50 text-lg mb-8 max-w-xl"
+              >
+                Unified enterprise platform for Walmart Central America — warranty lifecycle management,
+                digital ticket portal, and centralized fiscal document consultation under one ecosystem,
+                with 5 user roles with radically different permissions coexisting without friction.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap gap-3 mb-10"
-          >
-            {['Enterprise UX', 'RBAC Design', 'Living Design System', 'HTML Prototyping', 'Multi-role UX', 'Walmart CA'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap gap-3 mb-10"
+              >
+                {['Enterprise UX', 'RBAC Design', 'Living Design System', 'HTML Prototyping', 'Multi-role UX', 'Walmart CA'].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
-          >
-            {[
-              { value: '3', label: 'Modules' },
-              { value: '5', label: 'User Roles' },
-              { value: '$434K', label: 'Yearly Savings Target' },
-              { value: '3', label: 'Phases' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.55 }}
-            className="hidden md:block self-end pb-4"
-          >
-            <div className="overflow-hidden">
-              <Image src="/onedesk-walmart-media-files/mockup-1.png" alt="OneDesk dashboard" width={1600} height={900} className="w-full h-auto" />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl"
+              >
+                {[
+                  { value: '3', label: 'Modules' },
+                  { value: '5', label: 'User Roles' },
+                  { value: '$434K', label: 'Yearly Savings Target' },
+                  { value: '3', label: 'Phases' },
+                ].map((stat) => (
+                  <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
+                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Hero mockup — larger column */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="self-end pb-4"
+            >
+              <Image
+                src="/onedesk-walmart-media-files/mockup-1.png"
+                alt="OneDesk dashboard"
+                width={1600}
+                height={900}
+                className="w-full h-auto"
+                priority
+              />
+            </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* Context */}
+      {/* ── Context ───────────────────────────────────────────────────── */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -153,7 +280,7 @@ export default function OneDeskCaseStudy() {
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-              Four critical problems across<br />Central America & Mexico
+              Four critical problems across<br />Central America &amp; Mexico
             </h2>
             <p className="text-white/60 leading-relaxed max-w-2xl mb-12">
               Fragmented warranty management, physical ticket printing, manual fiscal documents — three disconnected systems generating four compounding operational problems.
@@ -198,7 +325,10 @@ export default function OneDeskCaseStudy() {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-semibold text-white">{item.title}</h3>
-                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full" style={{ background: `${item.color}20`, color: item.color }}>
+                        <span
+                          className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
+                          style={{ background: `${item.color}20`, color: item.color }}
+                        >
                           {item.stat}
                         </span>
                       </div>
@@ -209,15 +339,23 @@ export default function OneDeskCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          {/* mockup-2 inline */}
           <Reveal delay={0.2}>
             <div className="mt-8">
-              <Image src="/onedesk-walmart-media-files/mockup-2.png" alt="OneDesk platform overview" width={1600} height={900} className="w-full h-auto" />
+              <Image
+                src="/onedesk-walmart-media-files/mockup-2.png"
+                alt="OneDesk platform overview"
+                width={1600}
+                height={900}
+                className="w-full h-auto"
+              />
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Challenge */}
+      {/* ── Challenge ─────────────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -265,7 +403,12 @@ export default function OneDeskCaseStudy() {
                       { role: 'SAC', desc: 'Warranty tracking and customer service' },
                     ].map((r) => (
                       <div key={r.role} className="flex items-center gap-3">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded" style={{ background: `${accent}15`, color: accent }}>{r.role}</span>
+                        <span
+                          className="text-xs font-bold px-2 py-0.5 rounded"
+                          style={{ background: `${accent}15`, color: accent }}
+                        >
+                          {r.role}
+                        </span>
                         <span className="text-xs text-white/40">{r.desc}</span>
                       </div>
                     ))}
@@ -277,7 +420,7 @@ export default function OneDeskCaseStudy() {
         </div>
       </section>
 
-      {/* Methodology */}
+      {/* ── Methodology ───────────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -331,7 +474,7 @@ export default function OneDeskCaseStudy() {
         </div>
       </section>
 
-      {/* Solution — 3 modules */}
+      {/* ── Solution — 3 modules ──────────────────────────────────────── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -375,12 +518,15 @@ export default function OneDeskCaseStudy() {
                       </div>
                     ))}
                   </div>
-                  <div className="grid md:grid-cols-3 gap-3 mt-6">
-                    {[3,4,5].map((n) => (
-                      <div key={n} className="overflow-hidden">
-                        <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
-                      </div>
-                    ))}
+                  {/* mockup-3 inline — single featured screen */}
+                  <div className="mt-6">
+                    <Image
+                      src="/onedesk-walmart-media-files/mockup-3.png"
+                      alt="OneDesk Portal de Garantías screen"
+                      width={1600}
+                      height={900}
+                      className="w-full h-auto"
+                    />
                   </div>
                 </div>
               </div>
@@ -415,13 +561,6 @@ export default function OneDeskCaseStudy() {
                       </div>
                     ))}
                   </div>
-                  <div className="grid md:grid-cols-3 gap-3 mt-6">
-                    {[6,7,8].map((n) => (
-                      <div key={n} className="overflow-hidden">
-                        <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </Reveal>
@@ -445,20 +584,13 @@ export default function OneDeskCaseStudy() {
                     {[
                       { title: 'Advanced Filters', desc: 'Filter by country, date range, store ID, and store name.' },
                       { title: 'Alert Banner', desc: 'Proactive compliance alerts — days without sending consolidated documents.' },
-                      { title: 'Bulk Selection & Download', desc: 'Direct PDF download (one PDF per document) with no format modal — friction removed where it doesn\'t apply.' },
+                      { title: 'Bulk Selection & Download', desc: "Direct PDF download (one PDF per document) with no format modal — friction removed where it doesn't apply." },
                       { title: 'Email Sending', desc: 'Same validated email flow as the ticket portal.' },
                       { title: 'Role-Restricted Access', desc: 'Restricted to Administrator and Consultant roles — store-level users have no access.' },
                     ].map((f) => (
                       <div key={f.title} className="rounded-xl p-4 border border-white/06 bg-white/[0.02]">
                         <p className="text-sm font-semibold text-white mb-1.5">{f.title}</p>
                         <p className="text-xs text-white/50 leading-relaxed">{f.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid md:grid-cols-3 gap-3 mt-6">
-                    {[9,10,11].map((n) => (
-                      <div key={n} className="overflow-hidden">
-                        <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
                       </div>
                     ))}
                   </div>
@@ -469,56 +601,52 @@ export default function OneDeskCaseStudy() {
         </div>
       </section>
 
-      {/* Decisions */}
+      {/* ── Masonry Gallery — mockup-4 through mockup-12 ──────────────── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Design Decisions</span>
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              What we didn&apos;t choose — and why
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">
+              Full screen library
             </h2>
-            <p className="text-white/50 text-sm max-w-xl mb-10 leading-relaxed">
-              Five evaluated alternatives — each discarded for a specific reason.
+            <p className="text-white/50 text-sm max-w-xl mb-12 leading-relaxed">
+              All screens across the three modules. Click any image to explore at full resolution.
             </p>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="glass rounded-2xl border border-white/08 overflow-hidden">
-              <div className="grid grid-cols-2 gap-6 px-6 py-3 border-b border-white/06 text-xs font-semibold tracking-widest uppercase">
-                <span className="text-rose-400">Discarded Alternative</span>
-                <span style={{ color: accent }}>Reason</span>
+          <div
+            style={{ columns: 3, columnGap: '15px' }}
+            className="[column-count:2] md:[column-count:3]"
+          >
+            {GALLERY_IMAGES.map((img, i) => (
+              <div
+                key={img.src}
+                style={{ marginBottom: '15px', breakInside: 'avoid', display: 'inline-block', width: '100%' }}
+              >
+                <motion.button
+                  onClick={() => openLightbox(i)}
+                  className="w-full block cursor-zoom-in group"
+                  whileHover={{ opacity: 0.85 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    width={1600}
+                    height={900}
+                    className="w-full h-auto"
+                  />
+                </motion.button>
               </div>
-              <div className="px-6">
-                <DecisionRow
-                  discarded="Format selection modal in Docs Fiscales (Consolidated PDF vs. Individual)"
-                  reason="In Docs Fiscales it's always one PDF per document — the selection was unnecessary friction. Kept only in Tickets where format choice actually applies."
-                />
-                <DecisionRow
-                  discarded="Country and Store inside the filter drawer"
-                  reason="Moving them to the topbar keeps them always visible, reducing steps for the most-used filter pair. The drawer was reserved for secondary filters."
-                />
-                <DecisionRow
-                  discarded="'Add' button in the SLA Totals table (Admin)"
-                  reason="The correct flow is editing existing rows, not creating new ones. The button generated confusion about the data model."
-                />
-                <DecisionRow
-                  discarded="Global 'Pending' badge for all countries when editing one stage"
-                  reason="A change in CR should not affect the GT or HN display. Implemented per-country pending tracking for specifically affected countries."
-                />
-                <DecisionRow
-                  discarded="Loading spinner on text search (per keystroke)"
-                  reason="For real-time search a 1.3s delay creates friction. The spinner is reserved for 'Apply Filters' which simulates a backend query."
-                />
-              </div>
-            </div>
-          </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Impact */}
+      {/* ── Impact ────────────────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -590,33 +718,40 @@ export default function OneDeskCaseStudy() {
               </div>
             </Reveal>
           </div>
-          <Reveal delay={0.15}>
-            <div className="mt-8">
-              <Image src="/onedesk-walmart-media-files/mockup-12.png" alt="OneDesk interface" width={1600} height={900} className="w-full h-auto" />
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── NDA Notice ────────────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/08">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-              <div>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                  Want to see the full prototype?
+            <div className="flex flex-col md:flex-row items-start gap-8">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Prototype Access</span>
+                </div>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
+                  Protected under NDA
                 </h2>
-                <p className="text-white/50 text-sm">Available upon request — reach out directly.</p>
+                <p className="text-white/50 text-sm leading-relaxed max-w-xl">
+                  Due to legal and privacy arrangements established in the Walmart employment contract,
+                  the interactive prototype, internal system documentation, and live environment
+                  cannot be shared publicly. The design process, methodology, and outcomes
+                  documented in this case study represent what can be disclosed.
+                </p>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 md:pt-12">
                 <Link
                   href="/#contact"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
                 >
                   Get in touch →
                 </Link>
-                <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08">
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08"
+                >
                   Back to portfolio
                 </Link>
               </div>
@@ -626,7 +761,10 @@ export default function OneDeskCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-              <Link href="/projects/cecoapp" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
+              <Link
+                href="/projects/cecoapp"
+                className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors"
+              >
                 <div>
                   <p className="font-display font-bold text-white text-lg">CECOApp</p>
                   <p className="text-sm text-white/40">Mobile UX · Product Design · E-commerce</p>
