@@ -168,7 +168,7 @@ export default function FulzerCaseStudy() {
             className="hidden md:block self-end pb-4"
           >
             <div className="overflow-hidden">
-              <Image src="/fulzer-media-files/graphic-1.png" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
+              <Image src="/fulzer-media-files/graphic-1.svg" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
             </div>
           </motion.div>
           </div>
@@ -205,7 +205,7 @@ export default function FulzerCaseStudy() {
                   </p>
                 </div>
                 <div className="">
-                  <Image src="/fulzer-media-files/graphic-2.png" alt="Fulzer RULA ergonomic analysis" width={1200} height={900} className="w-full h-auto" />
+                  <Image src="/fulzer-media-files/graphic-2.svg" alt="Fulzer RULA ergonomic analysis" width={1200} height={900} className="w-full h-auto" />
                 </div>
               </div>
             </Reveal>
@@ -272,7 +272,7 @@ export default function FulzerCaseStudy() {
           </div>
           <Reveal delay={0.3}>
             <div className="mt-8">
-              <Image src="/fulzer-media-files/graphic-3.png" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
+              <Image src="/fulzer-media-files/graphic-3.svg" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
         </div>
@@ -434,7 +434,7 @@ export default function FulzerCaseStudy() {
           <Reveal delay={0.15}>
             <div className="grid md:grid-cols-2 gap-4 mt-8">
               <div className="overflow-hidden">
-                <Image src="/fulzer-media-files/graphic-4.png" alt="Fulzer technical drawing" width={1200} height={900} className="w-full h-auto" />
+                <Image src="/fulzer-media-files/graphic-4.svg" alt="Fulzer technical drawing" width={1200} height={900} className="w-full h-auto" />
               </div>
               <div className="overflow-hidden">
                 <Image src="/fulzer-media-files/mockup-4.png" alt="Fulzer furniture prototype" width={1200} height={900} className="w-full h-auto" />
