@@ -927,20 +927,33 @@ export default function ArtCityTourCaseStudy() {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                  See the full design on Behance
+                  Explore the interactive prototype
                 </h2>
                 <p className="text-white/50 text-sm">
-                  Complete screens, design system, and prototype available on Behance.
+                  Complete flows, design system, and annotated specs — live on Figma.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
+                <motion.a
+                  href="https://www.figma.com/proto/zusgQ4eURnNd6pO2uDUT83/Design-System-Final--Copy-?node-id=383-29509&p=f&t=qJ0Xp1aH6JYYFmZn-1&scaling=scale-down&content-scaling=fixed&page-id=81%3A723&starting-point-node-id=383%3A29509"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
+                >
+                  View Prototype
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </motion.a>
                 <motion.a
                   href="https://www.behance.net/gallery/146062185/Art-City-Tour-Maps-design"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08"
                 >
                   View on Behance
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
