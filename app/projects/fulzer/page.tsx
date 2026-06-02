@@ -167,7 +167,7 @@ export default function FulzerCaseStudy() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="hidden md:block self-end pb-4"
           >
-            <div className="overflow-hidden">
+            <div className="bg-white rounded-2xl p-6 overflow-hidden">
               <Image src="/fulzer-media-files/graphic-1.svg" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
             </div>
           </motion.div>
@@ -204,7 +204,7 @@ export default function FulzerCaseStudy() {
                     and real manufacturing restrictions?&rdquo;
                   </p>
                 </div>
-                <div className="">
+                <div className="bg-white rounded-2xl p-6 overflow-hidden">
                   <Image src="/fulzer-media-files/graphic-2.svg" alt="Fulzer RULA ergonomic analysis" width={1200} height={900} className="w-full h-auto" />
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function FulzerCaseStudy() {
             ))}
           </div>
           <Reveal delay={0.3}>
-            <div className="mt-8">
+            <div className="mt-8 bg-white rounded-2xl p-6 overflow-hidden">
               <Image src="/fulzer-media-files/graphic-3.svg" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
@@ -433,7 +433,7 @@ export default function FulzerCaseStudy() {
           </div>
           <Reveal delay={0.15}>
             <div className="grid md:grid-cols-2 gap-4 mt-8">
-              <div className="overflow-hidden">
+              <div className="bg-white rounded-2xl p-6 overflow-hidden">
                 <Image src="/fulzer-media-files/graphic-4.svg" alt="Fulzer technical drawing" width={1200} height={900} className="w-full h-auto" />
               </div>
               <div className="overflow-hidden">
