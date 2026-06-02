@@ -55,7 +55,7 @@ function PhaseStep({
             </li>
           ))}
         </ul>
-        <div className="glass rounded-xl p-4 border border-violet-500/20">
+        <div className="glass rounded-xl p-4 border border-white/[0.07]">
           <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: accent }}>Output</p>
           <p className="text-sm text-white/60 leading-relaxed">{result}</p>
         </div>
@@ -162,7 +162,7 @@ export default function ArtCityTourNavCaseStudy() {
               transition={{ duration: 0.9, delay: 0.55 }}
               className="hidden md:block self-end pb-4"
             >
-              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style={{ maxHeight: 560 }}>
+              <div className="overflow-hidden" style={{ maxHeight: 560 }}>
                 <Image src="/art-city-tour-media-files/mockup-1.png" alt="Art City Tour app screen" width={390} height={844} className="w-full h-auto" />
               </div>
             </motion.div>
@@ -387,7 +387,7 @@ export default function ArtCityTourNavCaseStudy() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                <div className="overflow-hidden">
                   <Image src="/art-city-tour-media-files/mockup-2.png" alt="Transport section" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
@@ -411,7 +411,7 @@ export default function ArtCityTourNavCaseStudy() {
                     ))}
                   </ul>
                 </div>
-                <div className="md:order-1 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                <div className="md:order-1 overflow-hidden">
                   <Image src="/art-city-tour-media-files/mockup-3.png" alt="Routes section" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
@@ -435,7 +435,7 @@ export default function ArtCityTourNavCaseStudy() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                <div className="overflow-hidden">
                   <Image src="/art-city-tour-media-files/mockup-4.png" alt="Friends section" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
@@ -536,7 +536,7 @@ export default function ArtCityTourNavCaseStudy() {
           </div>
 
           <Reveal delay={0.15}>
-            <div className="mt-10 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+            <div className="mt-10">
               <Image src="/art-city-tour-media-files/mockup-6-wcag.png" alt="WCAG accessibility validation" width={1200} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
@@ -654,7 +654,7 @@ export default function ArtCityTourNavCaseStudy() {
           </div>
 
           <Reveal delay={0.2}>
-            <div className="mt-12 rounded-2xl overflow-hidden border border-white/08 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+            <div className="mt-12">
               <Image src="/art-city-tour-media-files/mockup-5.png" alt="Art City Tour app overview" width={1200} height={844} className="w-full h-auto" />
             </div>
           </Reveal>

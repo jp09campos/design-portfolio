@@ -57,7 +57,7 @@ function PhaseStep({
             </li>
           ))}
         </ul>
-        <div className="glass rounded-xl p-4 border border-teal-500/20">
+        <div className="glass rounded-xl p-4 border border-white/[0.07]">
           <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: accent }}>Output</p>
           <p className="text-sm text-white/60 leading-relaxed">{result}</p>
         </div>
@@ -167,7 +167,7 @@ export default function FulzerCaseStudy() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="hidden md:block self-end pb-4"
           >
-            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
+            <div className="overflow-hidden">
               <Image src="/fulzer-media-files/graphic-1.png" alt="Fulzer food truck design" width={1200} height={900} className="w-full h-auto" />
             </div>
           </motion.div>
@@ -204,7 +204,7 @@ export default function FulzerCaseStudy() {
                     and real manufacturing restrictions?&rdquo;
                   </p>
                 </div>
-                <div className="rounded-3xl overflow-hidden border border-white/08 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
+                <div className="">
                   <Image src="/fulzer-media-files/graphic-2.png" alt="Fulzer RULA ergonomic analysis" width={1200} height={900} className="w-full h-auto" />
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function FulzerCaseStudy() {
             ))}
           </div>
           <Reveal delay={0.3}>
-            <div className="mt-8 rounded-3xl overflow-hidden border border-white/08">
+            <div className="mt-8">
               <Image src="/fulzer-media-files/graphic-3.png" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
@@ -433,10 +433,10 @@ export default function FulzerCaseStudy() {
           </div>
           <Reveal delay={0.15}>
             <div className="grid md:grid-cols-2 gap-4 mt-8">
-              <div className="rounded-3xl overflow-hidden border border-white/08">
+              <div className="overflow-hidden">
                 <Image src="/fulzer-media-files/graphic-4.png" alt="Fulzer technical drawing" width={1200} height={900} className="w-full h-auto" />
               </div>
-              <div className="rounded-3xl overflow-hidden border border-white/08">
+              <div className="overflow-hidden">
                 <Image src="/fulzer-media-files/mockup-4.png" alt="Fulzer furniture prototype" width={1200} height={900} className="w-full h-auto" />
               </div>
             </div>
@@ -590,14 +590,14 @@ export default function FulzerCaseStudy() {
           <Reveal delay={0.2}>
             <div className="grid md:grid-cols-3 gap-4 mt-8">
               {['mockup-1.jpg','mockup-2.jpg','mockup-3.jpg'].map((f, i) => (
-                <div key={f} className="rounded-2xl overflow-hidden border border-white/08">
+                <div key={f} className="overflow-hidden">
                   <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+1}`} width={1200} height={900} className="w-full h-auto" />
                 </div>
               ))}
             </div>
             <div className="grid md:grid-cols-2 gap-4 mt-4">
               {['mockup-5.jpg'].map((f, i) => (
-                <div key={f} className="rounded-2xl overflow-hidden border border-white/08">
+                <div key={f} className="overflow-hidden">
                   <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+4}`} width={1200} height={900} className="w-full h-auto" />
                 </div>
               ))}

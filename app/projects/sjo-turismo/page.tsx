@@ -223,7 +223,7 @@ export default function ArtCityTourCaseStudy() {
               transition={{ duration: 0.9, delay: 0.55 }}
               className="hidden md:block self-end pb-4"
             >
-              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style={{ maxHeight: 560 }}>
+              <div className="overflow-hidden" style={{ maxHeight: 560 }}>
                 <Image src="/sjo-turismo-media-files/mockup-1.png" alt="SJO Turismo app screen" width={390} height={844} className="w-full h-auto" />
               </div>
             </motion.div>
@@ -450,7 +450,7 @@ export default function ArtCityTourCaseStudy() {
           <Reveal delay={0.2}>
             <div className="grid md:grid-cols-3 gap-4 mt-8">
               {[1, 2, 3].map((n, i) => (
-                <div key={n} className="rounded-2xl overflow-hidden border border-white/08 bg-white/02">
+                <div key={n} className="overflow-hidden">
                   <Image src={`/sjo-turismo-media-files/mockup-${n}.png`} alt={`SJO Turismo screen ${n}`} width={390} height={844} className="w-full h-auto" />
                 </div>
               ))}

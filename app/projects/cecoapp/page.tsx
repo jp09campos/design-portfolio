@@ -158,7 +158,7 @@ export default function CECOAppCaseStudy() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="hidden md:block self-end pb-4"
           >
-            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style={{ maxHeight: 560 }}>
+            <div className="overflow-hidden" style={{ maxHeight: 560 }}>
               <Image src="/cecoapp-media-files/mockup-1.png" alt="CECOApp app screen" width={390} height={844} className="w-full h-auto" />
             </div>
           </motion.div>
@@ -194,7 +194,7 @@ export default function CECOAppCaseStudy() {
                     active loyalty with the user?&rdquo;
                   </p>
                 </div>
-                <div className="rounded-3xl overflow-hidden border border-white/08 shadow-[0_24px_48px_rgba(0,0,0,0.4)]">
+                <div className="">
                   <Image src="/cecoapp-media-files/mockup-2.png" alt="CECOApp discovery screens" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
@@ -412,7 +412,7 @@ export default function CECOAppCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
               {[3,4,5,6].map((n) => (
-                <div key={n} className="rounded-2xl overflow-hidden border border-white/08">
+                <div key={n} className="overflow-hidden">
                   <Image src={`/cecoapp-media-files/mockup-${n}.png`} alt={`CECOApp screen ${n}`} width={390} height={844} className="w-full h-auto" />
                 </div>
               ))}

@@ -136,7 +136,7 @@ export default function OneDeskCaseStudy() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="hidden md:block self-end pb-4"
           >
-            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)]">
+            <div className="overflow-hidden">
               <Image src="/onedesk-walmart-media-files/mockup-1.png" alt="OneDesk dashboard" width={1600} height={900} className="w-full h-auto" />
             </div>
           </motion.div>
@@ -210,7 +210,7 @@ export default function OneDeskCaseStudy() {
             ))}
           </div>
           <Reveal delay={0.2}>
-            <div className="mt-8 rounded-3xl overflow-hidden border border-white/08 shadow-[0_24px_48px_rgba(0,0,0,0.3)]">
+            <div className="mt-8">
               <Image src="/onedesk-walmart-media-files/mockup-2.png" alt="OneDesk platform overview" width={1600} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
@@ -377,7 +377,7 @@ export default function OneDeskCaseStudy() {
                   </div>
                   <div className="grid md:grid-cols-3 gap-3 mt-6">
                     {[3,4,5].map((n) => (
-                      <div key={n} className="rounded-2xl overflow-hidden border border-white/08">
+                      <div key={n} className="overflow-hidden">
                         <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
                       </div>
                     ))}
@@ -417,7 +417,7 @@ export default function OneDeskCaseStudy() {
                   </div>
                   <div className="grid md:grid-cols-3 gap-3 mt-6">
                     {[6,7,8].map((n) => (
-                      <div key={n} className="rounded-2xl overflow-hidden border border-white/08">
+                      <div key={n} className="overflow-hidden">
                         <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
                       </div>
                     ))}
@@ -457,7 +457,7 @@ export default function OneDeskCaseStudy() {
                   </div>
                   <div className="grid md:grid-cols-3 gap-3 mt-6">
                     {[9,10,11].map((n) => (
-                      <div key={n} className="rounded-2xl overflow-hidden border border-white/08">
+                      <div key={n} className="overflow-hidden">
                         <Image src={`/onedesk-walmart-media-files/mockup-${n}.png`} alt={`OneDesk screen ${n}`} width={1600} height={900} className="w-full h-auto" />
                       </div>
                     ))}
@@ -591,7 +591,7 @@ export default function OneDeskCaseStudy() {
             </Reveal>
           </div>
           <Reveal delay={0.15}>
-            <div className="mt-8 rounded-3xl overflow-hidden border border-white/08">
+            <div className="mt-8">
               <Image src="/onedesk-walmart-media-files/mockup-12.png" alt="OneDesk interface" width={1600} height={900} className="w-full h-auto" />
             </div>
           </Reveal>
