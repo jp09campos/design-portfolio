@@ -52,7 +52,7 @@ export default function ContactSection() {
               className="flex flex-col sm:flex-row gap-3"
             >
               <Link
-                href="mailto:jp09campos@gmail.com"
+                href="mailto:j.p11sequeira@gmail.com"
                 className="text-[13px] font-medium text-[#080808] bg-white px-6 py-3 rounded-full tracking-wide hover:bg-white/90 transition-colors duration-200 text-center"
               >
                 Send an email
@@ -79,10 +79,10 @@ export default function ContactSection() {
             <div className="border-b border-white/[0.07] pb-6">
               <p className="text-[11px] tracking-[0.16em] uppercase text-white/20 mb-2">Email</p>
               <Link
-                href="mailto:jp09campos@gmail.com"
+                href="mailto:j.p11sequeira@gmail.com"
                 className="text-[15px] text-white/60 hover:text-white transition-colors duration-300 link-underline"
               >
-                jp09campos@gmail.com
+                j.p11sequeira@gmail.com
               </Link>
             </div>
 

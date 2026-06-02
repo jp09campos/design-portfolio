@@ -55,7 +55,7 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href="mailto:jp09campos@gmail.com"
+              href="mailto:j.p11sequeira@gmail.com"
               className="text-[13px] font-medium text-[#080808] bg-white px-4 py-2 rounded-full tracking-wide hover:bg-white/90 transition-colors duration-200"
             >
               Hire me
@@ -118,7 +118,7 @@ export default function Navbar() {
                 className="pt-4"
               >
                 <Link
-                  href="mailto:jp09campos@gmail.com"
+                  href="mailto:j.p11sequeira@gmail.com"
                   onClick={() => setMobileOpen(false)}
                   className="inline-block text-[13px] font-medium text-[#080808] bg-white px-6 py-3 rounded-full tracking-wide"
                 >
