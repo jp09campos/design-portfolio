@@ -106,7 +106,7 @@ export default function FulzerCaseStudy() {
               >
                 <span className="w-8 h-px" style={{ background: accent }} />
                 <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2021</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2023</span>
                 <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Graduation Project · TEC</span>
               </motion.div>
 

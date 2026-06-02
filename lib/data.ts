@@ -232,9 +232,4 @@ export const SOCIAL_LINKS = [
     href: 'https://www.behance.net/josecamposdesigner',
     icon: 'behance',
   },
-  {
-    name: 'Twine',
-    href: 'https://www.twine.net/jp11sequeira4926/about',
-    icon: 'twine',
-  },
 ]

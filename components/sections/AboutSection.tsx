@@ -55,10 +55,10 @@ export default function AboutSection() {
           <div>
             <p className="text-[11px] tracking-[0.16em] uppercase text-white/25 mb-4">Bio</p>
             <p className="text-[14px] text-white/55 leading-relaxed">
-              UX/UI Designer and Industrial Design Engineer from Costa Rica. I work at the intersection of research, strategy, and craft — designing digital products people genuinely want to use.
+              Industrial Design Engineer and UX/UI Designer from Costa Rica, specializing in digital product design and brand identity. I help create intuitive experiences and cohesive brands that resonate with real people and achieve real goals.
             </p>
             <p className="text-[14px] text-white/55 leading-relaxed mt-4">
-              Currently designing enterprise tools at Walmart Global Tech. Formerly at Cecotec, Fulzer, and multiple early-stage startups.
+              Currently Product Designer at Walmart Central America. Formerly at Cecotec, Fulzer, and multiple early-stage startups — always collaborating closely and tailoring every solution to the project's unique vision.
             </p>
           </div>
 
@@ -76,10 +76,20 @@ export default function AboutSection() {
           {/* Education + availability */}
           <div>
             <p className="text-[11px] tracking-[0.16em] uppercase text-white/25 mb-4">Education</p>
-            <p className="text-[14px] text-white/55 leading-relaxed">
-              B.S. Industrial Design Engineering<br />
-              <span className="text-white/30">Universidad Veritas, Costa Rica</span>
-            </p>
+            <div className="space-y-4">
+              <div>
+                <p className="text-[14px] text-white/70 leading-snug">B.S. Industrial Design Engineering</p>
+                <p className="text-[13px] text-white/30 mt-0.5">Instituto Tecnológico de Costa Rica (TEC) · 2023</p>
+              </div>
+              <div>
+                <p className="text-[14px] text-white/70 leading-snug">Specialization in Creative UX/UI</p>
+                <p className="text-[13px] text-white/30 mt-0.5">LCI Veritas · 2024</p>
+              </div>
+              <div>
+                <p className="text-[14px] text-white/70 leading-snug">Master's in User Experience Design</p>
+                <p className="text-[13px] text-white/30 mt-0.5">UNIR · 2026</p>
+              </div>
+            </div>
             <div className="mt-6 pt-6 border-t border-white/[0.07]">
               <p className="text-[11px] tracking-[0.16em] uppercase text-white/25 mb-3">Availability</p>
               <div className="flex items-center gap-2">
