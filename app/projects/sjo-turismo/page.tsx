@@ -874,7 +874,7 @@ export default function ArtCityTourCaseStudy() {
                   See the full design
                 </h2>
                 <p className="text-white/50 text-sm">
-                  Interactive prototype on Figma · Complete screens and design system on Behance.
+                  Interactive prototype live on Figma.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -891,20 +891,7 @@ export default function ArtCityTourCaseStudy() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </motion.a>
-                <motion.a
-                  href="https://www.behance.net/gallery/146062185/Art-City-Tour-Maps-design"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08"
-                >
-                  View on Behance
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </motion.a>
-                <Link
+<Link
                   href="/"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08"
                 >
