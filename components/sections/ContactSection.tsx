@@ -58,7 +58,7 @@ export default function ContactSection() {
                 Send an email
               </Link>
               <Link
-                href="https://linkedin.com/in/jp-campos"
+                href="https://www.linkedin.com/in/jos%C3%A9-pablo-campos-sequeira-b0a9b11bb/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[13px] font-medium text-white/60 border border-white/20 px-6 py-3 rounded-full tracking-wide hover:text-white hover:border-white/40 transition-all duration-200 text-center"
