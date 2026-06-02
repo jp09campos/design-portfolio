@@ -1,11 +1,106 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
 
-/* ─── Animation helpers ───────────────────────────────────────────────────── */
+/* ── Gallery data ─────────────────────────────────────────────── */
+const GALLERY_IMAGES = [
+  { src: '/sjo-turismo-media-files/mockup-2.png', alt: 'SJO Turismo screen 2' },
+  { src: '/sjo-turismo-media-files/mockup-3.png', alt: 'SJO Turismo screen 3' },
+]
+
+/* ── Lightbox ─────────────────────────────────────────────────── */
+function Lightbox({
+  images,
+  activeIndex,
+  onClose,
+}: {
+  images: { src: string; alt: string }[]
+  activeIndex: number
+  onClose: () => void
+}) {
+  const [current, setCurrent] = useState(activeIndex)
+  const prev = useCallback(() => setCurrent(i => (i - 1 + images.length) % images.length), [images.length])
+  const next = useCallback(() => setCurrent(i => (i + 1) % images.length), [images.length])
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [prev, next, onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,0.92)' }}
+      onClick={onClose}
+    >
+      {/* Counter */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-xs text-white/40 tabular-nums tracking-widest">
+        {current + 1} / {images.length}
+      </div>
+
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-6 text-white/40 hover:text-white transition-colors text-2xl leading-none"
+      >
+        ×
+      </button>
+
+      {/* Image */}
+      <motion.div
+        key={current}
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.97 }}
+        transition={{ duration: 0.25 }}
+        className="relative max-w-xs sm:max-w-sm md:max-w-md w-full mx-6"
+        onClick={e => e.stopPropagation()}
+      >
+        <Image
+          src={images[current].src}
+          alt={images[current].alt}
+          width={390}
+          height={844}
+          className="w-full h-auto"
+        />
+      </motion.div>
+
+      {/* Prev */}
+      <button
+        onClick={e => { e.stopPropagation(); prev() }}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
+      >
+        ←
+      </button>
+
+      {/* Next */}
+      <button
+        onClick={e => { e.stopPropagation(); next() }}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
+      >
+        →
+      </button>
+    </motion.div>
+  )
+}
+
+/* ── Reveal ───────────────────────────────────────────────────── */
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
@@ -28,7 +123,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
-/* ─── Process step ────────────────────────────────────────────────────────── */
+/* ── PhaseStep ────────────────────────────────────────────────── */
 function PhaseStep({
   number,
   title,
@@ -40,6 +135,7 @@ function PhaseStep({
   activities: string[]
   result: string
 }) {
+  const accent = 'rgba(200,200,200,0.55)'
   return (
     <div className="relative flex gap-6 pb-10">
       <div className="flex flex-col items-center">
@@ -56,13 +152,13 @@ function PhaseStep({
         <ul className="space-y-2 mb-4">
           {activities.map((a, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-white/55">
-              <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: 'rgba(200,200,200,0.55)' }} />
+              <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: accent }} />
               {a}
             </li>
           ))}
         </ul>
         <div className="glass rounded-xl p-4 border border-white/[0.08]">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: 'rgba(200,200,200,0.55)' }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: accent }}>
             Result
           </p>
           <p className="text-sm text-white/60 leading-relaxed">{result}</p>
@@ -72,7 +168,7 @@ function PhaseStep({
   )
 }
 
-/* ─── Stat bar ────────────────────────────────────────────────────────────── */
+/* ── StatBar ──────────────────────────────────────────────────── */
 function StatBar({ label, pct }: { label: string; pct: number }) {
   return (
     <div className="flex items-center gap-3">
@@ -92,7 +188,7 @@ function StatBar({ label, pct }: { label: string; pct: number }) {
   )
 }
 
-/* ─── Comparison row ──────────────────────────────────────────────────────── */
+/* ── CompareRow ───────────────────────────────────────────────── */
 function CompareRow({
   task,
   apkTime,
@@ -114,20 +210,23 @@ function CompareRow({
   )
 }
 
-/* ─── Main page ───────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════ */
 export default function ArtCityTourCaseStudy() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
-  /* accent = neutralized to greyscale */
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const openLightbox = (i: number) => setLightboxIndex(i)
+  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
+
   const accent = 'rgba(200,200,200,0.55)'
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
 
-      {/* ── Back nav ──────────────────────────────────────────────────────── */}
+      {/* ── Back nav ── */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -142,15 +241,15 @@ export default function ArtCityTourCaseStudy() {
         </Link>
       </motion.div>
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
-        {/* Ambient glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <div className="grid md:grid-cols-[1fr_340px] gap-10 items-end">
+          <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
             <div>
-              {/* Label */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -166,7 +265,6 @@ export default function ArtCityTourCaseStudy() {
                 </span>
               </motion.div>
 
-              {/* Title */}
               <motion.h1
                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -176,7 +274,6 @@ export default function ArtCityTourCaseStudy() {
                 <span className="text-white/45">App Redesign</span>
               </motion.h1>
 
-              {/* Sub-title */}
               <motion.p
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -186,7 +283,6 @@ export default function ArtCityTourCaseStudy() {
                 a collaboration between the Instituto Tecnológico de Costa Rica and the Municipalidad de San José.
               </motion.p>
 
-              {/* Tags */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35 }}
@@ -199,11 +295,10 @@ export default function ArtCityTourCaseStudy() {
                 ))}
               </motion.div>
 
-              {/* Quick stats */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.45 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
+                className="grid grid-cols-2 gap-4"
               >
                 {[
                   { value: '3', label: 'Design Stages' },
@@ -218,20 +313,29 @@ export default function ArtCityTourCaseStudy() {
                 ))}
               </motion.div>
             </div>
+
+            {/* Hero mockup — 3/4 width, full height */}
             <motion.div
               initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.55 }}
-              className="hidden md:block self-end pb-4"
+              className="hidden md:flex justify-center items-end self-end pb-4"
             >
-              <div className="overflow-hidden" style={{ maxHeight: 560 }}>
-                <Image src="/sjo-turismo-media-files/mockup-1.png" alt="SJO Turismo app screen" width={390} height={844} className="w-full h-auto" />
-              </div>
+              <Image
+                src="/sjo-turismo-media-files/mockup-1.png"
+                alt="SJO Turismo app screen"
+                width={390}
+                height={844}
+                className="w-full max-w-none h-auto"
+                priority
+              />
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* ── Overview ──────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          OVERVIEW
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -294,7 +398,9 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── Design Stages ─────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          DESIGN STAGES
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -355,7 +461,9 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── Color system ──────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          DESIGN SYSTEM
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -368,7 +476,7 @@ export default function ArtCityTourCaseStudy() {
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* Methodology */}
             <Reveal delay={0.05}>
               <div className="glass rounded-2xl p-6 border border-white/08 h-full">
@@ -414,52 +522,13 @@ export default function ArtCityTourCaseStudy() {
                 </div>
               </div>
             </Reveal>
-
-            {/* Navigation */}
-            <Reveal delay={0.15}>
-              <div className="glass rounded-2xl p-6 border border-white/08 h-full">
-                <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">
-                  Navigation Structure
-                </p>
-                <p className="text-xs text-white/40 mb-5 leading-relaxed">
-                  Material Design navigation bar with 5 primary tabs. Content categories
-                  ordered by user relevance scores from 120-person survey.
-                </p>
-                <div className="space-y-2">
-                  {[
-                    { section: 'Descubrir', desc: 'Parks, boulevards, museums, galleries, heritage, art', icon: '⌂' },
-                    { section: 'Actividades', desc: 'GAM Cultural calendar', icon: '⊞' },
-                    { section: 'Rutas', desc: 'SJO routes, custom routes, nearby', icon: 'Y' },
-                    { section: 'Movilidad', desc: 'Bike rental, train stops', icon: '◎' },
-                    { section: 'Ajustes', desc: 'Profile, favorites, settings, help', icon: '⚙' },
-                  ].map((item) => (
-                    <div key={item.section} className="flex items-start gap-3">
-                      <span className="text-xs w-5 mt-0.5" style={{ color: accent }}>{item.icon}</span>
-                      <div>
-                        <p className="text-xs font-semibold text-white/80">{item.section}</p>
-                        <p className="text-xs text-white/35">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
           </div>
-
-          {/* Screens */}
-          <Reveal delay={0.2}>
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
-              {[1, 2, 3].map((n, i) => (
-                <div key={n} className="overflow-hidden">
-                  <Image src={`/sjo-turismo-media-files/mockup-${n}.png`} alt={`SJO Turismo screen ${n}`} width={390} height={844} className="w-full h-auto" />
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* ── Usability Results ─────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          USABILITY RESULTS
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -480,7 +549,6 @@ export default function ArtCityTourCaseStudy() {
 
           <Reveal delay={0.1}>
             <div className="glass rounded-2xl border border-white/08 overflow-hidden mb-8">
-              {/* Header */}
               <div className="grid grid-cols-4 gap-4 px-6 py-3 border-b border-white/06 text-xs font-semibold tracking-widest uppercase">
                 <span className="text-white/30">Task</span>
                 <span className="text-rose-400">APK avg time</span>
@@ -488,30 +556,10 @@ export default function ArtCityTourCaseStudy() {
                 <span style={{ color: accent }}>Improvement</span>
               </div>
               <div className="px-6">
-                <CompareRow
-                  task="Find Museo Nacional info"
-                  apkTime="24 sec"
-                  protoTime="13 sec"
-                  improvement="−46%"
-                />
-                <CompareRow
-                  task="Find Teatro El Triciclo"
-                  apkTime="55 sec"
-                  protoTime="51 sec"
-                  improvement="−7%"
-                />
-                <CompareRow
-                  task="Visit Favorites tab"
-                  apkTime="N/A"
-                  protoTime="7 sec"
-                  improvement="New feature"
-                />
-                <CompareRow
-                  task="Download Museos route"
-                  apkTime="2 min 44 sec"
-                  protoTime="1 min 9 sec"
-                  improvement="−58%"
-                />
+                <CompareRow task="Find Museo Nacional info" apkTime="24 sec" protoTime="13 sec" improvement="−46%" />
+                <CompareRow task="Find Teatro El Triciclo" apkTime="55 sec" protoTime="51 sec" improvement="−7%" />
+                <CompareRow task="Visit Favorites tab" apkTime="N/A" protoTime="7 sec" improvement="New feature" />
+                <CompareRow task="Download Museos route" apkTime="2 min 44 sec" protoTime="1 min 9 sec" improvement="−58%" />
               </div>
             </div>
           </Reveal>
@@ -537,7 +585,9 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── Category prioritization ───────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          CATEGORY PRIORITIZATION
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -644,7 +694,9 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── II Semester handoff ───────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          II SEMESTER HANDOFF
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -711,7 +763,9 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── Reflection ────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          REFLECTION
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -768,7 +822,49 @@ export default function ArtCityTourCaseStudy() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          GALLERY
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-10">
+              All screens
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <div style={{ columns: 2, columnGap: '15px' }}>
+              {GALLERY_IMAGES.map((img, i) => (
+                <div key={img.src} style={{ marginBottom: '15px', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
+                  <motion.button
+                    onClick={() => openLightbox(i)}
+                    className="w-full block cursor-zoom-in group"
+                    whileHover={{ opacity: 0.85 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={390}
+                      height={844}
+                      className="w-full h-auto"
+                    />
+                  </motion.button>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          CTA
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/08">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -818,7 +914,6 @@ export default function ArtCityTourCaseStudy() {
             </div>
           </Reveal>
 
-          {/* Next project */}
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
@@ -840,6 +935,17 @@ export default function ArtCityTourCaseStudy() {
           <Link href="/" className="text-[13px] text-white/30 hover:text-white/60 transition-colors">← Back to work</Link>
         </div>
       </footer>
+
+      {/* ── Lightbox ── */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            images={GALLERY_IMAGES}
+            activeIndex={lightboxIndex}
+            onClose={closeLightbox}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
