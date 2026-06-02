@@ -1,10 +1,106 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
 
+/* ── Gallery data ─────────────────────────────────────────────── */
+const GALLERY_IMAGES = Array.from({ length: 6 }, (_, i) => ({
+  src: `/cecoapp-media-files/mockup-${i + 2}.png`,
+  alt: `CECOApp screen ${i + 2}`,
+}))
+
+/* ── Lightbox ─────────────────────────────────────────────────── */
+function Lightbox({
+  images,
+  activeIndex,
+  onClose,
+}: {
+  images: { src: string; alt: string }[]
+  activeIndex: number
+  onClose: () => void
+}) {
+  const [current, setCurrent] = useState(activeIndex)
+  const prev = useCallback(() => setCurrent(i => (i - 1 + images.length) % images.length), [images.length])
+  const next = useCallback(() => setCurrent(i => (i + 1) % images.length), [images.length])
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [prev, next, onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,0.92)' }}
+      onClick={onClose}
+    >
+      {/* Counter */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-xs text-white/40 tabular-nums tracking-widest">
+        {current + 1} / {images.length}
+      </div>
+
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-6 text-white/40 hover:text-white transition-colors text-2xl leading-none"
+      >
+        ×
+      </button>
+
+      {/* Image */}
+      <motion.div
+        key={current}
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.97 }}
+        transition={{ duration: 0.25 }}
+        className="relative max-w-xs sm:max-w-sm md:max-w-md w-full mx-6"
+        onClick={e => e.stopPropagation()}
+      >
+        <Image
+          src={images[current].src}
+          alt={images[current].alt}
+          width={390}
+          height={844}
+          className="w-full h-auto"
+        />
+      </motion.div>
+
+      {/* Prev */}
+      <button
+        onClick={e => { e.stopPropagation(); prev() }}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
+      >
+        ←
+      </button>
+
+      {/* Next */}
+      <button
+        onClick={e => { e.stopPropagation(); next() }}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
+      >
+        →
+      </button>
+    </motion.div>
+  )
+}
+
+/* ── Reveal ───────────────────────────────────────────────────── */
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
@@ -23,6 +119,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
+/* ── PhaseStep ────────────────────────────────────────────────── */
 function PhaseStep({
   number,
   title,
@@ -64,11 +161,16 @@ function PhaseStep({
   )
 }
 
+/* ═══════════════════════════════════════════════════════════════ */
 export default function CECOAppCaseStudy() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const openLightbox = (i: number) => setLightboxIndex(i)
+  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
 
   const accent = '#888888'
 
@@ -85,125 +187,129 @@ export default function CECOAppCaseStudy() {
         <Link href="/" className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300">← Back to work</Link>
       </motion.div>
 
-      {/* Hero */}
+      {/* ══════════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
-          <div className="grid md:grid-cols-[1fr_340px] gap-10 items-end">
-          <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-center gap-4 mb-6"
-          >
-            <span className="w-8 h-px" style={{ background: accent }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2023</span>
-            <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Cecotec · Spain</span>
-          </motion.div>
+          <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <span className="w-8 h-px" style={{ background: accent }} />
+                <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2023</span>
+                <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Cecotec · Spain</span>
+              </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-          >
-            CECOApp<br />
-            <span className="text-white/45">Mobile E-commerce</span>
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+              >
+                CECOApp<br />
+                <span className="text-white/45">Mobile E-commerce</span>
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/50 text-lg mb-8 max-w-2xl"
-          >
-            Designing the first mobile app for Cecotec — a home appliances brand generating €510M in annual
-            sales with zero mobile presence. Bridging the digital gap through research, prototyping, and
-            user validation.
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-white/50 text-lg mb-8 max-w-2xl"
+              >
+                Designing the first mobile app for Cecotec — a home appliances brand generating €510M in annual
+                sales with zero mobile presence. Bridging the digital gap through research, prototyping, and
+                user validation.
+              </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap gap-3 mb-10"
-          >
-            {['Mobile UX', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing', 'Card Sorting'].map((tag) => (
-              <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="flex flex-wrap gap-3 mb-10"
+              >
+                {['Mobile UX', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing', 'Card Sorting'].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
-          >
-            {[
-              { value: '€510M', label: 'Annual Sales (No App)' },
-              { value: '7', label: 'Usability Testers' },
-              { value: '4', label: 'Product Pillars' },
-              { value: '3', label: 'User Personas' },
-            ].map((stat) => (
-              <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
-                <p className="text-xs text-white/40 mt-1">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.55 }}
-            className="hidden md:block self-end pb-4"
-          >
-            <div className="overflow-hidden" style={{ maxHeight: 560 }}>
-              <Image src="/cecoapp-media-files/mockup-1.png" alt="CECOApp app screen" width={390} height={844} className="w-full h-auto" />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="grid grid-cols-2 gap-4"
+              >
+                {[
+                  { value: '€510M', label: 'Annual Sales (No App)' },
+                  { value: '7', label: 'Usability Testers' },
+                  { value: '4', label: 'Product Pillars' },
+                  { value: '3', label: 'User Personas' },
+                ].map((stat) => (
+                  <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
+                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="text-xs text-white/40 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Hero mockup — 3/4 width, full height */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55 }}
+              className="hidden md:flex justify-center items-end self-end pb-4"
+            >
+              <Image
+                src="/cecoapp-media-files/mockup-1.png"
+                alt="CECOApp app screen"
+                width={390}
+                height={844}
+                className="w-full max-w-none h-auto"
+                priority
+              />
+            </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* Context */}
+      {/* ══════════════════════════════════════════════════════════
+          CONTEXT
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <Reveal>
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-6 h-px" style={{ background: accent }} />
-                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
-                </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                  Closing the mobile gap for a<br />€510M brand
-                </h2>
-                <p className="text-white/60 leading-relaxed mb-4">
-                  €510M in annual sales with zero mobile presence. M-commerce was already the dominant channel — Cecotec had no way to reach users on mobile.
-                </p>
-              </div>
-            </Reveal>
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              Closing the mobile gap for a<br />€510M brand
+            </h2>
+            <p className="text-white/60 leading-relaxed mb-4 max-w-2xl">
+              €510M in annual sales with zero mobile presence. M-commerce was already the dominant channel — Cecotec had no way to reach users on mobile.
+            </p>
+          </Reveal>
 
-            <Reveal delay={0.15}>
-              <div className="space-y-4">
-                <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">The Challenge</p>
-                  <p className="text-white/70 text-sm leading-relaxed italic">
-                    &ldquo;How do you design a first mobile app that doesn&apos;t just replicate the web — but builds
-                    active loyalty with the user?&rdquo;
-                  </p>
-                </div>
-                <div className="">
-                  <Image src="/cecoapp-media-files/mockup-2.png" alt="CECOApp discovery screens" width={390} height={844} className="w-full h-auto" />
-                </div>
-              </div>
-            </Reveal>
-          </div>
+          <Reveal delay={0.1}>
+            <div className="glass rounded-2xl p-6 border border-white/08 max-w-2xl mt-6">
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">The Challenge</p>
+              <p className="text-white/70 text-sm leading-relaxed italic">
+                &ldquo;How do you design a first mobile app that doesn&apos;t just replicate the web — but builds
+                active loyalty with the user?&rdquo;
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Methodology */}
+      {/* ══════════════════════════════════════════════════════════
+          METHODOLOGY
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -281,7 +387,9 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* User Personas */}
+      {/* ══════════════════════════════════════════════════════════
+          USER PERSONAS
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -340,7 +448,9 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* Solution — 4 Pillars */}
+      {/* ══════════════════════════════════════════════════════════
+          SOLUTION — 4 PILLARS
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -407,43 +517,12 @@ export default function CECOAppCaseStudy() {
               </Reveal>
             ))}
           </div>
-
-          {/* Screens */}
-          <Reveal delay={0.1}>
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[3,4,5,6].map((n) => (
-                <div key={n} className="overflow-hidden">
-                  <Image src={`/cecoapp-media-files/mockup-${n}.png`} alt={`CECOApp screen ${n}`} width={390} height={844} className="w-full h-auto" />
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          {/* Navigation structure */}
-          <Reveal delay={0.15}>
-            <div className="mt-8 glass rounded-2xl p-6 border border-white/08">
-              <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Navigation Structure</p>
-              <p className="text-sm text-white/50 mb-5 leading-relaxed">
-                Tab bar with 3 content categories validated by card sorting — not replicated from the web structure.
-              </p>
-              <div className="grid md:grid-cols-3 gap-4">
-                {[
-                  { tab: 'Hogar & Electrodomésticos', icon: '🏠', desc: 'Major appliances, kitchen, cleaning, climate' },
-                  { tab: 'Fitness & Cuidado Personal', icon: '💪', desc: 'Sports equipment, personal care, health' },
-                  { tab: 'Mantenimiento del Hogar', icon: '🔨', desc: 'Tools, garden, DIY, maintenance' },
-                ].map((item) => (
-                  <div key={item.tab} className="rounded-xl p-4 bg-white/03 border border-white/06">
-                    <span className="text-2xl mb-2 block">{item.icon}</span>
-                    <p className="text-sm font-semibold text-white mb-1">{item.tab}</p>
-                    <p className="text-xs text-white/40">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* What we didn't choose */}
+      {/* ══════════════════════════════════════════════════════════
+          DESIGN DECISION
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -500,7 +579,9 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* Impact */}
+      {/* ══════════════════════════════════════════════════════════
+          IMPACT
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -544,7 +625,49 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ══════════════════════════════════════════════════════════
+          GALLERY
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: accent }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-10">
+              All screens
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <div style={{ columns: 3, columnGap: '15px' }} className="[column-count:2] md:[column-count:3]">
+              {GALLERY_IMAGES.map((img, i) => (
+                <div key={img.src} style={{ marginBottom: '15px', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
+                  <motion.button
+                    onClick={() => openLightbox(i)}
+                    className="w-full block cursor-zoom-in group"
+                    whileHover={{ opacity: 0.85 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={390}
+                      height={844}
+                      className="w-full h-auto"
+                    />
+                  </motion.button>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          CTA
+      ══════════════════════════════════════════════════════════ */}
       <section className="py-20 border-t border-white/08">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -597,6 +720,17 @@ export default function CECOAppCaseStudy() {
           <Link href="/" className="text-[13px] text-white/30 hover:text-white/60 transition-colors">← Back to work</Link>
         </div>
       </footer>
+
+      {/* ── Lightbox ── */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            images={GALLERY_IMAGES}
+            activeIndex={lightboxIndex}
+            onClose={closeLightbox}
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
