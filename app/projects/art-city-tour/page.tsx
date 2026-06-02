@@ -108,7 +108,7 @@ function PhaseStep({
           ))}
         </ul>
         <div className="glass rounded-xl p-4 border border-white/[0.08]">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: accent }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-1.5 text-white/40">
             Result
           </p>
           <p className="text-sm text-white/60 leading-relaxed">{result}</p>
