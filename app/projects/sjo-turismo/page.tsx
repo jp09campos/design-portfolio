@@ -6,8 +6,13 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
 
 const GALLERY_IMAGES = [
+  { src: '/sjo-turismo-media-files/mockup-1.png', alt: 'SJO Turismo screen 1' },
   { src: '/sjo-turismo-media-files/mockup-2.png', alt: 'SJO Turismo screen 2' },
   { src: '/sjo-turismo-media-files/mockup-3.png', alt: 'SJO Turismo screen 3' },
+  { src: '/sjo-turismo-media-files/mockup-4.png', alt: 'SJO Turismo screen 4' },
+  { src: '/sjo-turismo-media-files/mockup-5.png', alt: 'SJO Turismo screen 5' },
+  { src: '/sjo-turismo-media-files/mockup-6.png', alt: 'SJO Turismo screen 6' },
+  { src: '/sjo-turismo-media-files/mockup-7.png', alt: 'SJO Turismo screen 7' },
 ]
 
 function Lightbox({ images, activeIndex, onClose }: { images: { src: string; alt: string }[]; activeIndex: number; onClose: () => void }) {
@@ -390,7 +395,7 @@ export default function SJOTurismoCaseStudy() {
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-10">All screens</h2>
           </Reveal>
           <Reveal delay={0.05}>
-            <div style={{ columns: 2, columnGap: '15px' }}>
+            <div className="columns-2 md:columns-3 lg:columns-4" style={{ columnGap: '15px' }}>
               {GALLERY_IMAGES.map((img, i) => (
                 <div key={img.src} style={{ marginBottom: '15px', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
                   <motion.button onClick={() => openLightbox(i)} className="w-full block cursor-zoom-in group" whileHover={{ opacity: 0.85 }} transition={{ duration: 0.2 }}>
