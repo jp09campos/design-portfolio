@@ -164,7 +164,6 @@ function CompareRow({
 export default function ArtCityTourCaseStudy() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
   /* accent = neutralized for premium minimal aesthetic */
@@ -189,7 +188,7 @@ export default function ArtCityTourCaseStudy() {
         {/* Ambient glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
-        <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
+        <motion.div style={{ y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}

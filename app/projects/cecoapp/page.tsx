@@ -165,7 +165,6 @@ function PhaseStep({
 export default function CECOAppCaseStudy() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
@@ -193,7 +192,7 @@ export default function CECOAppCaseStudy() {
       <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
-        <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
+        <motion.div style={{ y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
           <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
             <div>
               <motion.div

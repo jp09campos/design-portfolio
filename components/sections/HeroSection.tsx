@@ -18,8 +18,6 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   })
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  const opacity   = useTransform(scrollYProgress, [0, 0.55], [1, 0])
-
   return (
     <section
       id="home"
@@ -31,7 +29,7 @@ export default function HeroSection() {
 
       {/* Bottom-aligned content */}
       <motion.div
-        style={{ y: contentY, opacity }}
+        style={{ y: contentY }}
         className="relative z-10 mt-auto pb-16 md:pb-20 px-6 max-w-7xl mx-auto w-full"
       >
         {/* Role label */}
