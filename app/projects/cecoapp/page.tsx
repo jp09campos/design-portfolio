@@ -5,22 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
 
-/* ── Gallery data ─────────────────────────────────────────────── */
 const GALLERY_IMAGES = Array.from({ length: 6 }, (_, i) => ({
   src: `/cecoapp-media-files/mockup-${i + 2}.png`,
   alt: `CECOApp screen ${i + 2}`,
 }))
 
-/* ── Lightbox ─────────────────────────────────────────────────── */
-function Lightbox({
-  images,
-  activeIndex,
-  onClose,
-}: {
-  images: { src: string; alt: string }[]
-  activeIndex: number
-  onClose: () => void
-}) {
+function Lightbox({ images, activeIndex, onClose }: { images: { src: string; alt: string }[]; activeIndex: number; onClose: () => void }) {
   const [current, setCurrent] = useState(activeIndex)
   const prev = useCallback(() => setCurrent(i => (i - 1 + images.length) % images.length), [images.length])
   const next = useCallback(() => setCurrent(i => (i + 1) % images.length), [images.length])
@@ -33,113 +23,40 @@ function Lightbox({
     }
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = ''
-    }
+    return () => { document.removeEventListener('keydown', handleKey); document.body.style.overflow = '' }
   }, [prev, next, onClose])
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center"
-      style={{ background: 'rgba(0,0,0,0.92)' }}
-      onClick={onClose}
-    >
-      {/* Counter */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-xs text-white/40 tabular-nums tracking-widest">
-        {current + 1} / {images.length}
-      </div>
-
-      {/* Close */}
-      <button
-        onClick={onClose}
-        className="absolute top-5 right-6 text-white/40 hover:text-white transition-colors text-2xl leading-none"
-      >
-        ×
-      </button>
-
-      {/* Image */}
-      <motion.div
-        key={current}
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.97 }}
-        transition={{ duration: 0.25 }}
-        className="relative max-w-xs sm:max-w-sm md:max-w-md w-full mx-6"
-        onClick={e => e.stopPropagation()}
-      >
-        <Image
-          src={images[current].src}
-          alt={images[current].alt}
-          width={390}
-          height={844}
-          className="w-full h-auto"
-        />
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.92)' }} onClick={onClose}>
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-xs text-white/40 tabular-nums tracking-widest">{current + 1} / {images.length}</div>
+      <button onClick={onClose} className="absolute top-5 right-6 text-white/40 hover:text-white transition-colors text-2xl leading-none">×</button>
+      <motion.div key={current} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }}
+        transition={{ duration: 0.25 }} className="relative max-w-xs sm:max-w-sm md:max-w-md w-full mx-6" onClick={e => e.stopPropagation()}>
+        <Image src={images[current].src} alt={images[current].alt} width={390} height={844} className="w-full h-auto" />
       </motion.div>
-
-      {/* Prev */}
-      <button
-        onClick={e => { e.stopPropagation(); prev() }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
-      >
-        ←
-      </button>
-
-      {/* Next */}
-      <button
-        onClick={e => { e.stopPropagation(); next() }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors"
-      >
-        →
-      </button>
+      <button onClick={e => { e.stopPropagation(); prev() }} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors">←</button>
+      <button onClick={e => { e.stopPropagation(); next() }} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-colors">→</button>
     </motion.div>
   )
 }
 
-/* ── Reveal ───────────────────────────────────────────────────── */
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? 'show' : 'hidden'}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] } },
-      }}
-    >
+    <motion.div ref={ref} initial="hidden" animate={isInView ? 'show' : 'hidden'}
+      variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] } } }}>
       {children}
     </motion.div>
   )
 }
 
-/* ── PhaseStep ────────────────────────────────────────────────── */
-function PhaseStep({
-  number,
-  title,
-  activities,
-  result,
-  accent,
-}: {
-  number: string
-  title: string
-  activities: string[]
-  result: string
-  accent: string
-}) {
+function PhaseStep({ number, title, activities, result, accent }: { number: string; title: string; activities: string[]; result: string; accent: string }) {
   return (
     <div className="relative flex gap-6 pb-10">
       <div className="flex flex-col items-center">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
-          style={{ background: 'rgba(255,255,255,0.1)' }}>
-          {number}
-        </div>
+        <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ background: 'rgba(255,255,255,0.1)' }}>{number}</div>
         <div className="flex-1 w-px mt-2" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)' }} />
       </div>
       <div className="flex-1 pb-4">
@@ -161,87 +78,49 @@ function PhaseStep({
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════ */
 export default function CECOAppCaseStudy() {
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
-
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const openLightbox = (i: number) => setLightboxIndex(i)
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
 
   const accent = '#888888'
+  const highlight = '#0384D5'
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
 
       {/* Back nav */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-6 left-6 z-50"
-      >
+      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="fixed top-6 left-6 z-50">
         <Link href="/" className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white/80 transition-colors duration-300">← Back to work</Link>
       </motion.div>
 
-      {/* ══════════════════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+      {/* ── Hero ── */}
+      <section ref={heroRef} className="relative min-h-screen flex items-end pt-20 md:pt-0 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
-
         <motion.div style={{ y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
           <div className="grid md:grid-cols-[1fr_3fr] gap-10 items-end">
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex items-center gap-4 mb-6"
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="flex items-center gap-4 mb-6">
                 <span className="w-8 h-px" style={{ background: accent }} />
                 <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Case Study</span>
                 <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">2026</span>
                 <span className="text-xs text-white/30 px-2.5 py-1 rounded-full glass border border-white/08">Cecotec · Spain</span>
               </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
-              >
-                CECOApp<br />
-                <span className="text-white/45">Mobile E-commerce</span>
+              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6">
+                CECOApp<br /><span className="text-white/45">Mobile E-commerce</span>
               </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-white/50 text-lg mb-8 max-w-2xl"
-              >
-                Designing the first mobile app for Cecotec — a home appliances brand generating €510M in annual
-                sales with zero mobile presence. Bridging the digital gap through research, prototyping, and
-                user validation.
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-white/50 text-lg mb-8 max-w-2xl">
+                Designing the first mobile app for Cecotec — a home appliances brand with €510M in annual sales and zero mobile presence.
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.35 }}
-                className="flex flex-wrap gap-3 mb-10"
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="flex flex-wrap gap-3 mb-10">
                 {['Mobile UX', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing', 'Card Sorting'].map((tag) => (
-                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">
-                    {tag}
-                  </span>
+                  <span key={tag} className="px-3 py-1.5 rounded-full text-xs text-white/50 glass border border-white/08">{tag}</span>
                 ))}
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.45 }}
-                className="grid grid-cols-2 gap-4"
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }} className="grid grid-cols-2 gap-4">
                 {[
                   { value: '€510M', label: 'Annual Sales (No App)' },
                   { value: '7', label: 'Usability Testers' },
@@ -249,36 +128,20 @@ export default function CECOAppCaseStudy() {
                   { value: '3', label: 'User Personas' },
                 ].map((stat) => (
                   <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="font-display font-bold text-2xl" style={{ color: highlight }}>{stat.value}</p>
                     <p className="text-xs text-white/40 mt-1">{stat.label}</p>
                   </div>
                 ))}
               </motion.div>
             </div>
-
-            {/* Hero mockup — 3/4 width, full height */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.55 }}
-              className="hidden md:flex justify-center items-end self-end pb-4"
-            >
-              <Image
-                src="/cecoapp-media-files/mockup-1.png"
-                alt="CECOApp app screen"
-                width={390}
-                height={844}
-                className="w-full max-w-none h-auto"
-                priority
-              />
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.55 }} className="hidden md:flex justify-center items-end self-end pb-4">
+              <Image src="/cecoapp-media-files/mockup-1.png" alt="CECOApp app screen" width={390} height={844} className="w-full max-w-none h-auto" priority />
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          CONTEXT
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Context ── */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -286,29 +149,64 @@ export default function CECOAppCaseStudy() {
               <span className="w-6 h-px" style={{ background: accent }} />
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-              Closing the mobile gap for a<br />€510M brand
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+              Closing the mobile gap for a €510M brand
             </h2>
             <p className="text-white/60 leading-relaxed mb-4 max-w-2xl">
               €510M in annual sales with zero mobile presence. M-commerce was already the dominant channel — Cecotec had no way to reach users on mobile.
             </p>
           </Reveal>
-
           <Reveal delay={0.1}>
             <div className="glass rounded-2xl p-6 border border-white/08 max-w-2xl mt-6">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-3">The Challenge</p>
               <p className="text-white/70 text-sm leading-relaxed italic">
-                &ldquo;How do you design a first mobile app that doesn&apos;t just replicate the web — but builds
-                active loyalty with the user?&rdquo;
+                &ldquo;How do you design a first mobile app that doesn&apos;t just replicate the web — but builds active loyalty with the user?&rdquo;
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          METHODOLOGY
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Impact ── */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: highlight }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: highlight }}>Impact</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Results</h2>
+            <p className="text-white/50 text-sm max-w-xl mb-12 leading-relaxed">
+              A validated, dev-ready prototype grounded in real user behavior — not web assumptions.
+            </p>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {[
+              { value: '0', label: 'Unresolved Frictions', desc: 'Every hierarchy, accessibility, and CTA issue resolved before delivery.', color: '#34d399' },
+              { value: '7', label: 'Usability Testers', desc: 'Validated across all 3 personas — purchase, tracking, search, and CecoClips.', color: highlight },
+              { value: '4', label: 'Validated Flows', desc: 'Purchase, tracking, search, CecoClips — dev-ready with Atomic Design system.', color: '#c4b5fd' },
+            ].map((item, i) => (
+              <Reveal key={item.label} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08 text-center">
+                  <p className="font-display font-bold text-5xl md:text-6xl mb-2 leading-none" style={{ color: item.color }}>{item.value}</p>
+                  <p className="font-semibold text-white text-sm mb-2">{item.label}</p>
+                  <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={0.2}>
+            <div className="glass rounded-2xl p-6 border" style={{ borderColor: `${highlight}25` }}>
+              <p className="text-sm text-white/70 leading-relaxed">
+                <span style={{ color: highlight }} className="font-bold">Key insight: </span>
+                Card sorting showed mobile users group by lifestyle context — so the entire IA was rebuilt from scratch rather than copied from the web.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Methodology ── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -317,67 +215,48 @@ export default function CECOAppCaseStudy() {
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Double Diamond — Design Process</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-16">
-              Four phases,{' '}
-              <span className="text-white/45">one validated prototype</span>
+              Four phases, <span className="text-white/45">one validated prototype</span>
             </h2>
           </Reveal>
-
           <div className="max-w-2xl">
             <Reveal delay={0.05}>
-              <PhaseStep
-                number="01"
-                title="Discovery"
-                accent={accent}
+              <PhaseStep number="01" title="Discovery" accent={accent}
                 activities={[
-                  'Surveys and semi-structured interviews to map user behavior, purchase motivations, and emotional pain points',
-                  'Analysis of existing Cecotec web user journeys to identify mobile-specific value moments',
+                  'Surveys and semi-structured interviews to map user behavior, purchase motivations, and pain points',
+                  'Analysis of Cecotec web user journeys to identify mobile-specific value moments',
                   'Mapped the purchase cycle to find where a mobile app creates unique value over the web',
                 ]}
                 result="Mobile app adds unique value in reordering, tracking, and loyalty — not just a web port."
               />
             </Reveal>
-
             <Reveal delay={0.1}>
-              <PhaseStep
-                number="02"
-                title="Definition"
-                accent={accent}
+              <PhaseStep number="02" title="Definition" accent={accent}
                 activities={[
                   'Benchmarking against leading e-commerce apps (Amazon, Zalando, Leroy Merlin)',
-                  'Non-moderated card sorting to understand user mental models for category groupings',
-                  '3 card sorting groupings emerged: Home & Appliances, Fitness & Personal Care, Home Maintenance',
+                  'Non-moderated card sorting: 3 groupings emerged — Home & Appliances, Fitness & Personal Care, Home Maintenance',
                   'Definition of 3 user personas: Ejecutiva Exigente, Comprador Técnico, Usuario Tradicional',
                   'Feature prioritization matrix balancing user need, business value, and technical effort',
                 ]}
-                result="IA validated against real user mental models. 3 card-sorted navigation categories — not replicated from the web."
+                result="IA validated against real mental models — 3 card-sorted navigation categories, not replicated from the web."
               />
             </Reveal>
-
             <Reveal delay={0.15}>
-              <PhaseStep
-                number="03"
-                title="Development"
-                accent={accent}
+              <PhaseStep number="03" title="Development" accent={accent}
                 activities={[
                   'Low-fidelity wireframes for all primary flows',
                   'Atomic Design system: Atoms → Molecules → Organisms → Templates → Pages',
                   'High-fidelity prototype covering all 4 product pillars',
-                  'Interactive prototype built in Figma with real navigation flows',
                   'Accessibility and visual hierarchy review across all screens',
                 ]}
                 result="Complete high-fidelity prototype covering purchase, tracking, and CecoClips flows — ready for validation."
               />
             </Reveal>
-
             <Reveal delay={0.2}>
-              <PhaseStep
-                number="04"
-                title="Delivery"
-                accent={accent}
+              <PhaseStep number="04" title="Delivery" accent={accent}
                 activities={[
-                  'Moderated usability test with 7 participants across all 3 personas — covering purchase, tracking, and CecoClips flows',
-                  'Friction identified in visual hierarchy, accessibility, and key action prioritization — all resolved before delivery',
-                  'Final Atomic Design system delivered with annotated specs for development handoff',
+                  'Moderated usability test with 7 participants across all 3 personas',
+                  'Friction in hierarchy, accessibility, and key action prioritization — all resolved before delivery',
+                  'Final Atomic Design system with annotated specs for development handoff',
                 ]}
                 result="All identified frictions resolved before delivery. Zero open issues at handoff."
               />
@@ -386,9 +265,7 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          USER PERSONAS
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── User Personas ── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -396,34 +273,16 @@ export default function CECOAppCaseStudy() {
               <span className="w-6 h-px" style={{ background: accent }} />
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>User Personas</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">
-              Three profiles, one consistent experience
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Three profiles, one consistent experience</h2>
+            <p className="text-white/50 text-sm max-w-xl mb-12 leading-relaxed">
+              3 distinct personas drove every design decision — from tap target size to navigation depth.
+            </p>
           </Reveal>
-
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              {
-                name: 'Ejecutiva Exigente',
-                emoji: '👩‍💼',
-                desc: 'Busy professional. Judges the app by how fast she can reorder or track a delivery.',
-                priorities: ['Quick reorder', 'Order tracking', 'Clean UI'],
-                color: accent,
-              },
-              {
-                name: 'Comprador Técnico',
-                emoji: '🔧',
-                desc: 'Researches before buying. Needs complete specs, reviews, and comparison tools.',
-                priorities: ['Product details', 'Comparisons', 'Reviews'],
-                color: '#c4b5fd',
-              },
-              {
-                name: 'Usuario Tradicional',
-                emoji: '🧑‍🦳',
-                desc: 'Less experienced with mobile apps. Needs large tap targets, simple navigation, no surprises.',
-                priorities: ['Simple navigation', 'Accessibility', 'Clear CTAs'],
-                color: '#e9d5ff',
-              },
+              { name: 'Ejecutiva Exigente', emoji: '👩‍💼', desc: 'Busy professional. Judges the app by how fast she can reorder or track a delivery.', priorities: ['Quick reorder', 'Order tracking', 'Clean UI'], color: accent },
+              { name: 'Comprador Técnico', emoji: '🔧', desc: 'Researches before buying. Needs complete specs, reviews, and comparison tools.', priorities: ['Product details', 'Comparisons', 'Reviews'], color: '#c4b5fd' },
+              { name: 'Usuario Tradicional', emoji: '🧑‍🦳', desc: 'Less experienced with mobile. Needs large tap targets, simple navigation, no surprises.', priorities: ['Simple navigation', 'Accessibility', 'Clear CTAs'], color: '#e9d5ff' },
             ].map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <div className="glass rounded-2xl p-6 border border-white/08 h-full">
@@ -434,9 +293,7 @@ export default function CECOAppCaseStudy() {
                     <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-2">Priorities</p>
                     <div className="flex flex-wrap gap-2">
                       {p.priorities.map((pr) => (
-                        <span key={pr} className="px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: `${p.color}15`, color: p.color }}>
-                          {pr}
-                        </span>
+                        <span key={pr} className="px-2.5 py-1 rounded-full text-xs font-medium" style={{ background: `${p.color}15`, color: p.color }}>{pr}</span>
                       ))}
                     </div>
                   </div>
@@ -447,9 +304,7 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          SOLUTION — 4 PILLARS
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Solution ── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -457,53 +312,22 @@ export default function CECOAppCaseStudy() {
               <span className="w-6 h-px" style={{ background: accent }} />
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Solution</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              CECOApp — four pillars
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">CECOApp — four pillars</h2>
             <p className="text-white/50 text-sm max-w-xl mb-12 leading-relaxed">
-              The app was structured around four core pillars that address the full post-sale lifecycle,
-              from discovery through community.
+              Structured around four core pillars addressing the full lifecycle from discovery through community.
             </p>
           </Reveal>
-
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              {
-                number: '01',
-                title: 'Product Discovery',
-                desc: 'Personalized home feed, card-sorted category browsing, and smart search with filters.',
-                icon: '🔍',
-                color: accent,
-              },
-              {
-                number: '02',
-                title: 'Simple & Efficient Purchase',
-                desc: 'Streamlined checkout, saved addresses and payment methods, one-tap reorder.',
-                icon: '🛒',
-                color: '#c4b5fd',
-              },
-              {
-                number: '03',
-                title: 'Real-Time Order Tracking',
-                desc: 'Live status, estimated delivery, push notifications. No need to contact support.',
-                icon: '📦',
-                color: '#e9d5ff',
-              },
-              {
-                number: '04',
-                title: 'CecoClips',
-                desc: 'Short videos from real users showing products in use. Built for retention and loyalty.',
-                icon: '🎬',
-                color: '#f9a8d4',
-              },
+              { number: '01', title: 'Product Discovery', desc: 'Personalized home feed, card-sorted category browsing, and smart search with filters.', icon: '🔍', color: accent },
+              { number: '02', title: 'Simple & Efficient Purchase', desc: 'Streamlined checkout, saved addresses and payment methods, one-tap reorder.', icon: '🛒', color: '#c4b5fd' },
+              { number: '03', title: 'Real-Time Order Tracking', desc: 'Live status, estimated delivery, push notifications. No need to contact support.', icon: '📦', color: '#e9d5ff' },
+              { number: '04', title: 'CecoClips', desc: 'Short videos from real users showing products in use. Built for retention and loyalty.', icon: '🎬', color: '#f9a8d4' },
             ].map((pillar, i) => (
               <Reveal key={pillar.title} delay={i * 0.08}>
                 <div className="glass rounded-2xl p-6 border border-white/08">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0"
-                      style={{ background: `${pillar.color}15` }}>
-                      {pillar.icon}
-                    </div>
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0" style={{ background: `${pillar.color}15` }}>{pillar.icon}</div>
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs font-bold" style={{ color: pillar.color }}>{pillar.number}</span>
@@ -519,9 +343,7 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          DESIGN DECISION
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Design Decision ── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
@@ -531,18 +353,11 @@ export default function CECOAppCaseStudy() {
                   <span className="w-6 h-px" style={{ background: accent }} />
                   <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Design Decision</span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                  What we didn&apos;t choose
-                </h2>
-                <p className="text-white/60 leading-relaxed mb-4">
-                  Replicating the web structure was the fastest path — and was explicitly rejected.
-                </p>
-                <p className="text-white/60 leading-relaxed">
-                  Card sorting showed mobile mental models differ from desktop. Clarity over consistency.
-                </p>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">What we didn&apos;t choose</h2>
+                <p className="text-white/60 leading-relaxed mb-4">Replicating the web structure was the fastest path — and was explicitly rejected.</p>
+                <p className="text-white/60 leading-relaxed">Card sorting showed mobile mental models differ from desktop. Clarity over consistency.</p>
               </div>
             </Reveal>
-
             <Reveal delay={0.1}>
               <div className="space-y-4">
                 <div className="glass rounded-2xl p-6 border border-rose-500/20">
@@ -550,22 +365,15 @@ export default function CECOAppCaseStudy() {
                     <span className="w-2 h-2 rounded-full bg-rose-500/60 shrink-0" />
                     <p className="text-sm font-semibold text-rose-400">Discarded</p>
                   </div>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    Mirror the existing Cecotec web navigation structure for the mobile app architecture.
-                  </p>
+                  <p className="text-sm text-white/60 leading-relaxed">Mirror the existing Cecotec web navigation structure for the mobile app architecture.</p>
                 </div>
-
                 <div className="glass rounded-2xl p-6 border border-emerald-500/20">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="w-2 h-2 rounded-full bg-emerald-500/60 shrink-0" />
                     <p className="text-sm font-semibold text-emerald-400">Chosen</p>
                   </div>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    Design the information architecture from scratch based on the 3 groupings that emerged from
-                    non-moderated card sorting with real users — aligned with mobile mental models, not desktop ones.
-                  </p>
+                  <p className="text-sm text-white/60 leading-relaxed">Design IA from scratch based on 3 groupings from non-moderated card sorting with real users.</p>
                 </div>
-
                 <div className="glass rounded-xl p-4 border border-white/08">
                   <p className="text-xs text-white/40 leading-relaxed">
                     <span className="text-white/70 font-medium">Why it mattered: </span>
@@ -578,55 +386,7 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          IMPACT
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-20 border-t border-white/06">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Impact</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Results</h2>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                value: '0',
-                label: 'Unresolved Frictions',
-                desc: 'Every hierarchy, accessibility, and CTA issue from usability testing resolved before delivery.',
-                color: '#34d399',
-              },
-              {
-                value: '4',
-                label: 'Validated Flows',
-                desc: 'Purchase, tracking, search, and CecoClips — validated across all 3 personas.',
-                color: accent,
-              },
-              {
-                value: '✓',
-                label: 'Dev-Ready Handoff',
-                desc: 'Complete Atomic Design system + annotated Figma prototype — dev-ready, zero ambiguity.',
-                color: '#c4b5fd',
-              },
-            ].map((item, i) => (
-              <Reveal key={item.label} delay={i * 0.08}>
-                <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="font-display font-bold text-4xl mb-2" style={{ color: item.color }}>{item.value}</p>
-                  <p className="font-semibold text-white text-sm mb-2">{item.label}</p>
-                  <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════
-          GALLERY
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Gallery ── */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
@@ -634,28 +394,14 @@ export default function CECOAppCaseStudy() {
               <span className="w-6 h-px" style={{ background: accent }} />
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Screens</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-10">
-              All screens
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-10">All screens</h2>
           </Reveal>
-
           <Reveal delay={0.05}>
             <div style={{ columns: 3, columnGap: '15px' }} className="[column-count:2] md:[column-count:3]">
               {GALLERY_IMAGES.map((img, i) => (
                 <div key={img.src} style={{ marginBottom: '15px', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
-                  <motion.button
-                    onClick={() => openLightbox(i)}
-                    className="w-full block cursor-zoom-in group"
-                    whileHover={{ opacity: 0.85 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      width={390}
-                      height={844}
-                      className="w-full h-auto"
-                    />
+                  <motion.button onClick={() => openLightbox(i)} className="w-full block cursor-zoom-in group" whileHover={{ opacity: 0.85 }} transition={{ duration: 0.2 }}>
+                    <Image src={img.src} alt={img.alt} width={390} height={844} className="w-full h-auto" />
                   </motion.button>
                 </div>
               ))}
@@ -664,40 +410,70 @@ export default function CECOAppCaseStudy() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          CTA
-      ══════════════════════════════════════════════════════════ */}
+      {/* ── Learnings ── */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <Reveal>
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-6 h-px" style={{ background: accent }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Reflection</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Key learnings</h2>
+                <p className="text-white/60 leading-relaxed mb-4">
+                  Mobile-first means redesigning around the mental model shift that happens when users pick up their phone. Not making things smaller — making them different.
+                </p>
+                <p className="text-white/60 leading-relaxed">
+                  The most important research method was card sorting, not interviews. Users couldn't articulate how they wanted to navigate — but the sort data showed it clearly.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="space-y-4">
+                {[
+                  { title: 'Data beats assumptions about navigation', desc: 'Card sorting with real users produced 3 clear groupings that contradicted the existing web taxonomy — and became the entire IA.' },
+                  { title: 'Usability testing is not optional', desc: '7 participants across 3 personas found real friction in hierarchy and CTAs. Those fixes made the difference between a prototype and a usable product.' },
+                  { title: 'CecoClips was the loyalty differentiator', desc: 'Short videos from real users create reasons to return that a product catalog alone can\'t generate.' },
+                  { title: 'Atomic Design pays off at handoff', desc: 'Building from atoms up meant the design system was the handoff document — no extra annotation needed.' },
+                ].map((item) => (
+                  <div key={item.title} className="glass rounded-2xl p-5 border border-white/08 flex items-start gap-4">
+                    <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: highlight }} />
+                    <div>
+                      <p className="font-semibold text-white text-sm mb-1">{item.title}</p>
+                      <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
       <section className="py-20 border-t border-white/08">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
               <div>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
-                  Explore the interactive prototype
-                </h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">Explore the interactive prototype</h2>
                 <p className="text-white/50 text-sm">Complete flows, design system, and annotated specs — live on Figma.</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <motion.a
                   href="https://www.figma.com/proto/CKFV2GZwMbopWNDIYjXKps/Prototipo?node-id=53-17278&p=f&t=7ShqCqjCVjpXhjge-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A189&starting-point-node-id=53%3A17278"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
+                  target="_blank" rel="noopener noreferrer"
+                  whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#080808] text-sm font-medium hover:bg-white/90 transition-colors"
                 >
                   View Prototype
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                 </motion.a>
-                <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08">
-                  Back to portfolio
-                </Link>
+                <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass text-sm text-white/60 hover:text-white transition-colors border border-white/08">Back to portfolio</Link>
               </div>
             </div>
           </Reveal>
-
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
@@ -720,15 +496,8 @@ export default function CECOAppCaseStudy() {
         </div>
       </footer>
 
-      {/* ── Lightbox ── */}
       <AnimatePresence>
-        {lightboxIndex !== null && (
-          <Lightbox
-            images={GALLERY_IMAGES}
-            activeIndex={lightboxIndex}
-            onClose={closeLightbox}
-          />
-        )}
+        {lightboxIndex !== null && <Lightbox images={GALLERY_IMAGES} activeIndex={lightboxIndex} onClose={closeLightbox} />}
       </AnimatePresence>
     </div>
   )

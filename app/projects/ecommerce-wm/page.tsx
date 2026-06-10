@@ -1,10 +1,11 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 
 const ACCENT = '#888888'
+const HIGHLIGHT = '#0384D5'
 
 /* ── Reveal wrapper ───────────────────────────────────────────── */
 function Reveal({
@@ -62,14 +63,16 @@ function StatCard({
   value,
   label,
   sub,
+  color,
 }: {
   value: string
   label: string
   sub?: string
+  color?: string
 }) {
   return (
     <div className="glass rounded-2xl p-5 text-center">
-      <div className="text-3xl font-bold mb-1" style={{ color: ACCENT }}>
+      <div className="text-3xl font-bold mb-1" style={{ color: color ?? HIGHLIGHT }}>
         {value}
       </div>
       <div className="text-sm font-semibold text-white/80">{label}</div>
@@ -153,7 +156,7 @@ export default function EcommerceWMPage() {
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-32 pb-24 px-6">
+      <section className="relative overflow-hidden pt-20 md:pt-32 pb-24 px-6">
         {/* ambient glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
@@ -191,7 +194,7 @@ export default function EcommerceWMPage() {
             className="text-xl text-white/55 max-w-3xl leading-relaxed mb-12"
           >
             Digital Tours research study across 16 sessions in Costa Rica and Guatemala,
-            diagnosing why Walmart CA's ecommerce CSAT scores 6.4 vs the 8.9 industry
+            diagnosing why Walmart CA&apos;s ecommerce CSAT scores 6.4 vs the 8.9 industry
             benchmark — and identifying the 4 critical bugs behind purchase abandonment.
           </motion.p>
 
@@ -223,7 +226,7 @@ export default function EcommerceWMPage() {
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-8">
-              Why is Walmart CA's e-commerce underperforming?
+              Why is Walmart CA&apos;s e-commerce underperforming?
             </h2>
           </Reveal>
 
@@ -236,7 +239,7 @@ export default function EcommerceWMPage() {
                   <strong className="text-white/80">Estudio Experiencia — Tour Digitales 2026</strong> was
                   commissioned to understand real end-to-end shopping flows in two key markets. Sessions
                   were conducted as moderated Digital Tours — guided shopping tasks performed by
-                  participants on Walmart's live ecommerce platform, recorded and analyzed for friction
+                  participants on Walmart&apos;s live ecommerce platform, recorded and analyzed for friction
                   points, task completion rates, and sentiment.
                 </p>
               </div>
@@ -249,13 +252,129 @@ export default function EcommerceWMPage() {
                   Costa Rica (9 sessions) and Guatemala (7 sessions) painted starkly different pictures.
                   While GT users showed relatively positive satisfaction (CSAT 8.1), CR users averaged
                   only <strong className="text-white/80">5.1/10</strong> — a full{' '}
-                  <strong style={{ color: ACCENT }}>−3.9 points</strong> below the competitive benchmark.
+                  <strong style={{ color: HIGHLIGHT }}>−3.9 points</strong> below the competitive benchmark.
                   Understanding why required going beyond surveys: watching real purchases break in real
                   time.
                 </p>
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          CSAT RESULTS (moved up — impact first)
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6" style={{ background: 'rgba(3,132,213,0.03)' }}>
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px" style={{ background: HIGHLIGHT }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: HIGHLIGHT }}>
+                CSAT Results
+              </span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              The satisfaction gap
+            </h2>
+            <p className="text-white/50 mb-12 max-w-2xl">
+              Overall Walmart CA CSAT: <strong className="text-white">6.4/10</strong> against a
+              competitive benchmark of <strong style={{ color: HIGHLIGHT }}>8.9/10</strong>. The split
+              between markets tells the real story.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* CR card */}
+            <Reveal delay={0.1}>
+              <div className="glass rounded-3xl p-8 border border-red-500/15">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">🇨🇷</span>
+                  <div>
+                    <div className="font-semibold text-white">Costa Rica</div>
+                    <div className="text-xs text-white/40">9 sessions</div>
+                  </div>
+                  <div className="ml-auto font-display font-bold text-4xl md:text-5xl text-red-400">5.1</div>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Repurchase intent (high)</span>
+                    <span className="text-red-400 font-semibold">11%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Repurchase intent (low)</span>
+                    <span className="text-red-400 font-semibold">56%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Gap vs benchmark</span>
+                    <span className="text-red-400 font-semibold">−3.9 pts</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* GT card */}
+            <Reveal delay={0.15}>
+              <div className="glass rounded-3xl p-8 border border-green-500/15">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">🇬🇹</span>
+                  <div>
+                    <div className="font-semibold text-white">Guatemala</div>
+                    <div className="text-xs text-white/40">7 sessions</div>
+                  </div>
+                  <div className="ml-auto font-display font-bold text-4xl md:text-5xl text-green-400">8.1</div>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Repurchase intent (high)</span>
+                    <span className="text-green-400 font-semibold">57%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Repurchase intent (low)</span>
+                    <span className="text-green-400 font-semibold">0%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/55">Gap vs benchmark</span>
+                    <span className="text-green-400 font-semibold">−0.6 pts</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Combined bar */}
+          <Reveal delay={0.2}>
+            <div className="glass rounded-3xl p-8">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-white/60">Total WM CA</span>
+                <span className="font-display font-bold text-2xl" style={{ color: HIGHLIGHT }}>6.4 / 10</span>
+              </div>
+              <div className="bg-white/08 rounded-full h-4 overflow-hidden">
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: '64%',
+                    background: 'rgba(255,255,255,0.35)',
+                  }}
+                />
+              </div>
+              <div className="flex justify-between mt-2 text-xs text-white/35">
+                <span>0</span>
+                <span className="text-white/50">Benchmark: 8.9 ▲</span>
+                <span>10</span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Insight callout */}
+          <Reveal delay={0.25}>
+            <div className="mt-8 glass rounded-2xl p-6 border-l-2" style={{ borderLeftColor: HIGHLIGHT, borderColor: `${HIGHLIGHT}30` }}>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: HIGHLIGHT }}>Key Insight</p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                <span className="font-bold" style={{ color: HIGHLIGHT }}>16/16 sessions</span> were affected by the associate discount bug — the single most widespread failure across both countries.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -355,112 +474,6 @@ export default function EcommerceWMPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          CSAT RESULTS
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px" style={{ background: ACCENT }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: ACCENT }}>
-                CSAT Results
-              </span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              The satisfaction gap
-            </h2>
-            <p className="text-white/50 mb-12 max-w-2xl">
-              Overall Walmart CA CSAT: <strong className="text-white">6.4/10</strong> against a
-              competitive benchmark of <strong style={{ color: ACCENT }}>8.9/10</strong>. The split
-              between markets tells the real story.
-            </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* CR card */}
-            <Reveal delay={0.1}>
-              <div className="glass rounded-3xl p-8 border border-red-500/15">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">🇨🇷</span>
-                  <div>
-                    <div className="font-semibold text-white">Costa Rica</div>
-                    <div className="text-xs text-white/40">9 sessions</div>
-                  </div>
-                  <div className="ml-auto text-4xl font-bold text-red-400">5.1</div>
-                </div>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Repurchase intent (high)</span>
-                    <span className="text-red-400 font-semibold">11%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Repurchase intent (low)</span>
-                    <span className="text-red-400 font-semibold">56%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Gap vs benchmark</span>
-                    <span className="text-red-400 font-semibold">−3.9 pts</span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* GT card */}
-            <Reveal delay={0.15}>
-              <div className="glass rounded-3xl p-8 border border-green-500/15">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">🇬🇹</span>
-                  <div>
-                    <div className="font-semibold text-white">Guatemala</div>
-                    <div className="text-xs text-white/40">7 sessions</div>
-                  </div>
-                  <div className="ml-auto text-4xl font-bold text-green-400">8.1</div>
-                </div>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Repurchase intent (high)</span>
-                    <span className="text-green-400 font-semibold">57%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Repurchase intent (low)</span>
-                    <span className="text-green-400 font-semibold">0%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-white/55">Gap vs benchmark</span>
-                    <span className="text-green-400 font-semibold">−0.6 pts</span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Combined bar */}
-          <Reveal delay={0.2}>
-            <div className="glass rounded-3xl p-8">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-white/60">Total WM CA</span>
-                <span className="text-2xl font-bold" style={{ color: ACCENT }}>6.4 / 10</span>
-              </div>
-              <div className="bg-white/08 rounded-full h-4 overflow-hidden">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: '64%',
-                    background: 'rgba(255,255,255,0.35)',
-                  }}
-                />
-              </div>
-              <div className="flex justify-between mt-2 text-xs text-white/35">
-                <span>0</span>
-                <span className="text-white/50">Benchmark: 8.9 ▲</span>
-                <span>10</span>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════
           CRITICAL BUGS
       ══════════════════════════════════════════════════════════ */}
       <section className="py-24 px-6" style={{ background: 'rgba(239,68,68,0.03)' }}>
@@ -476,7 +489,7 @@ export default function EcommerceWMPage() {
               4 bugs blocking purchase completion
             </h2>
             <p className="text-white/50 mb-12 max-w-2xl">
-              The Digital Tours revealed that low satisfaction wasn't caused by product quality
+              The Digital Tours revealed that low satisfaction wasn&apos;t caused by product quality
               or pricing — it was caused by four specific technical failures at checkout.
             </p>
           </Reveal>
@@ -521,8 +534,8 @@ export default function EcommerceWMPage() {
             <div
               className="mt-10 rounded-3xl p-8 border"
               style={{
-                background: `${ACCENT}10`,
-                borderColor: `${ACCENT}30`,
+                background: `${HIGHLIGHT}10`,
+                borderColor: `${HIGHLIGHT}30`,
               }}
             >
               <div className="flex items-start gap-4">
@@ -532,7 +545,7 @@ export default function EcommerceWMPage() {
                   <p className="text-white/70 leading-relaxed text-sm">
                     Post-reception results showed 5/5 participants rated product quality as acceptable
                     and 5/5 found prices correct. Only 1 order was incomplete at delivery. The problem
-                    was never the product. <strong style={{ color: ACCENT }}>It was the checkout bugs.</strong>{' '}
+                    was never the product. <strong style={{ color: HIGHLIGHT }}>It was the checkout bugs.</strong>{' '}
                     Fixing these four issues would address the majority of the CR satisfaction gap
                     without changing a single SKU.
                   </p>
@@ -608,9 +621,9 @@ export default function EcommerceWMPage() {
                   P0 — Immediate
                 </div>
                 <ul className="space-y-3 text-sm text-white/60">
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Fix frozen payment screen (CR)</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Fix associate discount logic (CR + GT)</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Repair 7AHORRO coupon validation (CR)</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Fix frozen payment screen (CR)</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Fix associate discount logic (CR + GT)</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Repair 7AHORRO coupon validation (CR)</li>
                 </ul>
               </div>
             </Reveal>
@@ -621,9 +634,9 @@ export default function EcommerceWMPage() {
                   P1 — Short term
                 </div>
                 <ul className="space-y-3 text-sm text-white/60">
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Rewrite tiquete/factura error message copy</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Add real-time discount feedback in cart</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Implement payment confirmation toast</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Rewrite tiquete/factura error message copy</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Add real-time discount feedback in cart</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Implement payment confirmation toast</li>
                 </ul>
               </div>
             </Reveal>
@@ -634,9 +647,9 @@ export default function EcommerceWMPage() {
                   P2 — Medium term
                 </div>
                 <ul className="space-y-3 text-sm text-white/60">
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Repeat Digital Tours post-fix (CR focus)</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> CSAT tracking dashboard (weekly cadence)</li>
-                  <li className="flex gap-2"><span style={{ color: ACCENT }}>→</span> Competitive parity review quarterly</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Repeat Digital Tours post-fix (CR focus)</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> CSAT tracking dashboard (weekly cadence)</li>
+                  <li className="flex gap-2"><span style={{ color: HIGHLIGHT }}>→</span> Competitive parity review quarterly</li>
                 </ul>
               </div>
             </Reveal>
@@ -646,24 +659,24 @@ export default function EcommerceWMPage() {
           <Reveal delay={0.25}>
             <div
               className="mt-10 rounded-3xl p-8 border"
-              style={{ background: `${ACCENT}08`, borderColor: `${ACCENT}25` }}
+              style={{ background: `${HIGHLIGHT}08`, borderColor: `${HIGHLIGHT}25` }}
             >
               <h3 className="font-semibold text-white mb-6">Expected impact after P0 fixes</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: ACCENT }}>5.1 → 7.5+</div>
+                  <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>5.1 → 7.5+</div>
                   <div className="text-xs text-white/50">CR CSAT projection</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400 mb-1">+45%</div>
+                  <div className="font-display font-bold text-2xl text-green-400 mb-1">+45%</div>
                   <div className="text-xs text-white/50">CR repurchase intent</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: ACCENT }}>0</div>
+                  <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>0</div>
                   <div className="text-xs text-white/50">checkout abandonments from bugs</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold mb-1" style={{ color: ACCENT }}>16/16</div>
+                  <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>16/16</div>
                   <div className="text-xs text-white/50">discount sessions resolved</div>
                 </div>
               </div>
@@ -673,9 +686,62 @@ export default function EcommerceWMPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          NDA NOTICE
+          LEARNINGS
       ══════════════════════════════════════════════════════════ */}
       <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-8 h-px" style={{ background: HIGHLIGHT }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: HIGHLIGHT }}>
+                Learnings & Reflection
+              </span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              What this study taught me
+            </h2>
+            <p className="text-white/50 mb-12 max-w-2xl">
+              Running research at this scale — live sessions, two markets, real checkout flows — surfaced things a survey would never catch.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              {
+                title: 'CSAT alone doesn\'t explain "why"',
+                body: 'A 5.1 score is a symptom. Only by watching real sessions did we see that checkout bugs — not product quality or pricing — were the actual cause of abandonment.',
+              },
+              {
+                title: 'Market segmentation reveals hidden signals',
+                body: 'The CR/GT split (5.1 vs 8.1) showed the problem was localized, not systemic. Without segmenting by country, the aggregate 6.4 would have hidden the severity in Costa Rica.',
+              },
+              {
+                title: 'Post-reception validation eliminates noise',
+                body: '5/5 post-purchase participants found quality and price acceptable. This ruled out supply-chain as a cause and pointed squarely at the UX layer — a crucial finding for prioritization.',
+              },
+              {
+                title: 'Observational research catches what surveys miss',
+                body: 'No survey would have revealed a frozen payment screen or a discount code silently failing. The Digital Tour format — watching real users on live systems — made invisible failures visible.',
+              },
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08 h-full">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ background: HIGHLIGHT }} />
+                    <h3 className="font-semibold text-white text-sm leading-snug">{item.title}</h3>
+                  </div>
+                  <p className="text-xs text-white/55 leading-relaxed pl-4">{item.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          NDA NOTICE
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.01)' }}>
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <div

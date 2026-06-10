@@ -72,6 +72,7 @@ export default function FulzerCaseStudy() {
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
   const accent = '#888888'
+  const highlight = '#0384D5'
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
@@ -92,7 +93,7 @@ export default function FulzerCaseStudy() {
       </motion.div>
 
       {/* Hero */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-end pt-20 md:pt-0 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
@@ -148,20 +149,25 @@ export default function FulzerCaseStudy() {
                 className="grid grid-cols-2 gap-4"
               >
                 {[
-                  { value: '7', label: 'Food Trucks Studied' },
-                  { value: '49 cm', label: 'Narrowest Aisle Found' },
-                  { value: '~100 cm', label: 'Post-Design Aisle Width' },
-                  { value: 'RULA', label: 'Ergonomic Method' },
+                  { value: '7', label: 'Food Trucks Studied', hi: false },
+                  { value: '49 cm', label: 'Narrowest Aisle Found', hi: false },
+                  { value: '~100 cm', label: 'Post-Design Aisle Width', hi: true },
+                  { value: 'RULA', label: 'Ergonomic Method', hi: false },
                 ].map((stat) => (
                   <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p
+                      className="font-display font-bold text-2xl"
+                      style={{ color: stat.hi ? highlight : 'white' }}
+                    >
+                      {stat.value}
+                    </p>
                     <p className="text-xs text-white/40 mt-1">{stat.label}</p>
                   </div>
                 ))}
               </motion.div>
             </div>
 
-            {/* Hero image — mockup-5 at 3/4 width */}
+            {/* Hero image */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -225,6 +231,97 @@ export default function FulzerCaseStudy() {
         </div>
       </section>
 
+      {/* Impact */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: highlight }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: highlight }}>Impact & Results</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Results</h2>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Reveal>
+              <div className="glass rounded-2xl p-6 border border-white/08">
+                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: highlight }}>Spatial</p>
+                <div className="flex items-center gap-6 mb-4">
+                  <div className="text-center">
+                    <p className="font-display font-bold text-4xl md:text-5xl text-rose-400">49 cm</p>
+                    <p className="text-xs text-white/40 mt-1">Before (min. aisle)</p>
+                  </div>
+                  <svg className="w-6 h-6 text-white/20 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <div className="text-center">
+                    <p className="font-display font-bold text-4xl md:text-5xl" style={{ color: highlight }}>~100 cm</p>
+                    <p className="text-xs text-white/40 mt-1">After (target aisle)</p>
+                  </div>
+                </div>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  Nearly doubled circulation — worker collisions eliminated, flow restored during peak service.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <div className="glass rounded-2xl p-6 border border-white/08">
+                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: highlight }}>Ergonomic</p>
+                <div className="flex items-center gap-6 mb-4">
+                  <div className="text-center">
+                    <p className="font-display font-bold text-4xl md:text-5xl text-rose-400">7</p>
+                    <p className="text-xs text-white/40 mt-1">RULA level (before)</p>
+                  </div>
+                  <svg className="w-6 h-6 text-white/20 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <div className="text-center">
+                    <p className="font-display font-bold text-4xl md:text-5xl" style={{ color: highlight }}>✓</p>
+                    <p className="text-xs text-white/40 mt-1">Risk eliminated</p>
+                  </div>
+                </div>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  Postural risk eliminated in all tested task configurations.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.12}>
+            <div className="grid md:grid-cols-4 gap-4">
+              {[
+                { value: '↑', label: 'Worker ergonomics', color: highlight },
+                { value: '↓', label: 'Postural risk postures', color: '#34d399' },
+                { value: '✓', label: 'Manufacturing validated', color: highlight },
+                { value: '✓', label: 'Multi-truck compatible', color: '#34d399' },
+              ].map((item) => (
+                <div key={item.label} className="glass rounded-2xl p-4 border border-white/08 text-center">
+                  <p className="font-display font-bold text-3xl mb-1" style={{ color: item.color }}>{item.value}</p>
+                  <p className="text-xs text-white/50">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {['mockup-1.jpg','mockup-2.jpg','mockup-3.jpg'].map((f, i) => (
+                <div key={f} className="overflow-hidden">
+                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+1}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              ))}
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 mt-4">
+              {['mockup-5.jpg'].map((f, i) => (
+                <div key={f} className="overflow-hidden">
+                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+4}`} width={1200} height={900} className="w-full h-auto" />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Problems */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
@@ -282,6 +379,17 @@ export default function FulzerCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          {/* Research insight callout */}
+          <Reveal delay={0.25}>
+            <div className="mt-8 glass rounded-2xl p-6 border-l-2" style={{ borderLeftColor: highlight, borderColor: `${highlight}30` }}>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: highlight }}>Key Insight</p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                <span className="font-bold" style={{ color: highlight }}>49 cm</span> — the narrowest aisle found across all 7 food trucks studied. Two workers couldn&apos;t pass each other without stopping service.
+              </p>
+            </div>
+          </Reveal>
+
           <Reveal delay={0.3}>
             <div className="mt-8 bg-white rounded-2xl p-6 overflow-hidden">
               <Image src="/fulzer-media-files/graphic-3.svg" alt="Fulzer 3D render" width={1200} height={900} className="w-full h-auto" />
@@ -329,7 +437,7 @@ export default function FulzerCaseStudy() {
                 activities={[
                   'Personas and journey maps built from interview data',
                   'Anthropometric analysis: percentile-based reach zones and functional reach',
-                  'Analysis of Fulzer\'s manufacturing processes and material constraints (SS304)',
+                  "Analysis of Fulzer's manufacturing processes and material constraints (SS304)",
                 ]}
                 result="Journey map revealed 4 high-friction moments during peak service. Anthropometric data established height ranges for adjustable surfaces across the worker population."
               />
@@ -357,7 +465,7 @@ export default function FulzerCaseStudy() {
                 activities={[
                   'Selected concept: "Adaptive Minimalism" — modular, adjustable, visually clean',
                   'CAD development of the modular stainless steel 304 furniture system',
-                  'Surface, joint, and adjustment mechanism design validated against SS304 fabrication',
+                  "Surface, joint, and adjustment mechanism design validated against SS304 fabrication",
                 ]}
                 result="Adjustable-height modular system — concentric tubes and set screws. Minimal surfaces, sliding doors, compatible with Fulzer's existing manufacturing lines."
               />
@@ -508,7 +616,7 @@ export default function FulzerCaseStudy() {
                     {[
                       { principle: 'Easy to manufacture', desc: 'Standard SS304 processes, no custom tooling' },
                       { principle: 'Easy to maintain', desc: 'No hidden joints, accessible cleaning surfaces' },
-                      { principle: 'Scalable production', desc: 'Compatible with Fulzer\'s existing lines' },
+                      { principle: 'Scalable production', desc: "Compatible with Fulzer's existing lines" },
                       { principle: 'Realistic cost', desc: 'Priced for commercial food truck market' },
                     ].map((p) => (
                       <div key={p.principle} className="flex items-start gap-3">
@@ -527,94 +635,52 @@ export default function FulzerCaseStudy() {
         </div>
       </section>
 
-      {/* Impact */}
+      {/* Learnings */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Impact & Results</span>
+              <span className="w-6 h-px" style={{ background: highlight }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: highlight }}>Learnings & Reflection</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Results</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              What this project taught me
+            </h2>
+            <p className="text-white/50 leading-relaxed max-w-2xl mb-12">
+              Applying UX methods to a physical product — with real manufacturing constraints — forced a level of rigor that purely digital projects rarely demand.
+            </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <Reveal>
-              <div className="glass rounded-2xl p-6 border border-white/08">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: accent }}>Spatial</p>
-                <div className="flex items-center gap-6 mb-4">
-                  <div className="text-center">
-                    <p className="font-display font-bold text-3xl text-rose-400">49 cm</p>
-                    <p className="text-xs text-white/40 mt-1">Before (min. aisle)</p>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              {
+                title: 'Research reveals the invisible',
+                body: "Workers had normalized their pain. 14-hour shifts in a 49 cm aisle were 'just how it is.' RULA analysis named it as a health emergency — numbers made the problem undeniable.",
+              },
+              {
+                title: 'Constraints enable creativity',
+                body: 'Manufacturing restrictions (SS304, existing processes, cost targets) pushed the design toward a simpler, more elegant solution than open-ended exploration would have produced.',
+              },
+              {
+                title: 'Modular beats custom',
+                body: 'A universal system that adapts beats a perfect solution for one truck that cannot scale. The business case for modularity is the same as the UX case for reusable components.',
+              },
+              {
+                title: 'Measure to validate, not to impress',
+                body: 'Intuition said the space was tight. RULA and spatial simulations quantified it — made it arguable, stakeholder-ready, and actionable. Data is not decoration.',
+              },
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08 h-full">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ background: highlight }} />
+                    <h3 className="font-semibold text-white text-sm leading-snug">{item.title}</h3>
                   </div>
-                  <svg className="w-6 h-6 text-white/20 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                  <div className="text-center">
-                    <p className="font-display font-bold text-3xl" style={{ color: accent }}>~100 cm</p>
-                    <p className="text-xs text-white/40 mt-1">After (target aisle)</p>
-                  </div>
+                  <p className="text-xs text-white/55 leading-relaxed pl-4">{item.body}</p>
                 </div>
-                <p className="text-sm text-white/50 leading-relaxed">
-                  Nearly doubled circulation — worker collisions eliminated, flow restored during peak service.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.08}>
-              <div className="glass rounded-2xl p-6 border border-white/08">
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: accent }}>Ergonomic</p>
-                <div className="flex items-center gap-6 mb-4">
-                  <div className="text-center">
-                    <p className="font-display font-bold text-3xl text-rose-400">7</p>
-                    <p className="text-xs text-white/40 mt-1">RULA level (before)</p>
-                  </div>
-                  <svg className="w-6 h-6 text-white/20 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                  <div className="text-center">
-                    <p className="font-display font-bold text-3xl" style={{ color: accent }}>✓</p>
-                    <p className="text-xs text-white/40 mt-1">Risk eliminated</p>
-                  </div>
-                </div>
-                <p className="text-sm text-white/50 leading-relaxed">
-                  Postural risk eliminated in all tested task configurations.
-                </p>
-              </div>
-            </Reveal>
+              </Reveal>
+            ))}
           </div>
-
-          <Reveal delay={0.12}>
-            <div className="grid md:grid-cols-4 gap-4">
-              {[
-                { value: '↑', label: 'Worker ergonomics', color: accent },
-                { value: '↓', label: 'Postural risk postures', color: '#34d399' },
-                { value: '✓', label: 'Manufacturing validated', color: accent },
-                { value: '✓', label: 'Multi-truck compatible', color: '#34d399' },
-              ].map((item, i) => (
-                <div key={item.label} className="glass rounded-2xl p-4 border border-white/08 text-center">
-                  <p className="font-display font-bold text-3xl mb-1" style={{ color: item.color }}>{item.value}</p>
-                  <p className="text-xs text-white/50">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
-              {['mockup-1.jpg','mockup-2.jpg','mockup-3.jpg'].map((f, i) => (
-                <div key={f} className="overflow-hidden">
-                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+1}`} width={1200} height={900} className="w-full h-auto" />
-                </div>
-              ))}
-            </div>
-            <div className="grid md:grid-cols-2 gap-4 mt-4">
-              {['mockup-5.jpg'].map((f, i) => (
-                <div key={f} className="overflow-hidden">
-                  <Image src={`/fulzer-media-files/${f}`} alt={`Fulzer product ${i+4}`} width={1200} height={900} className="w-full h-auto" />
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </section>
 

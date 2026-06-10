@@ -70,6 +70,7 @@ export default function ArtCityTourNavCaseStudy() {
   const heroY = useTransform(scrollY, [0, 400], [0, 60])
 
   const accent = '#888888'
+  const highlight = '#0384D5'
 
   return (
     <div className="relative min-h-screen bg-[#080808] text-[#efefef] overflow-x-hidden">
@@ -90,7 +91,7 @@ export default function ArtCityTourNavCaseStudy() {
       </motion.div>
 
       {/* Hero */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-end pt-20 md:pt-0 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 45%, rgba(8,8,8,0.7) 100%)' }} />
 
         <motion.div style={{ y: heroY }} className="relative max-w-7xl mx-auto px-6 w-full">
@@ -144,13 +145,13 @@ export default function ArtCityTourNavCaseStudy() {
                 className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl"
               >
                 {[
-                  { value: '15', label: 'Paper Prototype Users' },
-                  { value: '3', label: 'User Personas' },
-                  { value: '6', label: 'Apps Analyzed' },
-                  { value: 'WCAG', label: 'AA – AAA Contrast' },
+                  { value: '15', label: 'Paper Prototype Users', hi: false },
+                  { value: '3', label: 'User Personas', hi: false },
+                  { value: '6', label: 'Apps Analyzed', hi: false },
+                  { value: 'WCAG', label: 'AA – AAA Contrast', hi: true },
                 ].map((stat) => (
                   <div key={stat.label} className="glass rounded-2xl p-4 border border-white/08">
-                    <p className="font-display font-bold text-2xl text-white">{stat.value}</p>
+                    <p className="font-display font-bold text-2xl" style={{ color: stat.hi ? highlight : 'white' }}>{stat.value}</p>
                     <p className="text-xs text-white/40 mt-1">{stat.label}</p>
                   </div>
                 ))}
@@ -219,6 +220,56 @@ export default function ArtCityTourNavCaseStudy() {
         </div>
       </section>
 
+      {/* Impact (moved up) */}
+      <section className="py-20 border-t border-white/06">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px" style={{ background: highlight }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: highlight }}>Impact</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Results</h2>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                value: '0',
+                label: 'Task Failures (High-Frequency)',
+                desc: 'Bus stop, directions, bus times — zero failures across all paper prototype sessions.',
+                color: '#34d399',
+              },
+              {
+                value: '1',
+                label: 'Tap — Critical Tasks',
+                desc: 'Bus stop and preset route — single tap from home state.',
+                color: highlight,
+              },
+              {
+                value: 'AA+',
+                label: 'Accessibility Level',
+                desc: 'All tested contrast pairs meet WCAG AA minimum. Primary text achieves AAA (7.39:1). Designed for low-light legibility.',
+                color: '#c4b5fd',
+              },
+            ].map((item, i) => (
+              <Reveal key={item.label} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08">
+                  <p className="font-display font-bold text-4xl md:text-5xl mb-2" style={{ color: item.color }}>{item.value}</p>
+                  <p className="font-semibold text-white text-sm mb-2">{item.label}</p>
+                  <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.2}>
+            <div className="mt-12">
+              <Image src="/art-city-tour-media-files/mockup-5.png" alt="Art City Tour app overview" width={1200} height={844} className="w-full h-auto" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Methodology */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
@@ -248,6 +299,16 @@ export default function ArtCityTourNavCaseStudy() {
                 ]}
                 result="Transport and navigation = 80% of expected usage. Low-frequency features (3–4%) identified for de-prioritized placement."
               />
+            </Reveal>
+
+            {/* Research insight callout */}
+            <Reveal delay={0.08}>
+              <div className="mb-10 glass rounded-2xl p-6 border-l-2" style={{ borderLeftColor: highlight, borderColor: `${highlight}30` }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: highlight }}>Key Insight</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  <span className="font-bold" style={{ color: highlight }}>80%</span> of expected usage was transport and navigation — bus stop locator (18%), bus times (17%), and directions (15%) combined. That single number drove the entire information architecture.
+                </p>
+              </div>
             </Reveal>
 
             <Reveal delay={0.1}>
@@ -610,57 +671,54 @@ export default function ArtCityTourNavCaseStudy() {
         </div>
       </section>
 
-      {/* Impact */}
+      {/* Learnings */}
       <section className="py-20 border-t border-white/06">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-6 h-px" style={{ background: accent }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Impact</span>
+              <span className="w-6 h-px" style={{ background: highlight }} />
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: highlight }}>Learnings & Reflection</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-12">Results</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              What this project taught me
+            </h2>
+            <p className="text-white/50 leading-relaxed max-w-2xl mb-12">
+              Designing for a live event — with real motion, low light, and no second chances — forced decisions that purely studio-based projects rarely demand.
+            </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {[
               {
-                value: '0',
-                label: 'Task Failures (High-Frequency)',
-                desc: 'Bus stop, directions, bus times — zero failures across all paper prototype sessions.',
-                color: '#34d399',
+                title: 'Usage data drives architecture',
+                body: '80% of expected usage in 3 features. That number justified every IA decision — the bottom tab bar, one-tap critical tasks, secondary features buried. Without data, those decisions are preferences.',
               },
               {
-                value: '1',
-                label: 'Tap — Critical Tasks',
-                desc: 'Bus stop and preset route — single tap from home state.',
-                color: accent,
+                title: 'Paper prototyping is the cheapest test',
+                body: '15 users, 2 icon problems caught before any high-fidelity design. The filter icon fix took minutes with paper. In production it would have been a sprint.',
               },
               {
-                value: 'AA+',
-                label: 'Accessibility Level',
-                desc: 'All tested contrast pairs meet WCAG AA minimum. Primary text achieves AAA (7.39:1). Designed for low-light legibility.',
-                color: '#c4b5fd',
+                title: 'Context is a design constraint',
+                body: 'Nighttime, movement, noise, social distraction — these are real constraints, not edge cases. Dark UI, SF Pro, and high contrast were engineering choices before they were aesthetic ones.',
+              },
+              {
+                title: 'Accessibility validates design quality',
+                body: 'WCAG AA–AAA was a consequence of good decisions, not a separate checklist. When contrast ratios pass at 7.39:1 for a dark event app, it means the design works for everyone — not just ideal conditions.',
               },
             ].map((item, i) => (
-              <Reveal key={item.label} delay={i * 0.08}>
-                <div className="glass rounded-2xl p-6 border border-white/08">
-                  <p className="font-display font-bold text-4xl mb-2" style={{ color: item.color }}>{item.value}</p>
-                  <p className="font-semibold text-white text-sm mb-2">{item.label}</p>
-                  <p className="text-xs text-white/50 leading-relaxed">{item.desc}</p>
+              <Reveal key={item.title} delay={i * 0.08}>
+                <div className="glass rounded-2xl p-6 border border-white/08 h-full">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ background: highlight }} />
+                    <h3 className="font-semibold text-white text-sm leading-snug">{item.title}</h3>
+                  </div>
+                  <p className="text-xs text-white/55 leading-relaxed pl-4">{item.body}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={0.2}>
-            <div className="mt-12">
-              <Image src="/art-city-tour-media-files/mockup-5.png" alt="Art City Tour app overview" width={1200} height={844} className="w-full h-auto" />
-            </div>
-          </Reveal>
         </div>
       </section>
-
-
 
       {/* CTA */}
       <section className="py-20 border-t border-white/08">
@@ -687,7 +745,7 @@ export default function ArtCityTourNavCaseStudy() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </motion.a>
-<motion.a
+                <motion.a
                   href="https://www.behance.net/josecamposdesigner"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -710,7 +768,7 @@ export default function ArtCityTourNavCaseStudy() {
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
               <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-              <Link href="/projects/art-city-tour" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
+              <Link href="/projects/sjo-turismo" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
                 <div>
                   <p className="font-display font-bold text-white text-lg">SJO Turismo App — Redesign</p>
                   <p className="text-sm text-white/40">Mobile UX · UX Research · Tourism</p>

@@ -43,10 +43,25 @@ export default function HeroScene() {
     const onMouseMove = (e: MouseEvent) => {
       mouseNDC.x =  (e.clientX / window.innerWidth  - 0.5) * 2
       mouseNDC.y = -(e.clientY / window.innerHeight - 0.5) * 2
-      // Approximate world-space mouse position at z=0 plane
       mouseWorld.set(mouseNDC.x * 12, mouseNDC.y * 8, 0)
     }
+
+    const onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0]
+      mouseNDC.x =  (t.clientX / window.innerWidth  - 0.5) * 2
+      mouseNDC.y = -(t.clientY / window.innerHeight - 0.5) * 2
+      mouseWorld.set(mouseNDC.x * 12, mouseNDC.y * 8, 0)
+    }
+
+    const onTouchEnd = () => {
+      // Smoothly decay — the animation loop's lerp will carry this back to zero
+      mouseNDC.set(0, 0)
+      mouseWorld.set(0, 0, 0)
+    }
+
     window.addEventListener('mousemove', onMouseMove)
+    mount.addEventListener('touchmove', onTouchMove, { passive: true })
+    mount.addEventListener('touchend', onTouchEnd, { passive: true })
 
     /* ── Build nodes ────────────────────────────────────────────────────── */
     type Node = {
@@ -234,6 +249,8 @@ export default function HeroScene() {
     return () => {
       cancelAnimationFrame(animId)
       window.removeEventListener('mousemove', onMouseMove)
+      mount.removeEventListener('touchmove', onTouchMove)
+      mount.removeEventListener('touchend', onTouchEnd)
       window.removeEventListener('resize', onResize)
       regGeo.dispose()
       hubGeo.dispose()

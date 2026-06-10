@@ -1,0 +1,54 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "OpenBadgeCredential"
+  ],
+  "id": "https://www.credential.net/b1dac2a5-75f1-4bca-b2fc-e3dd3fabacc2",
+  "name": "Creative UX/UI: User Experience, Interface & Business Design",
+  "description": "Especialización conformada por cinco cursos, con una duración de 105 horas.  Durante la especialización los participantes adquirirán los conocimientos y habilidades para desarrollar un emprendimientos sostenible, que implique el diseño de una interfaz con el usuario que brinde una solución o servicio. ",
+  "image": {
+    "id": "https://pdf.ms.credential.net/v2/certificate/image?env=production&credential=pmk2qz4e&variant=medium",
+    "type": "Image"
+  },
+  "issuer": {
+    "type": "Profile",
+    "id": "did:web:api.accredible.com:v1:verifiable_credential:organizations:47529",
+    "name": "LCI Education-Universidad Veritas",
+    "url": "https://educacioncontinua.veritas.cr/"
+  },
+  "validFrom": "2024-02-06T00:00:00Z",
+  "credentialSubject": {
+    "type": "AchievementSubject",
+    "identifier": [
+      {
+        "type": "IdentityObject",
+        "hashed": true,
+        "identityHash": "sha256$54d6d26b1f39c46e784988d6cf4bdf486f73656ec40968204584da9a2335b782",
+        "identityType": "emailAddress",
+        "salt": "3ce910a3bab2ce6eb78e80a099c93bc4"
+      }
+    ],
+    "achievement": {
+      "id": "https://www.credential.net/group/276554",
+      "type": "Achievement",
+      "achievementType": "Achievement",
+      "name": "Creative UX/UI: User Experience, Interface & Business Design",
+      "description": "Especialización conformada por cinco cursos, con una duración de 105 horas.  Durante la especialización los participantes adquirirán los conocimientos y habilidades para desarrollar un emprendimientos sostenible, que implique el diseño de una interfaz con el usuario que brinde una solución o servicio. ",
+      "criteria": {
+        "narrative": "http://veritas.cr"
+      }
+    }
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-rdfc-2022",
+    "created": "2026-06-10T17:12:38Z",
+    "verificationMethod": "did:web:api.accredible.com:v1:verifiable_credential:organizations:47529#b1d02858-ed6d-11f0-a554-a3aef3e80f7e",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "z4f8V9ZBQ53sbxCuD5PA4edWEBgLZ3jSxUXRskxMPyuoHNUwJzqpMWH6uMsju5mFkGnD9J1xm53A2FxsF4dR9TBGq"
+  }
+}
