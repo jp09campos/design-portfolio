@@ -17,9 +17,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => { const close = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }; window.addEventListener('keydown', close); return () => window.removeEventListener('keydown', close) }, [])
 
   return (
     <>
@@ -67,6 +70,8 @@ export default function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden flex flex-col gap-[5px] p-2"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
           >
             <motion.span
               animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -94,7 +99,7 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-[#080808]/96 backdrop-blur-xl flex flex-col justify-center px-8"
           >
-            <nav className="flex flex-col gap-6">
+            <nav id="mobile-navigation" aria-label="Mobile navigation" className="flex flex-col gap-6">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}

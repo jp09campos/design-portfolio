@@ -17,21 +17,22 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'José Pablo Campos | UX/UI Designer',
-  description: 'UX/UI Designer & Industrial Design Engineer from Costa Rica. Creating digital experiences that are intuitive, beautiful, and impactful.',
-  keywords: ['UX Designer', 'UI Designer', 'Product Designer', 'Costa Rica', 'Portfolio'],
+  metadataBase: new URL('https://jp-campos-portfolio.com'),
+  title: 'José Pablo Campos | Senior Product Designer',
+  description: 'Senior Product Designer specializing in enterprise products, complex workflows, analytics dashboards and scalable design systems.',
+  keywords: ['Senior Product Designer', 'Enterprise UX', 'B2B SaaS', 'Analytics Dashboards', 'UX Research', 'Design Systems', 'Costa Rica'],
   authors: [{ name: 'José Pablo Campos Sequeira' }],
   openGraph: {
-    title: 'José Pablo Campos | UX/UI Designer',
-    description: 'UX/UI Designer & Industrial Design Engineer creating digital experiences that matter.',
+    title: 'José Pablo Campos | Senior Product Designer',
+    description: 'Turning complex business problems into intuitive digital products.',
     url: 'https://jp-campos-portfolio.com',
     siteName: 'JP Campos Portfolio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'José Pablo Campos | UX/UI Designer',
-    description: 'UX/UI Designer & Industrial Design Engineer creating digital experiences that matter.',
+    title: 'José Pablo Campos | Senior Product Designer',
+    description: 'Turning complex business problems into intuitive digital products.',
   },
 }
 

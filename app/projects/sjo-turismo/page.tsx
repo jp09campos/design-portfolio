@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import NextProject from '@/components/layout/NextProject'
 import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion'
 
@@ -425,11 +426,7 @@ export default function SJOTurismoCaseStudy() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="mt-16 pt-16 border-t border-white/08">
-              <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-              <Link href="/projects/onedesk" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
-                <div><p className="font-display font-bold text-white text-lg">OneDesk — Walmart Centroamérica</p><p className="text-sm text-white/40">Enterprise UX · Product Design · SaaS</p></div>
-                <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
-              </Link>
+              <NextProject currentId="sjo-turismo" />
             </div>
           </Reveal>
         </div>

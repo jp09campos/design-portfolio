@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import NextProject from '@/components/layout/NextProject'
 import { motion, useInView } from 'framer-motion'
 
 const ACCENT = '#888888'
@@ -194,8 +195,7 @@ export default function EcommerceWMPage() {
             className="text-xl text-white/55 max-w-3xl leading-relaxed mb-12"
           >
             Digital Tours research study across 16 sessions in Costa Rica and Guatemala,
-            diagnosing why Walmart CA&apos;s ecommerce CSAT scores 6.4 vs the 8.9 industry
-            benchmark — and identifying the 4 critical bugs behind purchase abandonment.
+            investigating Walmart CA&apos;s ecommerce CSAT of 6.4 versus the 8.9 competitive benchmark and identifying four critical checkout usability issues.
           </motion.p>
 
           {/* stats row */}
@@ -208,10 +208,20 @@ export default function EcommerceWMPage() {
             <StatCard value="16" label="Sessions" sub="9 CR · 7 GT" />
             <StatCard value="6.4" label="WM CSAT" sub="vs 8.9 competition" />
             <StatCard value="4" label="Critical Bugs" sub="blocking checkout" />
-            <StatCard value="−3.9" label="CR Gap" sub="pts vs benchmark" />
+            <StatCard value="−3.8" label="CR Gap" sub="pts vs benchmark" />
           </motion.div>
         </div>
       </section>
+
+      <section aria-label="Case study overview" className="max-w-7xl mx-auto px-6 py-12 border-t border-white/10">
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">My role</h2><p className="text-sm leading-relaxed text-white/80">UX research · Walmart Central America</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Design scope</h2><p className="text-sm leading-relaxed text-white/80">Digital Tours, competitive benchmarking and synthesis of usability barriers</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Evidence & status</h2><p className="text-sm leading-relaxed text-white/80">Prioritized remediation recommendations; no post-launch uplift claimed.</p></div>
+        </div>
+      </section>
+<section aria-label="Design rationale" className="max-w-7xl mx-auto px-6 py-16 border-t border-white/10"><p className="text-xs uppercase tracking-widest text-sky-300 mb-4">Decision rationale</p><h2 className="font-display text-3xl md:text-4xl font-bold mb-8">Why this direction matters</h2><div className="grid md:grid-cols-2 gap-5">{[["Prioritize checkout reliability before visual redesign","Moderated Digital Tours identified four checkout issues; the associate discount issue appeared in all 16 sessions. The roadmap puts payment and discount reliability ahead of lower-priority interface refinements.","This prioritization targets observed barriers rather than assuming a broad redesign will improve satisfaction."],["Separate observed findings from future impact","Costa Rica scored 5.1 and Guatemala 8.1, against a competitive benchmark of 8.9. The small post-reception follow-up provides additional context, not proof that fulfillment issues are absent.","Repeat Digital Tours and track checkout completion, discount errors and CSAT after remediation to assess whether the recommendations work."]].map(([title,reason,trade])=><article key={title} className="rounded-2xl border border-white/15 p-6 md:p-8"><h3 className="text-xl font-semibold mb-4">{title}</h3><p className="text-white/80 leading-relaxed">{reason}</p><p className="mt-5 pt-5 border-t border-white/10 text-sm text-white/70 leading-relaxed"><strong className="text-white">Trade-off &amp; evidence: </strong>{trade}</p></article>)}</div></section>
+
 
       {/* ══════════════════════════════════════════════════════════
           CONTEXT
@@ -252,7 +262,7 @@ export default function EcommerceWMPage() {
                   Costa Rica (9 sessions) and Guatemala (7 sessions) painted starkly different pictures.
                   While GT users showed relatively positive satisfaction (CSAT 8.1), CR users averaged
                   only <strong className="text-white/80">5.1/10</strong> — a full{' '}
-                  <strong style={{ color: HIGHLIGHT }}>−3.9 points</strong> below the competitive benchmark.
+                  <strong style={{ color: HIGHLIGHT }}>−3.8 points</strong> below the competitive benchmark.
                   Understanding why required going beyond surveys: watching real purchases break in real
                   time.
                 </p>
@@ -307,7 +317,7 @@ export default function EcommerceWMPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-white/55">Gap vs benchmark</span>
-                    <span className="text-red-400 font-semibold">−3.9 pts</span>
+                    <span className="text-red-400 font-semibold">−3.8 pts</span>
                   </div>
                 </div>
               </div>
@@ -335,7 +345,7 @@ export default function EcommerceWMPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-white/55">Gap vs benchmark</span>
-                    <span className="text-green-400 font-semibold">−0.6 pts</span>
+                    <span className="text-green-400 font-semibold">−0.8 pts</span>
                   </div>
                 </div>
               </div>
@@ -489,8 +499,7 @@ export default function EcommerceWMPage() {
               4 bugs blocking purchase completion
             </h2>
             <p className="text-white/50 mb-12 max-w-2xl">
-              The Digital Tours revealed that low satisfaction wasn&apos;t caused by product quality
-              or pricing — it was caused by four specific technical failures at checkout.
+              The Digital Tours identified four technical checkout failures that contributed to observed friction.
             </p>
           </Reveal>
 
@@ -661,23 +670,23 @@ export default function EcommerceWMPage() {
               className="mt-10 rounded-3xl p-8 border"
               style={{ background: `${HIGHLIGHT}08`, borderColor: `${HIGHLIGHT}25` }}
             >
-              <h3 className="font-semibold text-white mb-6">Expected impact after P0 fixes</h3>
+              <h3 className="font-semibold text-white mb-6">Measures to validate after P0 fixes</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center">
-                  <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>5.1 → 7.5+</div>
-                  <div className="text-xs text-white/50">CR CSAT projection</div>
+                  <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>CSAT</div>
+                  <div className="text-xs text-white/50">CR satisfaction trend</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-display font-bold text-2xl text-green-400 mb-1">+45%</div>
-                  <div className="text-xs text-white/50">CR repurchase intent</div>
+                  <div className="font-display font-bold text-2xl text-green-400 mb-1">Repurchase</div>
+                  <div className="text-xs text-white/50">CR repurchase intent trend</div>
                 </div>
                 <div className="text-center">
                   <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>0</div>
-                  <div className="text-xs text-white/50">checkout abandonments from bugs</div>
+                  <div className="text-xs text-white/50">Target: checkout abandonments from bugs</div>
                 </div>
                 <div className="text-center">
                   <div className="font-display font-bold text-2xl mb-1" style={{ color: HIGHLIGHT }}>16/16</div>
-                  <div className="text-xs text-white/50">discount sessions resolved</div>
+                  <div className="text-xs text-white/50">Baseline: sessions affected by discount issue</div>
                 </div>
               </div>
             </div>
@@ -709,15 +718,15 @@ export default function EcommerceWMPage() {
             {[
               {
                 title: 'CSAT alone doesn\'t explain "why"',
-                body: 'A 5.1 score is a symptom. Only by watching real sessions did we see that checkout bugs — not product quality or pricing — were the actual cause of abandonment.',
+                body: 'A 5.1 score is a symptom. Observing real sessions revealed checkout bugs that contributed to abandonment.',
               },
               {
                 title: 'Market segmentation reveals hidden signals',
-                body: 'The CR/GT split (5.1 vs 8.1) showed the problem was localized, not systemic. Without segmenting by country, the aggregate 6.4 would have hidden the severity in Costa Rica.',
+                body: 'The CR/GT split (5.1 vs 8.1) showed the severity differed by market. Without segmenting by country, the aggregate 6.4 would have hidden the severity in Costa Rica.',
               },
               {
                 title: 'Post-reception validation eliminates noise',
-                body: '5/5 post-purchase participants found quality and price acceptable. This ruled out supply-chain as a cause and pointed squarely at the UX layer — a crucial finding for prioritization.',
+                body: '5/5 post-purchase participants found quality and price acceptable. This supported prioritizing observed checkout friction, without ruling out broader fulfillment issues.',
               },
               {
                 title: 'Observational research catches what surveys miss',
@@ -781,14 +790,7 @@ export default function EcommerceWMPage() {
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-            <Link href="/projects/fulzer" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
-              <div>
-                <p className="font-display font-bold text-white text-lg">Fulzer — Food Truck Design</p>
-                <p className="text-sm text-white/40">Industrial Design · Ergonomics · Product Design</p>
-              </div>
-              <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
-            </Link>
+            <NextProject currentId="ecommerce-wm" />
           </Reveal>
         </div>
       </section>
