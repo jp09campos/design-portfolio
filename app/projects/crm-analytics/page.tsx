@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import NextProject from '@/components/layout/NextProject'
 import { motion } from 'framer-motion'
 
 const cases = [
@@ -48,6 +49,7 @@ export default function CRMAnalytics(){
  </section>
  <section className="py-12 border-t border-white/10"><h2 className="text-3xl font-display font-semibold">Consistent analytical design patterns</h2><div className="grid md:grid-cols-3 gap-6 mt-8">{[['Shared filters','Time, country, region, retail format and channel establish a consistent analytical context.'],['KPI hierarchy','Summary cards bring conversion, engagement and commercial indicators together with prior-year comparisons.'],['Progressive detail','Trend charts, channel comparisons, maps and tables support increasingly specific business questions.']].map(([h,p])=><div key={h} className="border border-white/15 rounded-xl p-6"><h3 className="font-semibold">{h}</h3><p className="mt-3 text-white/70">{p}</p></div>)}</div></section>
  <section className="py-12 border-t border-white/10"><h2 className="text-3xl font-display font-semibold">Design outcomes</h2><p className="mt-4 max-w-3xl text-white/75">Delivered 20 high-fidelity dashboard designs across eight analytical use cases. The intended value is a consistent way to investigate campaign effectiveness and customer behavior across markets. Production adoption and measured business impact have not been established here.</p></section>
+ <div className="mt-12 pt-12 border-t border-white/10"><NextProject currentId="crm-analytics" /></div>
  <Link href="/#projects" className="inline-block mt-8 text-white/80 hover:text-white">← Back to selected work</Link>
  </div></main>
 }
