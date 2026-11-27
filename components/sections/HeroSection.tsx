@@ -1,118 +1,26 @@
 'use client'
-
-import { useRef } from 'react'
 import Link from 'next/link'
-import { Download } from 'lucide-react'
 import dynamic from 'next/dynamic'
-import { motion, useScroll, useTransform } from 'framer-motion'
-
-const HeroScene = dynamic(() => import('@/components/three/HeroScene'), { ssr: false })
-
-const EASE = [0.16, 1, 0.3, 1] as const
-
-const HEADLINE_LINES = ['Turning complexity', 'into intuitive', 'digital products.']
-
-export default function HeroSection() {
-  const containerRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  })
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  return (
-    <section
-      id="home"
-      ref={containerRef}
-      className="relative min-h-screen flex flex-col overflow-hidden"
-    >
-      {/* Three.js atmospheric layer */}
-      <HeroScene />
-
-      {/* Bottom-aligned content */}
-      <motion.div
-        style={{ y: contentY }}
-        className="relative z-10 mt-auto pb-16 md:pb-20 px-6 max-w-7xl mx-auto w-full"
-      >
-        {/* Role label */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-          className="text-[12px] font-medium tracking-[0.18em] uppercase text-white/35 mb-6"
-        >
-          Senior Product Designer · Enterprise & B2B
-        </motion.p>
-
-        {/* Main headline — staggered line reveal */}
-        <h1 className="font-display font-bold leading-[1.0] tracking-[-0.03em] mb-10">
-          {HEADLINE_LINES.map((line, i) => (
-            <div key={line} className="overflow-hidden">
-              <motion.span
-                className={`block text-[clamp(2.8rem,7.5vw,7rem)] ${
-                  i === 1 ? 'text-white/38' : 'text-white'
-                }`}
-                initial={{ y: '110%' }}
-                animate={{ y: '0%' }}
-                transition={{ duration: 1.05, ease: EASE, delay: 0.3 + i * 0.1 }}
-              >
-                {line}
-              </motion.span>
-            </div>
-          ))}
-        </h1>
-
-        {/* Sub-tagline + CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
-        >
-          <p className="text-[15px] text-white/65 max-w-sm leading-relaxed">
-            Designing scalable enterprise experiences, analytics dashboards and complex workflows at Walmart Central America.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="#projects"
-              className="text-[13px] font-medium text-[#080808] bg-white px-6 py-3 rounded-full tracking-wide hover:bg-white/90 transition-colors duration-200"
-            >
-              View work
-            </Link>
-            <Link
-              href="#contact"
-              className="text-[13px] font-medium text-white/60 border border-white/20 px-6 py-3 rounded-full tracking-wide hover:text-white hover:border-white/40 transition-all duration-200"
-            >
-              Get in touch
-            </Link>
-            <a
-              href="/cv-jose-pablo-campos.pdf"
-              download="CV-Jose-Pablo-Campos.pdf"
-              className="inline-flex items-center gap-2 text-[13px] font-medium text-white/80 border border-white/30 px-6 py-3 rounded-full tracking-wide hover:text-white hover:border-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-all duration-200"
-            >
-              <Download size={15} aria-hidden="true" />
-              Download résumé
-            </a>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator — bottom right */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 right-6 z-10 flex flex-col items-center gap-2"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent"
-        />
-        <span className="text-[10px] tracking-[0.2em] uppercase text-white/20 [writing-mode:vertical-rl]">
-          Scroll
-        </span>
-      </motion.div>
-    </section>
-  )
+import { ArrowDownRight, Download } from 'lucide-react'
+const HeroScene=dynamic(()=>import('@/components/three/HeroScene'),{ssr:false})
+export default function HeroSection(){
+ return <section id="home" className="max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-12">
+  <div className="grid lg:grid-cols-[1.15fr_1fr] gap-8 items-center min-h-[65vh]">
+   <div className="relative z-10">
+    <p className="text-xs tracking-[.18em] uppercase text-sky-300 mb-7">José Pablo Campos / Senior Product Designer</p>
+    <h1 className="font-display font-bold text-[clamp(3rem,7vw,6.8rem)] leading-[.98] tracking-[-.055em] text-white">Making complexity <span className="text-white/55">feel simple.</span></h1>
+    <p className="mt-8 max-w-lg text-lg leading-relaxed text-white/70">I design enterprise products, intuitive workflows and scalable analytics experiences at Walmart Central America.</p>
+    <div className="flex flex-wrap gap-3 mt-8">
+     <Link href="#projects" className="inline-flex items-center gap-3 rounded-full bg-white text-black px-6 py-3 font-medium text-sm">Explore my work <ArrowDownRight size={18}/></Link>
+     <a href="/cv-jose-pablo-campos.pdf" download="CV-Jose-Pablo-Campos.pdf" className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm text-white"><Download size={16}/> Download résumé</a>
+    </div>
+   </div>
+   <div className="relative min-h-[320px] lg:min-h-[540px] rounded-3xl overflow-hidden border border-white/10 bg-[#0c1118]">
+    <HeroScene/>
+    <div className="absolute top-5 left-5 text-[10px] uppercase tracking-widest text-white/60 pointer-events-none">01 / Systems in motion</div>
+    <div className="absolute bottom-5 right-5 text-[10px] uppercase tracking-widest text-white/60 pointer-events-none">Interactive study</div>
+   </div>
+  </div>
+  <div className="mt-12 border-y border-white/15 py-5 flex flex-wrap justify-between gap-4 text-xs uppercase tracking-widest text-white/60"><span>Based in Costa Rica</span><span>Enterprise UX / Design systems / Data visualization</span><Link href="#contact" className="text-white">Let's connect ↗</Link></div>
+ </section>
 }
