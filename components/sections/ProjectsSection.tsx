@@ -9,6 +9,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 const CASE_STUDY_HIGHLIGHTS: Record<string, string> = {
   onedesk: '3 operational modules · 5 user roles · $434K annual savings target',
+  'crm-analytics': '20 dashboard designs · 8 analytical use cases · 5 regional markets',
   cecoapp: 'Master’s project · 31 card sorting participants · 4 validated journeys',
   'ecommerce-wm': '16 research sessions · 4 critical checkout issues identified',
 }
@@ -114,12 +115,12 @@ export default function ProjectsSection() {
 
         {/* Project list */}
         <div className="relative">
-          {PROJECTS.slice(0, 3).map((project, i) => (
+          {PROJECTS.slice(0, 4).map((project, i) => (
             <ProjectRow key={project.title} project={project} index={i} />
           ))}
           <h3 className="mt-12 mb-4 text-sm font-medium tracking-widest uppercase text-white/60">Earlier work</h3>
-          {PROJECTS.slice(3).map((project, i) => (
-            <ProjectRow key={project.id} project={project} index={i + 3} />
+          {PROJECTS.slice(4).map((project, i) => (
+            <ProjectRow key={project.id} project={project} index={i + 4} />
           ))}
           {/* Bottom border */}
           <div className="border-t border-white/[0.07]" />
