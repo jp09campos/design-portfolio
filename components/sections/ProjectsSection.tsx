@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { PROJECTS } from '@/lib/data'
-const covers: Record<string,string> = {'onedesk':'/onedesk-walmart-media-files/mockup-1.png','crm-analytics':'/crm-analytics/cart-summary.png','cecoapp':'/cecoapp-media-files/mockup-1.png'}
+const covers: Record<string,string> = {'onedesk':'/onedesk-walmart-media-files/mockup-1.png','crm-analytics':'/crm-analytics/crm%20mockup.png','cecoapp':'/cecoapp-media-files/mockup-1.png'}
 const highlights: Record<string,string> = {onedesk:'3 operational modules · 5 user roles','crm-analytics':'20 dashboards · 8 business use cases',cecoapp:'31 card sorting participants · 4 tested journeys','ecommerce-wm':'16 research sessions · 4 checkout issues'}
 export default function ProjectsSection(){
  return <section id="projects" className="max-w-7xl mx-auto px-6 py-20 md:py-28">
