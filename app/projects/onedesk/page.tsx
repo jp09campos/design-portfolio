@@ -146,6 +146,14 @@ export default function OneDeskCaseStudy() {
         </motion.div>
       </section>
 
+      <section aria-label="Case study overview" className="max-w-7xl mx-auto px-6 py-12 border-t border-white/10">
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">My role</h2><p className="text-sm leading-relaxed text-white/80">Senior Product Designer</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Design scope</h2><p className="text-sm leading-relaxed text-white/80">Enterprise workflows, role-based interfaces and Living Design System</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Evidence & status</h2><p className="text-sm leading-relaxed text-white/80">Functional prototypes and engineering handoff; savings are projected, not measured.</p></div>
+        </div>
+      </section>
+
       {/* ── Context ── */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -200,14 +208,14 @@ export default function OneDeskCaseStudy() {
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Projected outcomes</h2>
             <p className="text-white/50 text-sm max-w-xl mb-12 leading-relaxed">
-              Before a single line of code was written, the design validated outcomes that matter at the business level.
+              These are business targets and design scope indicators, not measured post-launch outcomes.
             </p>
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {[
               { value: '$434K', label: 'Yearly supply savings target', sub: 'Portal Ticket Digital' },
               { value: '−5%', label: 'Print volume reduction', sub: 'Phase 3 target' },
-              { value: '5', label: 'User roles, zero friction', sub: 'RBAC architecture' },
+              { value: '5', label: 'User roles supported', sub: 'RBAC architecture' },
               { value: '3', label: 'Operational modules unified', sub: 'Single ecosystem' },
             ].map((item, i) => (
               <Reveal key={item.label} delay={i * 0.06}>
