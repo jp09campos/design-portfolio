@@ -1,3 +1,4 @@
+import LightExperience from '@/components/layout/LightExperience'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
@@ -11,7 +12,8 @@ import ContactSection from '@/components/sections/ContactSection'
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-[#080808] grain">
+    <div className="light-home relative min-h-screen bg-[#080808] grain">
+      <LightExperience />
       <Navbar />
 
       <main>
