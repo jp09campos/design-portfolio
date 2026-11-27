@@ -14,6 +14,18 @@ export const PROJECTS = [
     featured: true,
   },
   {
+    id: 'crm-analytics',
+    title: 'CRM — Customer & Campaign Intelligence',
+    category: 'Enterprise UX · Marketing Analytics · Data Visualization',
+    description: 'Designed 20 high-fidelity dashboard views across eight customer and campaign analytics use cases for Walmart Central America.',
+    gradient: 'from-sky-500 via-blue-500 to-indigo-500',
+    bgGradient: 'from-sky-500/10 via-blue-500/10 to-indigo-500/10',
+    tags: ['Analytics Dashboards', 'Enterprise UX', 'Figma', 'Data Visualization'],
+    icon: '📊',
+    year: '2025',
+    featured: true,
+  },
+  {
     id: 'cecoapp',
     title: 'CECOApp — Master’s Project',
     category: 'Mobile UX · Product Design · E-commerce',
