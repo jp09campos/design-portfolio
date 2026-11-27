@@ -7,6 +7,12 @@ import { PROJECTS } from '@/lib/data'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
+const CASE_STUDY_HIGHLIGHTS: Record<string, string> = {
+  onedesk: '3 operational modules · 5 user roles · $434K annual savings target',
+  cecoapp: 'Master’s project · 31 card sorting participants · 4 validated journeys',
+  'ecommerce-wm': '16 research sessions · 4 critical checkout issues identified',
+}
+
 function ProjectRow({
   project,
   index,
@@ -21,9 +27,9 @@ function ProjectRow({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Link href={`/projects/${project.id}`}>
+      <Link href={`/projects/${project.id}`} className="block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
         <motion.div
-          className={`group flex items-center gap-6 py-6 border-t border-white/[0.07] cursor-pointer transition-colors duration-300 ${
+          className={`group flex items-center gap-3 md:gap-6 py-6 border-t border-white/[0.07] cursor-pointer transition-colors duration-300 ${
             hovered ? 'bg-white/[0.022]' : ''
           } px-4 -mx-4 rounded-sm`}
           initial={{ opacity: 0, y: 20 }}
@@ -32,7 +38,7 @@ function ProjectRow({
           transition={{ duration: 0.65, ease: EASE, delay: index * 0.08 }}
         >
           {/* Index */}
-          <span className="text-[11px] text-white/20 font-mono w-8 shrink-0 tabular-nums">
+          <span className="text-[11px] text-white/50 font-mono w-8 shrink-0 tabular-nums">
             {String(index + 1).padStart(2, '0')}
           </span>
 
@@ -42,16 +48,19 @@ function ProjectRow({
               {project.title}
             </h3>
             <p className="text-[12px] text-white/50 mt-0.5">{project.category}</p>
+            {CASE_STUDY_HIGHLIGHTS[project.id] && (
+              <p className="mt-2 text-[12px] leading-relaxed text-white/65">{CASE_STUDY_HIGHLIGHTS[project.id]}</p>
+            )}
           </div>
 
           {/* Year + tags + arrow */}
           <div className="hidden md:flex items-center gap-6 shrink-0">
-            <span className="text-[12px] text-white/25 font-mono tabular-nums">{project.year}</span>
+            <span className="text-[12px] text-white/50 font-mono tabular-nums">{project.year}</span>
             <div className="flex gap-2">
               {project.tags?.slice(0, 2).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[11px] text-white/30 border border-white/[0.08] px-2.5 py-0.5 rounded-full"
+                  className="text-[11px] text-white/60 border border-white/[0.15] px-2.5 py-0.5 rounded-full"
                 >
                   {tag}
                 </span>
@@ -87,7 +96,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-[11px] tracking-[0.2em] uppercase text-white/25 mb-4"
+            className="text-[11px] tracking-[0.2em] uppercase text-white/60 mb-4"
           >
             Selected Work
           </motion.p>
