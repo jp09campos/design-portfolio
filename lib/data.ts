@@ -15,10 +15,10 @@ export const PROJECTS = [
   },
   {
     id: 'cecoapp',
-    title: 'CECOApp',
+    title: 'CECOApp — Master’s Project',
     category: 'Mobile UX · Product Design · E-commerce',
     description:
-      'Designed the first mobile app for Cecotec — a home appliances brand generating €510M in annual sales with zero mobile presence. Applied the Double Diamond process: user surveys, card sorting, Atomic Design prototyping, and a moderated usability test with 7 participants. Delivered a prototype built around 4 pillars: product discovery, seamless purchase, real-time order tracking, and CecoClips — a community content module for active user retention.',
+      'Master’s project exploring a mobile e-commerce experience for Cecotec. Applied the Double Diamond process: user surveys, card sorting, Atomic Design prototyping, and a moderated usability test with 7 participants. Delivered a prototype built around 4 pillars: product discovery, seamless purchase, real-time order tracking, and CecoClips — a community content module for active user retention.',
     gradient: 'from-indigo-500 via-violet-500 to-purple-600',
     bgGradient: 'from-indigo-500/10 via-violet-500/10 to-purple-600/10',
     tags: ['Mobile Design', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing'],
@@ -31,7 +31,7 @@ export const PROJECTS = [
     title: 'Ecommerce Analysis WM',
     category: 'UX Research · Competitive Analysis · E-commerce',
     description:
-      'Led a Digital Tours UX research study across 16 sessions in Costa Rica and Guatemala to diagnose why Walmart CA\'s e-commerce CSAT scored 6.4/10 vs 8.9/10 for competitors. Uncovered 4 critical checkout bugs causing purchase abandonments, mapped a competitive benchmark against Uber Eats, Amazon, PriceSmart, and regional players, and delivered a prioritized remediation roadmap targeting the actual root cause: it was never the product — it was the bugs.',
+      'Led a Digital Tours UX research study across 16 sessions in Costa Rica and Guatemala to diagnose why Walmart CA\'s e-commerce CSAT scored 6.4/10 vs 8.9/10 for competitors. Uncovered 4 critical checkout bugs causing purchase abandonments, mapped a competitive benchmark against Uber Eats, Amazon, PriceSmart, and regional players, and delivered a prioritized remediation roadmap targeting the actual root cause: checkout usability barriers.',
     gradient: 'from-yellow-400 via-amber-500 to-orange-500',
     bgGradient: 'from-yellow-400/10 via-amber-500/10 to-orange-500/10',
     tags: ['UX Research', 'Digital Tours', 'CSAT Study', 'Competitive Analysis', 'Walmart CA'],
@@ -85,11 +85,11 @@ export const PROJECTS = [
 export const EXPERIENCE = [
   {
     id: 'walmart-exp',
-    role: 'Product Designer',
+    role: 'Senior Product Designer',
     company: 'Walmart CAM — Central America',
     period: '2024 – Present',
     description:
-      'Designing technology platforms to improve the experience and performance of Walmart associates. Apply UX methodologies including user interviews and feedback loops to ensure solutions meet real user needs and align with stakeholder goals. Collaborate with data analysts and business managers to transform complex datasets into actionable, readable visuals.',
+      'Design B2B enterprise applications and analytics dashboards across commercial, sales, merchandising and marketing domains. Simplify role-based workflows, navigation and advanced filtering; design guided onboarding and contextual guidance. Apply Walmart’s Living Design System and advanced Figma component architecture, collaborating with product managers, engineers, architects and data analysts.',
     tags: ['Enterprise UX', 'Data Visualization', 'User Interviews', 'Stakeholder Management', 'Design Systems'],
     type: 'full-time',
     color: 'from-sky-500 to-blue-600',
@@ -102,7 +102,7 @@ export const EXPERIENCE = [
     company: 'Grupo Financiero CAFSA',
     period: '2022 – 2024',
     description:
-      'Led UX/UI redesign of the CAFSA website and mobile application, improving navigation, accessibility, and user engagement. Conducted UX research through user interviews, journey mapping, and usability tests to guide digital product decisions. Developed and implemented a design system to ensure brand and interface consistency across digital platforms. Automated client-facing processes, reducing operational friction and improving service speed.',
+      'Led UX/UI redesign of the CAFSA website and mobile application, improving navigation, accessibility, and user engagement. Conducted UX research through user interviews, journey mapping, and usability tests to guide digital product decisions. Developed and implemented a design system to ensure brand and interface consistency across digital platforms. Designed reusable Figma components, interaction patterns and brand-consistent digital experiences.',
     tags: ['Design Systems', 'Fintech', 'User Research', 'Figma', 'Accessibility'],
     type: 'full-time',
     color: 'from-emerald-500 to-teal-500',
@@ -115,7 +115,7 @@ export const EXPERIENCE = [
     company: 'SIT – Soluciones Inteligentes en Tecnología',
     period: '2023 – 2024',
     description:
-      'Conducted UX research to support the full redesign of the company\'s website. Led a multi-phase research plan including surveys, focus groups, and usability audits. Synthesized findings into actionable insights, resulting in improved site architecture and measurably increased user satisfaction.',
+      'Conducted UX research to support the full redesign of the company\'s website. Led a multi-phase research plan including surveys, focus groups, and usability audits. Synthesized findings into actionable insights, informing recommendations for site architecture and navigation.',
     tags: ['UX Research', 'Usability Audits', 'Focus Groups', 'Information Architecture'],
     type: 'freelance',
     color: 'from-blue-500 to-indigo-500',
@@ -137,7 +137,7 @@ export const EXPERIENCE = [
   },
   {
     id: 'sjo-exp',
-    role: 'UX/UI Designer — App Project',
+    role: 'Freelance UX/UI Designer',
     company: 'SJO Turismo / Municipalidad de San José & TEC',
     period: '2020 – 2022',
     description:
@@ -160,6 +160,9 @@ export const SKILLS = [
       'Design Systems',
       'Interaction Design',
       'Visual Design',
+      'B2B Onboarding',
+      'Role-Based Experiences',
+      'Analytics Dashboard Design',
       'Branding & Identity',
       'Typography',
       'Prototyping',
@@ -171,7 +174,9 @@ export const SKILLS = [
     category: 'Tools',
     icon: '⬡',
     items: [
-      'Figma',
+      'Figma: Components & Variants',
+      'Auto Layout & Shared Libraries',
+      'Design Tokens & Developer Handoff',
       'Adobe Illustrator',
       'Adobe Photoshop',
       'Adobe Creative Suite',
