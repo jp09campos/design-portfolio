@@ -123,3 +123,15 @@ body {
 .light-home section[id]{scroll-margin-top:90px}
 .light-home[data-lighting=true] h2{background-image:radial-gradient(circle 240px at var(--light-x) var(--light-y),#fff,#b9ddff 35%,#efefef 85%);background-attachment:fixed;background-clip:text;-webkit-background-clip:text;color:transparent}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.light-home *, .light-home *::before,.light-home *::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.light-home[data-lighting=true] h2{color:#efefef;background:none}}
+
+/* Shared case-study interaction system */
+.project-experience .glass{transition:border-color .25s,background-color .25s}
+.project-experience :where(a,button){-webkit-tap-highlight-color:rgba(185,221,255,.15)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+.project-experience .glass:hover{border-color:rgba(185,221,255,.23);background-color:rgba(185,221,255,.045)}
+.project-experience[data-lighting=true] h1{background-image:radial-gradient(circle 260px at var(--light-x) var(--light-y),#fff,#b9ddff 35%,#efefef 85%);background-attachment:fixed;background-clip:text;-webkit-background-clip:text;color:transparent}
+.project-experience[data-lighting=true]:has(dialog[open]),.project-experience[data-lighting=true]:has(.fixed.z-\\[100\\]){cursor:auto}
+.project-experience dialog[open],.project-experience dialog[open] *,.project-experience .fixed.z-\\[100\\],.project-experience .fixed.z-\\[100\\] *{cursor:auto!important}
+.project-experience:has(dialog[open]) .light-experience,.project-experience:has(.fixed.z-\\[100\\]) .light-experience{opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.project-experience h1{color:#efefef;background:none}}
