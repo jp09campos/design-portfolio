@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { PROJECTS } from '@/lib/data'
 const covers: Record<string,string> = {'onedesk':'/onedesk-walmart-media-files/mockup-1.png','crm-analytics':'/crm-analytics/crm%20mockup.png','cecoapp':'/cecoapp-media-files/mockup-1.png'}
+const headlines: Record<string,string> = {onedesk:'Unifying complex retail operations', 'crm-analytics':'Connecting customer engagement with commercial intelligence', cecoapp:'Simplifying the connected shopping experience', 'ecommerce-wm':'Identifying friction in the digital shopping journey'}
 const highlights: Record<string,string> = {onedesk:'3 operational modules · 5 user roles','crm-analytics':'20 dashboards · 8 business use cases',cecoapp:'31 card sorting participants · 4 tested journeys','ecommerce-wm':'16 research sessions · 4 checkout issues'}
 export default function ProjectsSection(){
  return <section id="projects" className="max-w-7xl mx-auto px-6 py-20 md:py-28">
@@ -11,7 +12,7 @@ export default function ProjectsSection(){
  {covers[p.id]?<img src={covers[p.id]} alt={p.title+' project preview'} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-contain p-5 transition-transform duration-500 motion-safe:group-hover:scale-105"/>:<div className="absolute inset-0 flex flex-col justify-center p-8 md:p-12"><span className="text-xs tracking-widest uppercase text-amber-300">Research / Two markets</span><div className="mt-5 text-[clamp(2.5rem,6vw,5rem)] font-display font-bold text-white">6.4 <span className="text-white/50">/ 8.9</span></div><p className="mt-2 text-sm text-white/70">CSAT vs. competitive benchmark</p><div className="mt-6 h-px bg-white/25"/></div>}
  <span className="absolute top-4 left-4 rounded-full bg-black/70 px-3 py-1 text-xs text-white">{String(i+1).padStart(2,'0')}</span>
  </div>
- <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-xs text-white/60">{p.category} · {p.year}</p><h3 className="mt-2 font-display font-semibold text-2xl">{p.title}</h3><p className="mt-2 text-sm text-white/65">{highlights[p.id]}</p></div><span className="rounded-full border border-white/20 p-3 group-hover:bg-white group-hover:text-black transition-colors shrink-0" aria-hidden="true">↗</span></div>
+ <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-xs text-white/60">{p.title} · {p.year}</p><h3 className="mt-2 font-display font-semibold text-2xl">{headlines[p.id] || p.title}</h3><p className="mt-2 text-sm text-white/65">{highlights[p.id]}</p><div className="flex flex-wrap gap-2 mt-3">{p.tags.slice(0,3).map(tag=><span key={tag} className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/70">{tag}</span>)}</div></div><span className="rounded-full border border-white/20 p-3 group-hover:bg-white group-hover:text-black transition-colors shrink-0" aria-hidden="true">↗</span></div>
  </Link>)}
  </div>
  <h3 className="mt-20 mb-5 text-xs tracking-widest uppercase text-white/60">Earlier work / 2022–2023</h3>
