@@ -17,9 +17,14 @@ export default function HomePage() {
         <HeroSection />
         <ProjectsSection />
         <AboutSection />
-        <ExperienceSection />
         <SkillsSection />
-        <CertificatesSection />
+        <ExperienceSection />
+        <div className="max-w-7xl mx-auto px-6 pb-12">
+          <details className="border-y border-white/15 py-5">
+            <summary className="cursor-pointer text-white/80 font-medium">Explore education & certifications</summary>
+            <CertificatesSection />
+          </details>
+        </div>
         <ContactSection />
       </main>
 
