@@ -5,7 +5,7 @@ import { motion, useInView } from 'framer-motion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const EDITORIAL_LINES = ['I design products', 'that people enjoy', 'coming back to.']
+const EDITORIAL_LINES = ['Complex systems.', 'Clear experiences.', 'Human decisions.']
 
 export default function AboutSection() {
   const ref = useRef<HTMLElement>(null)
@@ -55,10 +55,10 @@ export default function AboutSection() {
           <div>
             <p className="text-[11px] tracking-[0.16em] uppercase text-white/25 mb-4">Bio</p>
             <p className="text-[14px] text-white/55 leading-relaxed">
-              Industrial Design Engineer and UX/UI Designer from Costa Rica, specializing in digital product design and brand identity. I help create intuitive experiences and cohesive brands that resonate with real people and achieve real goals.
+              Senior Product Designer and Industrial Design Engineer with 5+ years of experience across enterprise applications, retail, financial services and e-commerce. I specialize in B2B onboarding, analytics dashboards, complex workflows and scalable design systems.
             </p>
             <p className="text-[14px] text-white/55 leading-relaxed mt-4">
-              Currently Product Designer at Walmart Central America. Formerly at Cecotec, Fulzer, and multiple early-stage startups — always collaborating closely and tailoring every solution to the project's unique vision.
+              Currently Senior Product Designer at Walmart Central America, collaborating with product managers, engineers, data analysts and business stakeholders. Previously led UX/UI design at Grupo Financiero CAFSA.
             </p>
           </div>
 
@@ -94,7 +94,7 @@ export default function AboutSection() {
               <p className="text-[11px] tracking-[0.16em] uppercase text-white/25 mb-3">Availability</p>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                <span className="text-[13px] text-white/55">Open to new opportunities</span>
+                <span className="text-[13px] text-white/55">Open to international and remote opportunities</span>
               </div>
             </div>
           </div>
