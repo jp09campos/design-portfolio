@@ -9,7 +9,7 @@ const HeroScene = dynamic(() => import('@/components/three/HeroScene'), { ssr: f
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const HEADLINE_LINES = ['Designing digital', 'experiences', 'that matter.']
+const HEADLINE_LINES = ['Turning complexity', 'into intuitive', 'digital products.']
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null)
@@ -39,7 +39,7 @@ export default function HeroSection() {
           transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
           className="text-[12px] font-medium tracking-[0.18em] uppercase text-white/35 mb-6"
         >
-          UX / UI Designer · Industrial Design Engineer
+          Senior Product Designer · Enterprise & B2B
         </motion.p>
 
         {/* Main headline — staggered line reveal */}
@@ -67,11 +67,11 @@ export default function HeroSection() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
-          <p className="text-[15px] text-white/40 max-w-xs leading-relaxed">
-            Building intuitive, beautiful products — from research to pixel.
+          <p className="text-[15px] text-white/65 max-w-sm leading-relaxed">
+            Designing scalable enterprise experiences, analytics dashboards and complex workflows at Walmart Central America.
           </p>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-3">
             <Link
               href="#projects"
               className="text-[13px] font-medium text-[#080808] bg-white px-6 py-3 rounded-full tracking-wide hover:bg-white/90 transition-colors duration-200"
