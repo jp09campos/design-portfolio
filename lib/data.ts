@@ -80,7 +80,7 @@ export const PROJECTS = [
     featured: true,
   },
   {
-    id: 'art-city-tour',
+    id: 'sjo-turismo',
     title: 'SJO Turismo App — Redesign',
     category: 'Mobile UX · UX Research · Tourism',
     description:
