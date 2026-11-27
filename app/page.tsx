@@ -6,6 +6,7 @@ import ProjectsSection from '@/components/sections/ProjectsSection'
 import ExperienceSection from '@/components/sections/ExperienceSection'
 import SkillsSection from '@/components/sections/SkillsSection'
 import CertificatesSection from '@/components/sections/CertificatesSection'
+import RecommendationsSection from '@/components/sections/RecommendationsSection'
 import ContactSection from '@/components/sections/ContactSection'
 
 export default function HomePage() {
@@ -25,6 +26,7 @@ export default function HomePage() {
             <CertificatesSection />
           </details>
         </div>
+        <RecommendationsSection />
         <ContactSection />
       </main>
 
