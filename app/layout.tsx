@@ -17,6 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jp-campos-portfolio.com'),
   title: 'José Pablo Campos | Senior Product Designer',
   description: 'Senior Product Designer specializing in enterprise products, complex workflows, analytics dashboards and scalable design systems.',
   keywords: ['Senior Product Designer', 'Enterprise UX', 'B2B SaaS', 'Analytics Dashboards', 'UX Research', 'Design Systems', 'Costa Rica'],
