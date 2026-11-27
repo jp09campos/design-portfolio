@@ -38,10 +38,10 @@ function ProjectRow({
 
           {/* Title + category */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-[18px] md:text-[22px] font-display font-semibold text-white/85 group-hover:text-white transition-colors duration-300 truncate">
+            <h3 className="text-[18px] md:text-[22px] font-display font-semibold text-white/85 group-hover:text-white transition-colors duration-300 break-words">
               {project.title}
             </h3>
-            <p className="text-[12px] text-white/30 mt-0.5 truncate">{project.category}</p>
+            <p className="text-[12px] text-white/50 mt-0.5">{project.category}</p>
           </div>
 
           {/* Year + tags + arrow */}
@@ -105,8 +105,12 @@ export default function ProjectsSection() {
 
         {/* Project list */}
         <div className="relative">
-          {PROJECTS.map((project, i) => (
+          {PROJECTS.slice(0, 3).map((project, i) => (
             <ProjectRow key={project.title} project={project} index={i} />
+          ))}
+          <h3 className="mt-12 mb-4 text-sm font-medium tracking-widest uppercase text-white/60">Earlier work</h3>
+          {PROJECTS.slice(3).map((project, i) => (
+            <ProjectRow key={project.id} project={project} index={i + 3} />
           ))}
           {/* Bottom border */}
           <div className="border-t border-white/[0.07]" />
