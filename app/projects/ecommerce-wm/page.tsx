@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import NextProject from '@/components/layout/NextProject'
 import { motion, useInView } from 'framer-motion'
 
 const ACCENT = '#888888'
@@ -788,14 +789,7 @@ export default function EcommerceWMPage() {
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <p className="text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Next Project</p>
-            <Link href="/projects/fulzer" className="group flex items-center justify-between py-4 border-t border-white/[0.07] hover:border-white/[0.14] transition-colors">
-              <div>
-                <p className="font-display font-bold text-white text-lg">Fulzer — Food Truck Design</p>
-                <p className="text-sm text-white/40">Industrial Design · Ergonomics · Product Design</p>
-              </div>
-              <span className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all text-lg">→</span>
-            </Link>
+            <NextProject currentId="ecommerce-wm" />
           </Reveal>
         </div>
       </section>
