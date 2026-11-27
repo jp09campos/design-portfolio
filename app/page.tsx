@@ -14,9 +14,10 @@ export default function HomePage() {
   return (
     <div className="light-home relative min-h-screen bg-[#080808] grain">
       <LightExperience />
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
         <ProjectsSection />
         <AboutSection />
