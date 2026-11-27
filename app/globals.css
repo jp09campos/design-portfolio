@@ -103,3 +103,16 @@ body {
 }
 
 @keyframes fluidReveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* V3.4 — Luminous editorial system */
+.light-experience{position:fixed;inset:0;pointer-events:none;z-index:80;opacity:0;transition:opacity .25s;--lx:-500px;--ly:-500px}
+.light-experience[data-active=true]{opacity:1}
+.light-halo{position:absolute;inset:0;background:radial-gradient(circle 290px at var(--lx) var(--ly),rgba(143,190,255,.10),rgba(99,155,222,.035) 55%,transparent 100%);mix-blend-mode:screen}
+.light-reticle{position:absolute;left:var(--lx);top:var(--ly);width:30px;height:30px;transform:translate(-50%,-50%);border:1px solid #c6e4ffb0;border-radius:50%;background:#b0d9ff0c;box-shadow:0 0 18px #8cbfff30;display:grid;place-items:center;transition:width .18s,height .18s,background .18s}
+.light-reticle span{width:4px;height:4px;background:#ebf7ff;border-radius:50%}
+.light-experience[data-action=true] .light-reticle{width:44px;height:44px;background:#b0d9ff20}
+.light-experience[data-project=true] .light-reticle{opacity:0}
+.light-home[data-lighting=true] .light-type,.light-home[data-lighting=true] .light-secondary{background-image:radial-gradient(circle 260px at var(--light-x) var(--light-y),#ffffff 0%,#b9ddff 35%,#ececec 85%);background-attachment:fixed;background-clip:text;-webkit-background-clip:text;color:transparent}
+.light-home[data-lighting=true] .light-secondary{background-image:radial-gradient(circle 230px at var(--light-x) var(--light-y),#eef8ff,#a8cef6 32%,#999 85%)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.light-home[data-lighting=true],.light-home[data-lighting=true] a,.light-home[data-lighting=true] button,.light-home[data-lighting=true] summary{cursor:none}.light-home input,.light-home textarea{cursor:text!important}}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.light-experience{display:none}.light-home .light-type{color:white}.light-home .light-secondary{color:#999}}
