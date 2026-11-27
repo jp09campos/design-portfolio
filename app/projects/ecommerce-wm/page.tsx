@@ -194,8 +194,7 @@ export default function EcommerceWMPage() {
             className="text-xl text-white/55 max-w-3xl leading-relaxed mb-12"
           >
             Digital Tours research study across 16 sessions in Costa Rica and Guatemala,
-            diagnosing why Walmart CA&apos;s ecommerce CSAT scores 6.4 vs the 8.9 industry
-            benchmark — and identifying the 4 critical bugs behind purchase abandonment.
+            investigating Walmart CA&apos;s ecommerce CSAT of 6.4 versus the 8.9 competitive benchmark and identifying four critical checkout usability issues.
           </motion.p>
 
           {/* stats row */}
@@ -208,8 +207,16 @@ export default function EcommerceWMPage() {
             <StatCard value="16" label="Sessions" sub="9 CR · 7 GT" />
             <StatCard value="6.4" label="WM CSAT" sub="vs 8.9 competition" />
             <StatCard value="4" label="Critical Bugs" sub="blocking checkout" />
-            <StatCard value="−3.9" label="CR Gap" sub="pts vs benchmark" />
+            <StatCard value="−3.8" label="CR Gap" sub="pts vs benchmark" />
           </motion.div>
+        </div>
+      </section>
+
+      <section aria-label="Case study overview" className="max-w-7xl mx-auto px-6 py-12 border-t border-white/10">
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">My role</h2><p className="text-sm leading-relaxed text-white/80">UX research · Walmart Central America</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Design scope</h2><p className="text-sm leading-relaxed text-white/80">Digital Tours, competitive benchmarking and synthesis of usability barriers</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Evidence & status</h2><p className="text-sm leading-relaxed text-white/80">Prioritized remediation recommendations; no post-launch uplift claimed.</p></div>
         </div>
       </section>
 
@@ -252,7 +259,7 @@ export default function EcommerceWMPage() {
                   Costa Rica (9 sessions) and Guatemala (7 sessions) painted starkly different pictures.
                   While GT users showed relatively positive satisfaction (CSAT 8.1), CR users averaged
                   only <strong className="text-white/80">5.1/10</strong> — a full{' '}
-                  <strong style={{ color: HIGHLIGHT }}>−3.9 points</strong> below the competitive benchmark.
+                  <strong style={{ color: HIGHLIGHT }}>−3.8 points</strong> below the competitive benchmark.
                   Understanding why required going beyond surveys: watching real purchases break in real
                   time.
                 </p>
@@ -307,7 +314,7 @@ export default function EcommerceWMPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-white/55">Gap vs benchmark</span>
-                    <span className="text-red-400 font-semibold">−3.9 pts</span>
+                    <span className="text-red-400 font-semibold">−3.8 pts</span>
                   </div>
                 </div>
               </div>
