@@ -154,6 +154,8 @@ export default function OneDeskCaseStudy() {
           <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Evidence & status</h2><p className="text-sm leading-relaxed text-white/80">Functional prototypes and engineering handoff; savings are projected, not measured.</p></div>
         </div>
       </section>
+<section aria-label="Design rationale" className="max-w-7xl mx-auto px-6 py-16 border-t border-white/10"><p className="text-xs uppercase tracking-widest text-sky-300 mb-4">Decision rationale</p><h2 className="font-display text-3xl md:text-4xl font-bold mb-8">Why this direction matters</h2><div className="grid md:grid-cols-2 gap-5">{[["One platform, distinct responsibilities","A shared interface supports three operational modules, but store-level and administrative tasks require different permissions. Role-specific visibility reduces irrelevant actions while preserving a common navigation model.","The trade-off is additional permission and state complexity; interface visibility alone does not enforce backend authorization."],["Make exceptional states part of the workflow","SLA approvals, bulk document selection and loading, empty and error states were included in functional prototypes. Living Design System tokens, icons and reusable components supported consistency.","Functional prototypes clarify behavior before integration, but do not establish production reliability or realized savings."]].map(([title,reason,trade])=><article key={title} className="rounded-2xl border border-white/15 p-6 md:p-8"><h3 className="text-xl font-semibold mb-4">{title}</h3><p className="text-white/80 leading-relaxed">{reason}</p><p className="mt-5 pt-5 border-t border-white/10 text-sm text-white/70 leading-relaxed"><strong className="text-white">Trade-off &amp; evidence: </strong>{trade}</p></article>)}</div></section>
+
 
       {/* ── Context ── */}
       <section className="py-24">
@@ -234,7 +236,7 @@ export default function OneDeskCaseStudy() {
                 <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-4">Portal Ticket Digital</p>
                 <div className="space-y-4">
                   {[
-                    { value: '↑', label: 'Post-Sale NPS', desc: 'Measurable increase following digital channel adoption', color: '#34d399' },
+                    { value: '↑', label: 'Post-Sale NPS', desc: 'Intended improvement following digital channel adoption', color: '#34d399' },
                     { value: '↓', label: 'Support Tickets', desc: 'Fewer JECA support requests caused by missing receipts', color: '#34d399' },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4 py-3 border-b border-white/05 last:border-0">
@@ -254,7 +256,7 @@ export default function OneDeskCaseStudy() {
                 <div className="space-y-4">
                   {[
                     { value: '↑', label: 'CS Resolution Rate', desc: 'Real-time status + SLA visibility across all stages', color: accent },
-                    { value: '↓', label: 'Manual Tax Work', desc: 'Centralized Docs Fiscales eliminates hours per request', color: accent },
+                    { value: '↓', label: 'Manual Tax Work', desc: 'Centralized Docs Fiscales aims to reduce manual processing time', color: accent },
                     { value: '✓', label: 'SLA Compliance', desc: 'Per-country pending alerts before deadline expiry', color: accent },
                   ].map((item) => (
                     <div key={item.label} className="flex items-start gap-4 py-3 border-b border-white/05 last:border-0">
@@ -278,7 +280,7 @@ export default function OneDeskCaseStudy() {
                   </div>
                   <div>
                     <p className="font-semibold text-white mb-1">Delivered as functional dev specifications</p>
-                    <p className="text-sm text-white/55 leading-relaxed">Handed off as high-fidelity functional specs — reducing discovery time and eliminating ambiguity without requiring backend infrastructure.</p>
+                    <p className="text-sm text-white/55 leading-relaxed">Handed off as high-fidelity functional specs — intended to reduce discovery time and clarify behavior without requiring backend infrastructure.</p>
                   </div>
                 </div>
               </div>
