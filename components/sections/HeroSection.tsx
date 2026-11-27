@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import { Download } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
@@ -84,6 +85,14 @@ export default function HeroSection() {
             >
               Get in touch
             </Link>
+            <a
+              href="/cv-jose-pablo-campos.pdf"
+              download="CV-Jose-Pablo-Campos.pdf"
+              className="inline-flex items-center gap-2 text-[13px] font-medium text-white/80 border border-white/30 px-6 py-3 rounded-full tracking-wide hover:text-white hover:border-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-all duration-200"
+            >
+              <Download size={15} aria-hidden="true" />
+              Download résumé
+            </a>
           </div>
         </motion.div>
       </motion.div>
