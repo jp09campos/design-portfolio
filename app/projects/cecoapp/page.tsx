@@ -113,7 +113,7 @@ export default function CECOAppCaseStudy() {
                 CECOApp<br /><span className="text-white/45">Mobile E-commerce</span>
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-white/50 text-lg mb-8 max-w-2xl">
-                Designing the first mobile app for Cecotec — a home appliances brand with €510M in annual sales and zero mobile presence.
+                A master’s capstone exploring a mobile e-commerce experience for Cecotec, from product discovery to post-purchase support.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="flex flex-wrap gap-3 mb-10">
                 {['Mobile UX', 'Double Diamond', 'Atomic Design', 'E-commerce', 'Usability Testing', 'Card Sorting'].map((tag) => (
@@ -122,7 +122,7 @@ export default function CECOAppCaseStudy() {
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }} className="grid grid-cols-2 gap-4">
                 {[
-                  { value: '€510M', label: 'Annual Sales (No App)' },
+                  { value: '31', label: 'Card Sorting Participants' },
                   { value: '7', label: 'Usability Testers' },
                   { value: '4', label: 'Product Pillars' },
                   { value: '3', label: 'User Personas' },
@@ -141,6 +141,14 @@ export default function CECOAppCaseStudy() {
         </motion.div>
       </section>
 
+      <section aria-label="Case study overview" className="max-w-7xl mx-auto px-6 py-12 border-t border-white/10">
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">My role</h2><p className="text-sm leading-relaxed text-white/80">Master’s capstone · UX/Product Design</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Design scope</h2><p className="text-sm leading-relaxed text-white/80">Research, information architecture, Atomic Design and interactive prototyping</p></div>
+          <div className="rounded-2xl border border-white/10 p-5"><h2 className="text-xs uppercase tracking-widest text-white/60 mb-3">Evidence & status</h2><p className="text-sm leading-relaxed text-white/80">31 card sorting participants (16 complete responses), 45 cards and four tested journeys. Academic prototype, not a commercial launch.</p></div>
+        </div>
+      </section>
+
       {/* ── Context ── */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -150,10 +158,10 @@ export default function CECOAppCaseStudy() {
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: accent }}>Context</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-              Closing the mobile gap for a €510M brand
+              Exploring a dedicated mobile shopping experience
             </h2>
             <p className="text-white/60 leading-relaxed mb-4 max-w-2xl">
-              €510M in annual sales with zero mobile presence. M-commerce was already the dominant channel — Cecotec had no way to reach users on mobile.
+              The academic project explored how a dedicated mobile experience could improve product discovery, purchasing and post-purchase support.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
@@ -182,7 +190,7 @@ export default function CECOAppCaseStudy() {
           </Reveal>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {[
-              { value: '0', label: 'Unresolved Frictions', desc: 'Every hierarchy, accessibility, and CTA issue resolved before delivery.', color: '#34d399' },
+              { value: '16', label: 'Complete Card Sorts', desc: 'Complete responses across 45 content cards informed the information architecture.', color: '#34d399' },
               { value: '7', label: 'Usability Testers', desc: 'Validated across all 3 personas — purchase, tracking, search, and CecoClips.', color: highlight },
               { value: '4', label: 'Validated Flows', desc: 'Purchase, tracking, search, CecoClips — dev-ready with Atomic Design system.', color: '#c4b5fd' },
             ].map((item, i) => (
