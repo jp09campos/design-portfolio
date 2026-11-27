@@ -18,7 +18,7 @@ export default function HeroSection(){
    <div className="relative min-h-[320px] lg:min-h-[540px] rounded-3xl overflow-hidden border border-white/10 bg-[#0c1118]">
     <HeroScene/>
     <div className="absolute top-5 left-5 text-[10px] uppercase tracking-widest text-white/60 pointer-events-none">01 / Systems in motion</div>
-    <div className="absolute bottom-5 right-5 text-[10px] uppercase tracking-widest text-white/60 pointer-events-none">Interactive study</div>
+    <div className="absolute bottom-5 right-5 text-[10px] uppercase tracking-widest text-white/60 pointer-events-none"><span className="hidden [@media(pointer:fine)]:inline">Move to explore</span><span className="[@media(pointer:fine)]:hidden">Swipe to explore</span></div>
    </div>
   </div>
   <div className="mt-12 border-y border-white/15 py-5 flex flex-wrap justify-between gap-4 text-xs uppercase tracking-widest text-white/60"><span>Based in Costa Rica</span><span>Enterprise UX / Design systems / Data visualization</span><Link href="#contact" className="text-white">Let's connect ↗</Link></div>
