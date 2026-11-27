@@ -116,3 +116,10 @@ body {
 .light-home[data-lighting=true] .light-secondary{background-image:radial-gradient(circle 230px at var(--light-x) var(--light-y),#eef8ff,#a8cef6 32%,#999 85%)}
 @media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.light-home[data-lighting=true],.light-home[data-lighting=true] a,.light-home[data-lighting=true] button,.light-home[data-lighting=true] summary{cursor:none}.light-home input,.light-home textarea{cursor:text!important}}
 @media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.light-experience{display:none}.light-home .light-type{color:white}.light-home .light-secondary{color:#999}}
+
+/* Final accessibility and lighting refinements */
+.skip-link{position:fixed;top:12px;left:12px;z-index:100;background:white;color:#080808;padding:12px 20px;border-radius:8px;transform:translateY(-180%)}.skip-link:focus{transform:none}
+:where(a,button,summary,select,input,textarea):focus-visible{outline:2px solid #b9ddff;outline-offset:4px}
+.light-home section[id]{scroll-margin-top:90px}
+.light-home[data-lighting=true] h2{background-image:radial-gradient(circle 240px at var(--light-x) var(--light-y),#fff,#b9ddff 35%,#efefef 85%);background-attachment:fixed;background-clip:text;-webkit-background-clip:text;color:transparent}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.light-home *, .light-home *::before,.light-home *::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.light-home[data-lighting=true] h2{color:#efefef;background:none}}
